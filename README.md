@@ -1,0 +1,9 @@
+# Declarative semantic enrichment of spatial data
+
+Semantic data enrichment workflows mostly rely on script-based methods, particularly Python-based implementations. However, such conventional methods can constrain the transparency and reusability of enrichment processes. 
+In contrast, declarative mapping languages offer a more systematic alternative to perform semantic data enrichment in a more transparent and reusable manner. The following three use cases illustrate the application of declarative mapping languages for reusable semantic data enrichment in spatial contexts.
+
+
+   1) Data catalogs using the Comprehensive Knowledge Archive Network (CKAN) DCAT extension
+   2) Australian national place name foundation spatial data
+   3) Victorian state hydrology foundation spatial data
