@@ -1,0 +1,141 @@
+prefixes:
+  ex: "http://example.org/"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcat: "http://www.w3.org/ns/dcat#"
+  dcterms: "http://purl.org/dc/terms/"
+  foaf: "http://xmlns.com/foaf/0.1/"
+  idlab-fn: "https://w3id.org/imec/idlab/function#"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"
+
+mappings:
+  datasetMappping:
+    sources:
+      - access: ckan_dataset.json
+        referenceFormulation: jsonpath
+        iterator: "$"
+    s: http://wwww.example.com/catalog/datasets/$(id)
+    po:
+      - [a, dcat:Dataset]
+      - [dcterms:identifier, $(id)]
+      - [dcterms:title, $(title)]
+      - [dcterms:description, $(notes)]
+      - [dcat:landingPage, $(url)~iri]
+      - p: dcterms:issued
+        o:    
+         - value: "$(extras[0].value)"
+           datatype: xsd:date
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[0].key)"] 
+          - [grel:valueParameter2, "dcat_issued"]
+
+      - p: dcterms:modified
+        o:    
+         - value: "$(extras[1].value)"  
+           datatype: xsd:dateTime
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[1].key)"]  ## "$(extras[*].key)" Can not specify "*" here. It doesnt produce results.
+          - [grel:valueParameter2, "dcat_modified"]
+
+      - p: dcterms:identifier
+        o:   
+         - value: "$(extras[2].value)"
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[2].key)"] 
+          - [grel:valueParameter2, "guid"]
+
+      - p: dcterms:publisher
+        o:
+          - mapping: publisherMapping
+      - p: dcterms:creator
+        o:
+          - mapping: creatorMapping
+
+      - p: dcterms:language
+        o:   
+         - value: "$(extras[7].value)"
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[7].key)"] 
+          - [grel:valueParameter2, "language"]
+
+
+
+      - p: dcat:distribution
+        o:
+          - mapping: distributionMapping
+      - [dcat:keyword, "$(tags[*].name)"]
+
+
+
+  distributionMapping:
+    sources:
+      - access: ckan_dataset.json
+        referenceFormulation: jsonpath
+        iterator: "$.resources[*]"
+    s: http://wwww.example.com/distribution/${id} 
+    po:
+      - [a, dcat:Distribution]
+      - [dcterms:identifier, $(id)] ### No mapping for package_id in dcat
+      - [dcterms:description, $(description)]
+      - [dcterms:format, $(format)]
+      - [dcterms:title, $(name)]
+      - [dcat:accessURL, $(url)~iri]
+
+
+  publisherMapping:
+    sources:
+      - access: ckan_dataset.json
+        referenceFormulation: jsonpath
+        iterator: "$.extras[*]" 
+    s: http://wwww.example.com/publisher
+    po:
+      - [a, foaf:Agent]
+      - p: foaf:name
+        o:
+          - value: $(value)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "dcat_publisher_name"]
+      - p: foaf:mbox
+        o:
+          - value: $(value)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "dcat_publisher_email"]
+
+  
+  creatorMapping:
+    sources:
+      - access: ckan_dataset.json
+        referenceFormulation: jsonpath
+        iterator: "$.extras[*]" 
+    s: http://wwww.example.com/creator
+    po:
+      - [a, foaf:Agent]
+      - p: foaf:name
+        o:
+          - value: $(value)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "dcat_creator_name"]
+      - p: foaf:mbox
+        o:
+          - value: $(value)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "dcat_creator_email"]
