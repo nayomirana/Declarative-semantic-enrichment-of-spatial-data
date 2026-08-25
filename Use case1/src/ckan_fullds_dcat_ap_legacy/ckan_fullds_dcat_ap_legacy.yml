@@ -1,0 +1,408 @@
+prefixes:
+  ex: "http://example.org/"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcat: "http://www.w3.org/ns/dcat#"
+  dcterms: "http://purl.org/dc/terms/"
+  foaf: "http://xmlns.com/foaf/0.1/"
+  adms: "https://www.w3.org/ns/adms#"
+  owl: "http://www.w3.org/2002/07/owl#"
+  cnt: "http://www.w3.org/2008/content#"
+  spdx: "http://spdx.org/rdf/terms#"
+  dcatap: "http://data.europa.eu/r5r/"
+  locn: "http://www.w3.org/ns/locn#"
+  idlab-fn: "https://w3id.org/imec/idlab/function#"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"
+  vcard: "http://www.w3.org/2006/vcard/ns#"
+  geosparql: "http://www.opengis.net/ont/geosparql#"
+  skos: "http://www.w3.org/2004/02/skos/core#"
+
+sources:
+  dataset_source:
+    [ ckan_fullds_dcat_ap_legacy.json~jsonpath , "$"]
+
+mappings:
+  datasetMappping:
+    sources:  dataset_source
+    # dataset:
+    s: http://wwww.example.com/dataset/$(title)
+    po:
+      - [a, dcat:Dataset]
+      - [dcterms:title, $(title)] 
+      - [dcterms:description, $(notes)]
+      - [dcat:landingPage, $(url)~iri]
+      - [owl:versionInfo, $(version)]
+      - [dcat:keyword, "$(tags[*].name)"]
+
+      - p: dcterms:issued
+        o:    # o: ["$(extras[*].value)", xsd:date]
+         - value: "$(extras[0].value)"
+           datatype: xsd:date
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[0].key)"] 
+          - [grel:valueParameter2, "issued"]
+
+      - p: dcterms:modified
+        o:    
+         - value: "$(extras[1].value)"  
+           datatype: xsd:date
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[1].key)"]  
+          - [grel:valueParameter2, "modified"]
+
+      - p: dcterms:identifier
+        o:   ["$(extras[2].value)"]
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[2].key)"] ## "$(extras[*].key)" Can not specify "*"" here. It doesn't produce results.
+          - [grel:valueParameter2, "identifier"]
+
+      - p: dcterms:accrualPeriodicity
+        o:   ["$(extras[3].value)"]
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[3].key)"]
+          - [grel:valueParameter2, "frequency"]
+
+      - p: dcterms:provenance
+        o:   ["$(extras[4].value)"]
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[4].key)"]
+          - [grel:valueParameter2, "provenance"]
+
+      # - [dcterms:type, "$(extras[5].value)"]
+      - p: dcterms:type
+        o:   ["$(extras[5].value)"]
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[5].key)"]
+          - [grel:valueParameter2, "dcat_type"]
+
+      - p: adms:versionNotes
+        o:   ["$(extras[6].value)"]
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[6].key)"]
+          - [grel:valueParameter2, "version_notes"]
+
+      - p: dcterms:accessRights
+        o:   ["$(extras[7].value)"]
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[7].key)"]
+          - [grel:valueParameter2, "access_rights"]
+
+      - p: adms:identifier
+        o:   ["$(extras[8].value)"]
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[8].key)"]
+          - [grel:valueParameter2, "alternate_identifier"]
+      
+      - p: dcat:theme
+        o:   ["$(extras[9].value)"]
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[9].key)"]
+          - [grel:valueParameter2, "theme"]
+
+      - p: dcterms:language
+        o:   ["$(extras[10].value)"]
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[10].key)"]
+          - [grel:valueParameter2, "language"]
+
+      - p: foaf:page
+        o:   ["$(extras[11].value)"]
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[11].key)"]
+          - [grel:valueParameter2, "documentation"]
+
+      - p: dcterms:conformsTo
+        o:   ["$(extras[12].value)"]
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[12].key)"]
+          - [grel:valueParameter2, "conforms_to"]
+
+
+      - p: dcterms:isReferencedBy
+        o:   ["$(extras[13].value)"]
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[13].key)"]
+          - [grel:valueParameter2, "is_referenced_by"]
+
+      - p: dcatap:applicableLegislation
+        o:   ["$(extras[14].value)"]
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[14].key)"]
+          - [grel:valueParameter2, "applicable_legislation"]
+
+      - p: dcat:contactPoint
+        o:
+          - mapping: contactMapping
+
+      - p: dcterms:publisher
+        o:
+          - mapping: publisherMapping
+
+      - p: dcterms:temporal
+        o:
+          - mapping: temporalMapping
+
+      - p: dcat:temporalResolution
+        o:    
+         - value: "$(extras[23].value)"  
+           datatype: xsd:duration
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[23].key)"]
+          - [grel:valueParameter2, "temporal_resolution"]
+
+      - p: dcterms:spatial
+        o:
+         - mapping: spatialMapping
+
+      - p: dcat:spatialResolutionInMeters
+        o:    
+         - value: "$(extras[29].value)"  
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, "$(extras[29].key)"]
+          - [grel:valueParameter2, "spatial_resolution_in_meters"]
+
+      - p: dcat:distribution
+        o:
+          - mapping: distributionMapping
+
+
+  distributionMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_legacy.json
+        referenceFormulation: jsonpath
+        iterator: "$.resources[*]"
+    s: http://wwww.example.com/distribution/$(name) #No unique id
+    po:
+      - [a, dcat:Distribution]
+      - [dcterms:title, $(name)]  
+      - [dcterms:description, $(description)]
+      - [dcat:accessURL, $(url)~iri]
+      - [dcterms:format, $(format)]
+      - [dcatap:availability, $(availability)]
+      - [dcat:compressFormat, $(compress_format)]
+      - [dcat:dcat:packageFormat, $(package_format)]
+      - [dcat:dcat:byteSize, $(size)]
+      - [spdx:checksum, $(hash)]
+      - [spdx:algorithm, $(hash_algorithm)]
+      - [adms:status, $(status)]
+      - [dcat:accessURL, $(access_url)~iri]
+      - [dcat:downloadURL, $(download_url)~iri]
+      - [dcterms:issued, $(issued), xsd:dateTime]
+      - [dcterms:modified, $(modified), xsd:dateTime]
+      - [dcterms:license, $(license)]
+      - [dcterms:rights, $(rights)]
+      - [dcterms:language, "$(language[*])"]
+
+  contactMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_legacy.json
+        referenceFormulation: jsonpath
+        iterator: "$.extras[*]" 
+    s: http://wwww.example.com/contact
+    po:
+      - [a, vcard:Kind]
+      - p: vcard:fn
+        o:
+          - value: $(value)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "contact_name"]
+
+      - p: vcard:hasEmail
+        o:
+          - value: $(value)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "contact_email"]
+
+
+  publisherMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_legacy.json
+        referenceFormulation: jsonpath
+        iterator: "$.extras[*]" 
+    s: http://wwww.example.com/publisher
+    po:
+      - [a, foaf:Agent]
+      - p: foaf:name
+        o:
+          - value: $(value)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "publisher_name"]
+      - p: foaf:mbox
+        o:
+          - value: $(value)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "publisher_email"]
+      - p: foaf:homepage
+        o:
+          - value: $(value)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)~iri]  
+          - [grel:valueParameter2, "publisher_url"]
+
+      - p: dcterms:type
+        o:
+          - value: $(value)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "publisher_type"]
+
+
+  temporalMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_legacy.json
+        referenceFormulation: jsonpath
+        iterator: "$.extras[*]"
+    s: http://wwww.example.com/temporal
+    po:
+      - [a, dcterms:PeriodOfTime]
+      - p: dcat:startDate
+        o:
+          - value: $(value)
+            datatype: xsd:date
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "temporal_start"]
+
+      - p: dcat:endDate
+        o:
+          - value: $(value)
+            datatype: xsd:date
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "temporal_end"]
+      
+
+  spatialMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_legacy.json
+        referenceFormulation: jsonpath
+        iterator: "$.extras[*]"
+    s: http://wwww.example.com/spatial
+    po:
+      - [a, dcterms:Location]
+      - p: locn:geometry
+        o:
+          - value: $(value)
+            datatype: https://www.iana.org/assignments/media-types/application/vnd.geo+json
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "spatial"]
+
+      - p: skos:prefLabel
+        o:
+          - value: $(value)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "spatial_text"]
+
+      - p: dcat:bbox
+        o:
+          - value: $(value)
+            datatype: geosparql:geoJSONLiteral
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "spatial_bbox"]
+
+      - p: dcat:centriod
+        o:
+          - value: $(value)
+            datatype: geosparql:geoJSONLiteral
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "spatial_centroid"]
+
+      - p: dcat:centriod
+        o:
+          - value: $(value)
+            datatype: geosparql:geoJSONLiteral
+        condition:
+          function: idlab-fn:equal
+          parameters:
+          - [grel:valueParameter, $(key)]  
+          - [grel:valueParameter2, "spatial_centroid1"]
+
+        # po:
+        #   - p: ex:TestFunc
+        #     o:
+        #        - value: $(value)
+        #     condition:
+        #       function: idlab-fn:equal
+        #       parameters:
+        #       - [grel:valueParameter, $(key)]
+        #       - [grel:valueParameter2, "spatial_centroid1"]
+              
+        #     function: grel:string_replace
+        #     parameters:
+        #     - [grel:valueParam, $(value)]
+        #     - [grel:param_find, '\\"']
+        #     - [grel:param_replace, '']
+                  
+        #     - function: grel:string
+        #       parameters:
+        #       - [grel:valueParam, ""]
+           
+
+## TO DO
+### Preprocessing steps should be done for some attributes 
+## It is required to find an effective method to map extras, instead of mentioning indexes
