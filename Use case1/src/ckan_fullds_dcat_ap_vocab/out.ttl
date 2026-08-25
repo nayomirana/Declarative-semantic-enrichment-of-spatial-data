@@ -1,0 +1,100 @@
+_:genid300 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/PeriodOfTime> .
+_:genid300 <http://www.w3.org/ns/dcat#endDate> "2013-01-05"^^<http://www.w3.org/2001/XMLSchema#date> .
+_:genid300 <http://www.w3.org/ns/dcat#startDate> "1905-03-01"^^<http://www.w3.org/2001/XMLSchema#date> .
+_:genid311 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/Location> .
+_:genid311 <http://www.w3.org/2004/02/skos/core#prefLabel> "Tarragona" .
+_:genid311 <http://www.w3.org/ns/dcat#bbox> "{type=Polygon, coordinates=[[[-2.1604, 42.7611], [-2.0938, 42.7611], [-2.0938, 42.7931], [-2.1604, 42.7931], [-2.1604, 42.7611]]]}"^^<http://www.opengis.net/ont/geosparql#geoJSONLiteral> .
+_:genid311 <http://www.w3.org/ns/dcat#centriod> "{type=Point, coordinates=[1.26639, 41.12386]}"^^<http://www.opengis.net/ont/geosparql#geoJSONLiteral> .
+_:genid311 <http://www.w3.org/ns/locn#geometry> "{type=Polygon, coordinates=[[[11.9936, 54.0486], [11.9936, 54.2466], [12.3045, 54.2466], [12.3045, 54.0486], [11.9936, 54.0486]]]}"^^<https://www.iana.org/assignments/media-types/application/vnd.geo+json> .
+_:genid322 <http://purl.org/dc/terms/relation> "http://example.com/dataset/3.141592" .
+_:genid322 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Relationship> .
+_:genid322 <http://www.w3.org/ns/dcat#hadRole> "http://www.iana.org/assignments/relation/related" .
+<http://www.example.com/dataservice/servesDataset/Access%20Service%201> <http://purl.org/dc/terms/identifier> "https://example.org/dataset/1" .
+<http://www.example.com/dataservice/servesDataset/Access%20Service%201> <http://purl.org/dc/terms/identifier> "https://example.org/dataset/2" .
+<http://www.example.com/dataservice/servesDataset/Access%20Service%201> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Dataset> .
+<http://wwww.example.com/contact/Contact%201> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2006/vcard/ns#Kind> .
+<http://wwww.example.com/contact/Contact%201> <http://www.w3.org/2006/vcard/ns#fn> "Contact 1" .
+<http://wwww.example.com/contact/Contact%201> <http://www.w3.org/2006/vcard/ns#hasEmail> "contact1@example.org" .
+<http://wwww.example.com/contact/Contact%202> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2006/vcard/ns#Kind> .
+<http://wwww.example.com/contact/Contact%202> <http://www.w3.org/2006/vcard/ns#fn> "Contact 2" .
+<http://wwww.example.com/contact/Contact%202> <http://www.w3.org/2006/vcard/ns#hasEmail> "contact2@example.org" .
+<http://wwww.example.com/creator/Test%20Creator> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Agent> .
+<http://wwww.example.com/creator/Test%20Creator> <http://xmlns.com/foaf/0.1/homepage> <https://example.org> .
+<http://wwww.example.com/creator/Test%20Creator> <http://xmlns.com/foaf/0.1/mbox> "creator@example.org" .
+<http://wwww.example.com/creator/Test%20Creator> <http://xmlns.com/foaf/0.1/name> "Test Creator" .
+<http://wwww.example.com/creator/Test%20Publisher> <http://purl.org/dc/terms/type> "http://publications.europa.eu/resource/authority/corporate-body-classification/CB_INT" .
+<http://wwww.example.com/creator/Test%20Publisher> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Agent> .
+<http://wwww.example.com/creator/Test%20Publisher> <http://xmlns.com/foaf/0.1/homepage> <https://example.org> .
+<http://wwww.example.com/creator/Test%20Publisher> <http://xmlns.com/foaf/0.1/mbox> "publisher@example.org" .
+<http://wwww.example.com/creator/Test%20Publisher> <http://xmlns.com/foaf/0.1/name> "Test Publisher" .
+<http://wwww.example.com/dataservice/Access%20Service%201> <http://purl.org/dc/terms/title> "Access Service 1" .
+<http://wwww.example.com/dataservice/Access%20Service%201> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#DataService> .
+<http://wwww.example.com/dataservice/Access%20Service%201> <http://www.w3.org/ns/dcat#endpointDescription> "https://example.org/endpoint_description" .
+<http://wwww.example.com/dataservice/Access%20Service%201> <http://www.w3.org/ns/dcat#endpointURL> <https://example.org/access_service/1> .
+<http://wwww.example.com/dataservice/Access%20Service%201> <http://www.w3.org/ns/dcat#endpointURL> <https://example.org/access_service/2> .
+<http://wwww.example.com/dataservice/Access%20Service%201> <http://www.w3.org/ns/dcat#servesDataset> <http://www.example.com/dataservice/servesDataset/Access%20Service%201> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://data.europa.eu/r5r/applicableLegislation> "http://data.europa.eu/eli/reg_impl/2023/138/oj" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://data.europa.eu/r5r/applicableLegislation> "http://data.europa.eu/eli/reg_impl/2023/138/oj_alt" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/accessRights> <http://publications.europa.eu/resource/authority/access-right/PUBLIC> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/accrualPeriodicity> <http://publications.europa.eu/resource/authority/frequency/MONTHLY> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/conformsTo> "https://joinup.ec.europa.eu/collection/semic-support-centre/solution/dcat-application-profile-data-portals-europe/release/210" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/conformsTo> "https://joinup.ec.europa.eu/collection/semic-support-centre/solution/dcat-application-profile-data-portals-europe/release/211" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/creator> <http://wwww.example.com/creator/Test%20Creator> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/description> "Lorem ipsum" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/identifier> "xx-some-dataset-id-yy" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/isReferencedBy> "https://doi.org/10.1038/sdata.2018.22" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/issued> "2024-05-01"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/language> "http://publications.europa.eu/resource/authority/language/CAT" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/language> "http://publications.europa.eu/resource/authority/language/ENG" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/language> "http://publications.europa.eu/resource/authority/language/SPA" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/modified> "2024-05-05"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/provenance> "https://example.org/some-provenance-statement.html" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/publisher> <http://wwww.example.com/creator/Test%20Publisher> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/spatial> _:genid311 .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/temporal> _:genid300 .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/title> "Test DCAT dataset" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/type> "http://purl.org/dc/dcmitype/Dataset" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Dataset> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/2002/07/owl#versionInfo> "1.0b" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#contactPoint> <http://wwww.example.com/contact/Contact%201> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#contactPoint> <http://wwww.example.com/contact/Contact%202> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#distribution> <http://wwww.example.com/distribution/Resource%201> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#keyword> "Tag 1" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#keyword> "Tag 2" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#landingPage> <http://example.org/ds1> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#qualifiedRelation> _:genid322 .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#spatialResolutionInMeters> "1.5" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#temporalResolution> "PT15M"^^<http://www.w3.org/2001/XMLSchema#duration> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#theme> "https://example.org/uri/theme1" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#theme> "https://example.org/uri/theme2" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#theme> "https://example.org/uri/theme3" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://xmlns.com/foaf/0.1/page> <https://example.org/some-doc.html> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <https://www.w3.org/ns/adms#identifier> "https://org1.example.org/datasets/alt-id-1" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <https://www.w3.org/ns/adms#identifier> "https://org2.example.org/datasets/alt-id-2" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <https://www.w3.org/ns/adms#versionNotes> "Some version notes" .
+<http://wwww.example.com/distribution/Resource%201> <http://data.europa.eu/r5r/availability> "http://publications.europa.eu/resource/authority/planned-availability/EXPERIMENTAL" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/conformsTo> "https://joinup.ec.europa.eu/collection/semic-support-centre/solution/dcat-application-profile-data-portals-europe/release/210" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/conformsTo> "https://joinup.ec.europa.eu/collection/semic-support-centre/solution/dcat-application-profile-data-portals-europe/release/211" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/description> "Some description" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/format> "http://publications.europa.eu/resource/authority/file-type/CSV" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/issued> "2024-05-01T01:20:33"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/language> <http://publications.europa.eu/resource/authority/language/CAT> .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/language> <http://publications.europa.eu/resource/authority/language/ENG> .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/language> <http://publications.europa.eu/resource/authority/language/SPA> .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/license> "http://publications.europa.eu/resource/authority/licence/CC_BYNC_4_0" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/modified> "2024-05-05T09:33:20"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/rights> "http://publications.europa.eu/resource/authority/access-right/PUBLIC" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/title> "Resource 1" .
+<http://wwww.example.com/distribution/Resource%201> <http://spdx.org/rdf/terms#algorithm> "http://spdx.org/rdf/terms#checksumAlgorithm_sha1" .
+<http://wwww.example.com/distribution/Resource%201> <http://spdx.org/rdf/terms#checksum> "4304cf2e751e6053c90b1804c89c0ebb758f395a" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Distribution> .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#accessService> <http://wwww.example.com/dataservice/Access%20Service%201> .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#accessURL> <https://example.com/data.csv> .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#byteSize> "12323" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#compressFormat> "http://www.iana.org/assignments/media-types/application/gzip" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#downloadURL> <https://example.com/data.csv> .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#mediaType> "http://www.iana.org/assignments/media-types/text/csv" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#packageFormat> "http://publications.europa.eu/resource/authority/file-type/TAR" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#spatialResolutionInMeters> "1.5" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#temporalResolution> "PT15M"^^<http://www.w3.org/2001/XMLSchema#duration> .
+<http://wwww.example.com/distribution/Resource%201> <https://www.w3.org/ns/adms#status> "http://purl.org/adms/status/Completed" .

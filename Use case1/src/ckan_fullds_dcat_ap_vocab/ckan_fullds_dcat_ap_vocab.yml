@@ -1,0 +1,213 @@
+prefixes:
+  ex: "http://example.org/"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcat: "http://www.w3.org/ns/dcat#"
+  dcterms: "http://purl.org/dc/terms/"
+  foaf: "http://xmlns.com/foaf/0.1/"
+  adms: "https://www.w3.org/ns/adms#"
+  owl: "http://www.w3.org/2002/07/owl#"
+  cnt: "http://www.w3.org/2008/content#"
+  spdx: "http://spdx.org/rdf/terms#"
+  dcatap: "http://data.europa.eu/r5r/"
+  locn: "http://www.w3.org/ns/locn#"
+  geosparql: "http://www.opengis.net/ont/geosparql#"
+  skos: "http://www.w3.org/2004/02/skos/core#"
+
+
+mappings:
+  datasetMappping:
+    sources:
+      - access: ckan_fullds_dcat_ap_vocab.json
+        referenceFormulation: jsonpath
+        iterator: "$"
+    # dataset:
+    s: http://wwww.example.com/dataset/$(title)
+    po:
+      - [a, dcat:Dataset]
+      - [dcterms:title, $(title)] # No property to map "name"
+      - [dcterms:description, $(notes)]
+      - [dcat:landingPage, $(url)~iri]
+      - [owl:versionInfo, $(version)]
+      - [dcat:keyword, "$(tags[*].name)"]
+      - [dcterms:issued, $(issued), xsd:date]
+      - [dcterms:modified, $(modified), xsd:date]
+      - [dcterms:identifier, $(identifier)]
+      - [dcterms:accrualPeriodicity, $(frequency)~iri]
+      - [dcterms:provenance, $(provenance)]
+      - [dcterms:type, $(dcat_type)]
+      - [adms:versionNotes, $(version_notes)]
+      - [dcterms:accessRights, $(access_rights)~iri]
+      - [adms:identifier, "$(alternate_identifier[*])"]
+      - [dcat:theme, "$(theme[*])"]
+      - [dcterms:language, "$(language[*])"]
+      - [foaf:page, "$(documentation[*])~iri"]
+      - [dcterms:conformsTo, "$(conforms_to[*])"]
+      - [dcterms:isReferencedBy, "$(is_referenced_by[*])"]
+      - [dcatap:applicableLegislation, "$(applicable_legislation[*])"] ### https://semiceu.github.io/DCAT-AP/releases/3.0.0/
+      - p: dcat:contactPoint
+        o:
+          - mapping: contactMapping
+
+      - p: dcterms:creator
+        o:
+          - mapping: creatorMapping
+
+      - p: dcterms:publisher
+        o:
+          - mapping: publisherMapping
+
+      - p: dcterms:temporal
+        o:
+          - mapping: temporalMapping
+
+      - [dcat:temporalResolution, $(temporal_resolution), xsd:duration]
+      - p: dcterms:spatial
+        o:
+          - mapping: spatialCoverageMapping
+
+      - [dcat:spatialResolutionInMeters, $(spatial_resolution_in_meters) ]
+      - p: dcat:qualifiedRelation
+        o:
+          - mapping: qualifiedRelationMapping
+
+      - p: dcat:distribution
+        o:
+          - mapping: distributionMapping
+
+
+  contactMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_vocab.json
+        referenceFormulation: jsonpath
+        iterator: "$.contact[*]" 
+    s: http://wwww.example.com/contact/$(name)
+    po:
+      - [a, vcard:Kind]
+      - [vcard:fn, $(name)]
+      - [vcard:hasEmail, $(email)]
+
+  creatorMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_vocab.json
+        referenceFormulation: jsonpath
+        iterator: "$.creator[*]"
+    s: http://wwww.example.com/creator/$(name)
+    po:
+      - [a, foaf:Agent]
+      - [foaf:name, $(name)]
+      - [foaf:mbox, $(email)]
+      - [foaf:homepage, $(url)~iri]
+      
+  publisherMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_vocab.json
+        referenceFormulation: jsonpath
+        iterator: "$.publisher[*]"
+    s: http://wwww.example.com/creator/$(name)
+    po:
+      - [a, foaf:Agent]
+      - [foaf:name, $(name)]
+      - [foaf:mbox, $(email)]
+      - [foaf:homepage, $(url)~iri]
+      - [dcterms:type, $(type)]
+
+  temporalMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_vocab.json
+        referenceFormulation: jsonpath
+        iterator: "$.temporal_coverage[*]"
+    s: null
+    po:
+      - [a, dcterms:PeriodOfTime]
+      - [dcat:startDate, $(start), xsd:date]
+      - [dcat:endDate, $(end), xsd:date]
+
+
+  spatialCoverageMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_vocab.json
+        referenceFormulation: jsonpath
+        iterator: "$.spatial_coverage[*]"
+    s: null
+    po:
+      - [a, dcterms:Location]
+      - [locn:geometry, $(geom), https://www.iana.org/assignments/media-types/application/vnd.geo+json]
+      - [skos:prefLabel, $(text)]
+      - [dcat:bbox, $(bbox), geosparql:geoJSONLiteral]
+      - [dcat:centriod, $(centroid), geosparql:geoJSONLiteral]
+
+
+  qualifiedRelationMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_vocab.json
+        referenceFormulation: jsonpath
+        iterator: "$.qualified_relation[*]"
+    s: null
+    po:
+      - [a, dcat:Relationship]
+      - [dcterms:relation, $(relation)]
+      - [dcat:hadRole, $(role)]  ## uri ???
+
+
+  distributionMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_vocab.json
+        referenceFormulation: jsonpath
+        iterator: "$.resources[*]"
+    s: http://wwww.example.com/distribution/$(name) #No unique id
+    po:
+      - [a, dcat:Distribution]
+      - [dcterms:title, $(name)]  
+      - [dcterms:description, $(description)]
+      - [dcat:accessURL, $(url)~iri]
+      - [dcterms:format, $(format)]
+      - [dcat:mediaType, $(mimetype)]
+      - [dcatap:availability, $(availability)]
+      - [dcat:compressFormat, $(compress_format)]
+      - [dcat:packageFormat, $(package_format)]
+      - [dcat:byteSize, $(size)]
+      - [spdx:checksum, $(hash)]
+      - [spdx:algorithm, $(hash_algorithm)]
+      - [adms:status, $(status)]
+      - [dcat:accessURL, $(access_url)~iri]
+      - [dcat:downloadURL, $(download_url)~iri]
+      - [dcterms:issued, $(issued), xsd:dateTime]
+      - [dcterms:modified, $(modified), xsd:dateTime]
+      - [dcat:temporalResolution, $(temporal_resolution), xsd:duration]
+      - [dcat:spatialResolutionInMeters, $(spatial_resolution_in_meters) ]
+      - [dcterms:license, $(license)]
+      - [dcterms:rights, $(rights)]
+      - [dcterms:conformsTo, "$(conforms_to[*])"]
+      - [dcterms:language, "$(language[*])~iri"]
+      - p: dcat:accessService
+        o:
+          - mapping: accessServiceMapping
+
+
+  accessServiceMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_vocab.json
+        referenceFormulation: jsonpath
+        iterator: "$.resources[*].access_services[*]"
+    s: http://wwww.example.com/dataservice/$(title) 
+    po:
+      - [a, dcat:DataService]
+      - [dcterms:title, $(title)]  
+      - [dcat:endpointDescription, $(endpoint_description)]
+      - [dcat:endpointURL, "$(endpoint_url[*])~iri"]
+      # - [dcat:servesDataset, "$(serves_dataset[*])~iri", dcat:Dataset]
+      - p: dcat:servesDataset
+        o:
+          - mapping: servesDatasetMapping
+
+
+  servesDatasetMapping:
+    sources:
+      - access: ckan_fullds_dcat_ap_vocab.json
+        referenceFormulation: jsonpath
+        iterator: "$.resources[*].access_services[*]"
+
+    s: http://www.example.com/dataservice/servesDataset/$(title)
+    po:
+      - [a, dcat:Dataset]
+      - [dcterms:identifier, "$(serves_dataset[*])"]
