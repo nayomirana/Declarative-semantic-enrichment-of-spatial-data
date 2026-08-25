@@ -7,3 +7,5 @@ In contrast, declarative mapping languages offer a more systematic alternative t
    1) Data catalogs using the Comprehensive Knowledge Archive Network (CKAN) DCAT extension
    2) Australian national place name foundation spatial data
    3) Victorian state hydrology foundation spatial data
+      
+This repository contains the  datasets and source code for all three use cases listed above.
