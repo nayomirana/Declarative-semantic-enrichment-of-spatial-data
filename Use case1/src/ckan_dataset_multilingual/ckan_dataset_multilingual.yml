@@ -1,0 +1,96 @@
+prefixes:
+  ex: "http://example.org/"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcat: "http://www.w3.org/ns/dcat#"
+  dcterms: "http://purl.org/dc/terms/"
+  foaf: "http://xmlns.com/foaf/0.1/"
+  owl: "http://www.w3.org/2002/07/owl#"
+  adms: "https://www.w3.org/ns/adms#"
+  vcard: "http://www.w3.org/2006/vcard/ns#"
+  idlab-fn: "http://example.com/idlab/function/"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"
+
+mappings:
+  datasetMappping:
+    sources:
+      - access: ckan_dataset_multilingual.json
+        referenceFormulation: jsonpath
+        iterator: "$"
+    s: http://wwww.example.com/dataset/$(title)
+    po:
+      - [a, dcat:Dataset]
+      - [dcterms:title, $(title)]  
+      # - [dcterms:title, $(name)]   
+      - [dcterms:title, $(title_translated.en), en~lang]
+      - [dcterms:title, $(title_translated.ca), ca~lang]
+      - [dcterms:title, $(title_translated.es), es~lang]
+      - [dcterms:description, $(notes)]
+      - [dcterms:description, $(notes_translated.en), en~lang]
+      - [dcterms:description, $(notes_translated.ca), ca~lang]
+      - [dcterms:description, $(notes_translated.es), es~lang]
+      - [dcat:landingPage, $(url)~iri]
+      - [dcat:keyword, "$(tags[*].name)"]
+      - [dcat:keyword, $(tags_translated.en), en~lang]
+      - [dcat:keyword, $(tags_translated.ca), ca~lang]
+      - [dcat:keyword, $(tags_translated.es), es~lang]
+      - [dcterms:issued, $(issued), xsd:date]
+      - [dcterms:modified, $(modified), xsd:date]
+      - [dcterms:provenance, $(provenance.en), en~lang]
+      - [dcterms:provenance, $(provenance.ca), ca~lang]
+      - [dcterms:provenance, $(provenance.es), es~lang]
+      - [owl:versionInfo, $(version)]
+      - [adms:versionNotes, $(version_notes.en), en~lang]
+      - [adms:versionNotes, $(version_notes.ca), ca~lang]
+      - [adms:versionNotes, $(version_notes.es), es~lang]
+      - [dcterms:language, "http://id.loc.gov/vocabulary/iso639-1/$(language[*])~iri"]
+      - [foaf:page, "$(documentation[*])~iri"]
+      - p: dcat:contactPoint
+        o:
+          - mapping: contactMapping
+
+      - p: dcat:contactPoint
+        o:
+          - mapping: contactMapping
+
+      - p: dcat:distribution
+        o:
+          - mapping: distributionMapping
+    
+  contactMapping:
+    sources:
+      - access: ckan_dataset_multilingual.json
+        referenceFormulation: jsonpath
+        iterator: "$.contact[*]" 
+    s: http://wwww.example.com/contact/$(identifier)
+    po:
+      - [a, vcard:Kind]
+      - [vcard:fn, $(name)]
+      - [vcard:hasUID, $(identifier)]
+      - [vcard:hasEmail, $(email)] 
+
+  distributionMapping:
+    sources:
+      - access: ckan_dataset_multilingual.json
+        referenceFormulation: jsonpath
+        iterator: "$.resources[*]"
+    s: http://wwww.example.com/distribution/$(name) #No unique id
+    po:
+      - [a, dcat:Distribution]
+      - [dcterms:title, $(name)]  
+      - [dcterms:title, $(name_translated.en), en~lang]
+      - [dcterms:title, $(name_translated.ca), ca~lang]
+      - [dcterms:title, $(name_translated.es), es~lang]
+      - [dcterms:description, $(description)]
+      - [dcterms:description, $(description_translated.en), en~lang]
+      - [dcterms:description, $(description_translated.ca), ca~lang]
+      - [dcterms:description, $(description_translated.es), es~lang]
+      - [dcterms:format, $(format)]
+      - [dcat:accessURL, $(url)~iri] 
+      - [dcat:accessURL, $(access_url)~iri]
+      - [dcat:downloadURL, $(download_url)~iri]
+      - [dcterms:issued, $(issued), xsd:dateTime]
+      - [dcterms:modified, $(modified), xsd:dateTime]  
+      - [dcterms:rights, $(rights.en),  en~lang]
+      - [dcterms:rights, $(rights.ca),  ca~lang]
+      - [dcterms:rights, $(rights.es),  es~lang]
+      - [dcterms:language, "http://id.loc.gov/vocabulary/iso639-1/$(language[*])~iri"]

@@ -1,0 +1,62 @@
+<http://wwww.example.com/contact/123> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2006/vcard/ns#Kind> .
+<http://wwww.example.com/contact/123> <http://www.w3.org/2006/vcard/ns#fn> "Contact 1" .
+<http://wwww.example.com/contact/123> <http://www.w3.org/2006/vcard/ns#hasEmail> "contact1@example.org" .
+<http://wwww.example.com/contact/123> <http://www.w3.org/2006/vcard/ns#hasUID> "123" .
+<http://wwww.example.com/contact/456> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2006/vcard/ns#Kind> .
+<http://wwww.example.com/contact/456> <http://www.w3.org/2006/vcard/ns#fn> "Contact 2" .
+<http://wwww.example.com/contact/456> <http://www.w3.org/2006/vcard/ns#hasEmail> "contact2@example.org" .
+<http://wwww.example.com/contact/456> <http://www.w3.org/2006/vcard/ns#hasUID> "456" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/description> "Una descripció qualsevol"@ca .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/description> "Some description"@en .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/description> "Una descripción cualquiera"@es .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/description> "Some description" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/issued> "2024-05-01"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/ca> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/en> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/es> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/modified> "2024-05-05"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/provenance> "Una declaració sobre la procedència"@ca .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/provenance> "Statement about provenance"@en .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/provenance> "Una declaración sobre la procedencia"@es .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/title> "Conjunt de dades de prova DCAT"@ca .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/title> "Test DCAT dataset"@en .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/title> "Conjunto de datos de prueba DCAT"@es .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/title> "Test DCAT dataset" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Dataset> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/2002/07/owl#versionInfo> "1.0b" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#contactPoint> <http://wwww.example.com/contact/123> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#contactPoint> <http://wwww.example.com/contact/456> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#distribution> <http://wwww.example.com/distribution/Resource%201> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#keyword> "Pins"@ca .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#keyword> "Roures"@ca .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#keyword> "Oaks"@en .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#keyword> "Pines"@en .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#keyword> "Pinos"@es .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#keyword> "Robles"@es .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#keyword> "Oaks" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#keyword> "Pines" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#landingPage> <http://example.org/ds1> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://xmlns.com/foaf/0.1/page> <https://example.org/some-doc.html> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <https://www.w3.org/ns/adms#versionNotes> "Notes sobre la versió"@ca .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <https://www.w3.org/ns/adms#versionNotes> "Some version notes"@en .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <https://www.w3.org/ns/adms#versionNotes> "Notas sobre la versión"@es .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/description> "Una descripció qualsevol"@ca .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/description> "Some description"@en .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/description> "Una descripción cualquiera"@es .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/description> "Some description" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/format> "CSV" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/issued> "2024-05-01T01:20:33"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/ca> .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/en> .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/es> .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/modified> "2024-05-05T09:33:20"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/rights> "Una nota sobre drets"@ca .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/rights> "Some stament about rights"@en .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/rights> "Una nota sobre derechos"@es .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/title> "Recurs 1"@ca .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/title> "Resource 1"@en .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/title> "Recurso 1"@es .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/title> "Resource 1" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Distribution> .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#accessURL> <https://example.com/data.csv> .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#downloadURL> <https://example.com/data.csv> .
