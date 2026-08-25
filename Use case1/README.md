@@ -16,5 +16,11 @@ The semantic enrichment process via YARRRML involves a few steps. YARRRML rules 
   <img src="images/YARRRML_sde_process.png" alt="YARRRML process" style="width:75%;">
 </div>
 
+## Reproducing the Outputs
+
+To reproduce the provided outputs using the given input data and YARRRML mappings, run the following commands:
 
 ## Key resources 
+- [YARRRML Specification](https://rml.io/yarrrml/spec/)
+- [YARRRML Parser](https://github.com/RMLio/yarrrml-parser)
+- [Tutorial: generating Linked Data with YARRRML](https://rml.io/yarrrml/tutorial/getting-started/)
