@@ -19,12 +19,25 @@ The semantic enrichment process via YARRRML involves a few steps. YARRRML rules 
 
 ## Reproducing the Outputs
 
-To reproduce the provided outputs using the given input data and YARRRML mappings, run the following commands:
+To reproduce the provided outputs using the given input data and YARRRML mappings, first clone and set up the YARRRML Parser:
+https://github.com/RMLio/yarrrml-parser
+
+Then, run the following commands.
+First, convert the YARRRML mapping into an RML mapping by specifying the appropriate paths for both the input mapping file and the generated output files:
+```
+node bin/parser.js -i mapping.yml -o out.rml.ttl
+```
+Then, execute the generated RML mapping with RMLMapper:
+```
+java -jar rmlmapper.jar -m out.rml.ttl -o out.ttl
+```
+The resulting RDF output will be written to out.ttl.
 
 
 ## Key resources 
+- [DCAT ↔ CKAN mapping](https://docs.ckan.org/projects/ckanext-dcat/en/latest/mapping/)
+- [Ckanext-dcat extension](https://github.com/ckan/ckanext-dcat/tree/master)
+- [Data Catalog Vocabulary (DCAT)](https://www.w3.org/TR/vocab-dcat-3/)
 - [YARRRML Specification](https://rml.io/yarrrml/spec/)
 - [YARRRML Parser](https://github.com/RMLio/yarrrml-parser)
 - [Tutorial: generating Linked Data with YARRRML](https://rml.io/yarrrml/tutorial/getting-started/)
-- [Data Catalog Vocabulary (DCAT)](https://www.w3.org/TR/vocab-dcat-3/)
-- [DCAT ↔ CKAN mapping](https://docs.ckan.org/projects/ckanext-dcat/en/latest/mapping/)
