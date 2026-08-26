@@ -24,3 +24,5 @@ To reproduce the provided outputs using the given input data and YARRRML mapping
 - [YARRRML Specification](https://rml.io/yarrrml/spec/)
 - [YARRRML Parser](https://github.com/RMLio/yarrrml-parser)
 - [Tutorial: generating Linked Data with YARRRML](https://rml.io/yarrrml/tutorial/getting-started/)
+- [Data Catalog Vocabulary (DCAT)](https://www.w3.org/TR/vocab-dcat-3/)
+- [DCAT ↔ CKAN mapping](https://docs.ckan.org/projects/ckanext-dcat/en/latest/mapping/)
