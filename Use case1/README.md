@@ -41,3 +41,4 @@ The resulting RDF output will be written to out.ttl.
 - [YARRRML Specification](https://rml.io/yarrrml/spec/)
 - [YARRRML Parser](https://github.com/RMLio/yarrrml-parser)
 - [Tutorial: generating Linked Data with YARRRML](https://rml.io/yarrrml/tutorial/getting-started/)
+- [RML Mapper-Java](https://github.com/rmlio/rmlmapper-java)
