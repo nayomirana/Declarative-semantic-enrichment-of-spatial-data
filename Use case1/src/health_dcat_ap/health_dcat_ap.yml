@@ -1,0 +1,232 @@
+prefixes:
+  ex: "http://example.org/"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcat: "http://www.w3.org/ns/dcat#"
+  dcterms: "http://purl.org/dc/terms/"
+  foaf: "http://xmlns.com/foaf/0.1/"
+  adms: "https://www.w3.org/ns/adms#"
+  owl: "http://www.w3.org/2002/07/owl#"
+  cnt: "http://www.w3.org/2008/content#"
+  spdx: "http://spdx.org/rdf/terms#"
+  dcatap: "http://data.europa.eu/r5r/"
+  locn: "http://www.w3.org/ns/locn#"
+  dcat-us: "http://resources.data.gov/ontology/dcat-us#"
+  skos: "http://www.w3.org/2004/02/skos/core#"
+  health: "http://healthdataportal.eu/ns/health#" 
+  dpv: "https://w3id.org/dpv/"
+  vcard: "http://www.w3.org/2006/vcard/ns#"
+
+
+mappings:
+  datasetMappping:
+    sources:
+      - access: health_dcat_ap.json
+        referenceFormulation: jsonpath
+        iterator: "$[*]"
+
+    s: $(uri)
+    po:
+      - [a, dcat:Dataset]
+      - [health:analytics, $(analytics)~iri]
+      - [dcterms:accessRights, $(access_rights)~iri]
+      - [adms:identifier, $(alternate_identifier)]
+      - [dcterms:identifier, $(id)]
+      - [dcatap:applicableLegislation, $(applicable_legislation)~iri]
+      - p: dcat:contactPoint
+        o:
+          - mapping: contactMappingAuthor
+      - [health:hasCodeValues, $(code_values)~iri]
+      - [health:hasCodingSystem, $(coding_system)~iri]
+      - [dcterms:conformsTo, $(conforms_to)~iri]
+      - p: dcterms:creator
+        o:
+          - mapping: creatorMapiing
+
+      - [dcterms:type, $(dcat_type)]
+      - [foaf:page, $(documentation)]
+      - [dcterms:accrualPeriodicity, $(frequency)~iri]
+      - [health:healthCategory, "$(health_category[*])~iri" ]
+      - [health:healthTheme, "$(health_theme[*])~iri" ]
+      - [dcterms:identifier, $(identifier)~iri]   ### Didn't map id
+      - [dcterms:isReferencedBy, $(is_referenced_by)~iri]
+      - [dcterms:issued, $(issued), xsd:dateTime]
+      - [dcterms:language, "$(language[*])~iri" ]
+      - [dpv:hasLegalBasis, "$(legal_basis[*])~iri"]
+      - [dcterms:licence, $(license_title)]
+      - p: dcat:contactPoint
+        o:
+          - mapping: contactMappingMaintainer
+      - [health:maxTypicalAge, $(max_typical_age), xsd:nonNegativeInteger]
+      - [dcterms:issued, $(metadata_created), xsd:dateTime]
+      - [dcterms:modified, $(metadata_modified), xsd:dateTime]
+      - [health:minTypicalAge, $(min_typical_age), xsd:nonNegativeInteger]
+      - [dcterms:modified, $(modified), xsd:dateTime]
+      - [dcterms:description, $(notes)]
+      - [health:numberOfRecords, $(number_of_records), xsd:nonNegativeInteger]
+      - [health:numberOfUniqueIndividuals, $(number_of_unique_individuals), xsd:nonNegativeInteger]
+      - [health:hasPersonalData, "$(personal_data[*])~iri"]
+      - [health:populationCoverage, $(population_coverage)]
+      - [dcterms:provenance, $(provenance)]   
+
+                          ## In the dataset_health.ttl , provenance mapping is like this.
+                           # dct:provenance                  [ a           dct:ProvenanceStatement;
+                           #                                    rdfs:label  "This example dataset is partly sourced from TEHDAS2"
+                           #                                  ]; 
+                           # But dct:provenance -> cstom:provenance (text) in DCAT<->CKAN Mapping
+      - [health:publisherNote, $(publisher_note)~iri]
+      - [health:publisherType, $(publisher_type)~iri]
+      - [dpv:hasPurpose, $(purpose)~iri]
+      - p: dcat:Relationship
+        o:
+          - mapping: qualifiedRelationMapping
+      - [dcat:temporalResolution, $(temporal_resolution), xsd:duration]
+      - [dcat:theme, "$(theme[*])~iri"]
+      - [dcterms:title, $(title)]
+      - [adms:versionNotes, $(version_notes)]
+      - p: dcat:contactPoint
+        o:
+          - mapping: contactMapping
+      - p: dcterms:creator
+        o:
+          - mapping: creatorMappingBlock
+      - p: health:hdab
+        o:
+          - mapping: hdabMapping
+      - p: dcterms:publisher
+        o:
+          - mapping: publisherMapping
+      - p: health:retentionPeriod
+        o:
+          - mapping: retentionPeriodMapping
+      - [dcat:keyword, "$(tags[*].name)"]
+      - p: dcterms:temporal
+        o:
+          - mapping: temporalBlanknode
+      - [dcat:distribution, $(resources)]
+                          
+  
+  contactMappingAuthor:
+    sources:
+      - access: health_dcat_ap.json
+        referenceFormulation: jsonpath
+        iterator: "$[*]" 
+    s: http://wwww.example.com/contact/$(author)
+    po:
+      - [a, vcard:Kind]
+      - [vcard:fn, $(author)]
+      - [vcard:hasEmail, $(author_email)]
+
+
+  creatorMapiing:
+    sources:
+      - access: health_dcat_ap.json
+        referenceFormulation: jsonpath
+        iterator: "$[*]" 
+    s: null
+    po:
+      - [a, foaf:Agent]
+      - [dcterms:identifier, $(creator_user_id)]
+
+  contactMappingMaintainer:
+    sources:
+      - access: health_dcat_ap.json
+        referenceFormulation: jsonpath
+        iterator: "$[*]" 
+    s: http://wwww.example.com/contact/$(maintainer)
+    po:
+      - [a, vcard:Kind]
+      - [vcard:fn, $(maintainer)]
+      - [vcard:hasEmail, $(maintainer_email)]
+
+  qualifiedRelationMapping:
+    sources:
+      - access: health_dcat_ap.json
+        referenceFormulation: jsonpath
+        iterator: "$[*].qualified_relation[*]" 
+    s: null
+    po:
+      - [a, dcat:Relationship]
+      - [dcterms:relation, $(relation)~iri]
+      - [dcat:hadRole, $(role)~iri]
+
+
+  contactMapping:
+    sources:
+      - access: health_dcat_ap.json
+        referenceFormulation: jsonpath
+        iterator: "$[*].contact[*]" 
+    s: http://wwww.example.com/contact/$(name)
+    po:
+      - [a, vcard:Kind]
+      - [vcard:fn, $(name)]
+      - [vcard:hasEmail, $(email)]
+
+
+  creatorMappingBlock:
+    sources:
+      - access: health_dcat_ap.json
+        referenceFormulation: jsonpath
+        iterator: "$[*].creator[*]"
+    s: null
+    po:
+      - [a, foaf:Agent]
+      - [foaf:name, $(name)]
+      - [foaf:mbox, $(email)]
+      - [foaf:homepage, $(url)]
+      - [dcterms:identifier, $(identifier)]
+      - [dcterms:type, $(type)]
+
+  hdabMapping:
+     sources:
+      - access: health_dcat_ap.json
+        referenceFormulation: jsonpath
+        iterator: "$[*].hdab[*]"
+     s: null
+     po:
+      - [a, foaf:Organization]
+      - [foaf:mbox, $(email)]
+      - [foaf:name, $(name)]
+      - [dcterms:identifier, $(identifier)]
+      - [dcterms:type, $(type)]
+      - [foaf:homepage, $(url)]
+
+
+  publisherMapping:
+    sources:
+      - access: health_dcat_ap.json
+        referenceFormulation: jsonpath
+        iterator: "$[*].publisher[*]"
+    s: null
+    po:
+      - [a, foaf:Agent]
+      - [foaf:name, $(name)]
+      - [foaf:mbox, $(email)]
+      - [foaf:homepage, $(url)]
+      - [dcterms:identifier, $(identifier)]
+      - [dcterms:type, $(type)]
+
+  retentionPeriodMapping:
+    sources:
+      - access: health_dcat_ap.json
+        referenceFormulation: jsonpath
+        iterator: "$[*].retention_period[*]"
+    s: null
+    po:
+     - [a, dcterms:PeriodOfTime]
+     - [dcat:endDate, $(end), xsd:date]
+     - [dcat:startDate, $(start), xsd:date]
+
+      
+  temporalBlanknode:
+    sources:
+      - access: health_dcat_ap.json
+        referenceFormulation: jsonpath
+        iterator: "$.temporal_coverage[*]"
+    s: null
+    po:
+      - [a, dcterms:PeriodOfTime]
+      - [dcat:startDate, $(start)]
+      - [dcat:endDate, $(end)]   
+
+
+

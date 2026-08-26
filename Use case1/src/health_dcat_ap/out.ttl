@@ -1,0 +1,86 @@
+_:genid311 <http://purl.org/dc/terms/relation> <http://example.com/dataset/3.141592> .
+_:genid311 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Relationship> .
+_:genid311 <http://www.w3.org/ns/dcat#hadRole> <http://www.iana.org/assignments/relation/related> .
+_:genid322 <http://purl.org/dc/terms/identifier> "" .
+_:genid322 <http://purl.org/dc/terms/type> "" .
+_:genid322 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Agent> .
+_:genid322 <http://xmlns.com/foaf/0.1/homepage> "https:/example.com/homepage" .
+_:genid322 <http://xmlns.com/foaf/0.1/mbox> "info@example.com" .
+_:genid322 <http://xmlns.com/foaf/0.1/name> "Contact Point" .
+_:genid333 <http://purl.org/dc/terms/identifier> "" .
+_:genid333 <http://purl.org/dc/terms/type> "" .
+_:genid333 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Organization> .
+_:genid333 <http://xmlns.com/foaf/0.1/homepage> "https://www.example.com/hdab" .
+_:genid333 <http://xmlns.com/foaf/0.1/mbox> "hdab@example.com" .
+_:genid333 <http://xmlns.com/foaf/0.1/name> "EU Health Data Access Body" .
+_:genid344 <http://purl.org/dc/terms/identifier> "" .
+_:genid344 <http://purl.org/dc/terms/type> "" .
+_:genid344 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Agent> .
+_:genid344 <http://xmlns.com/foaf/0.1/homepage> "https://healthdata.nl" .
+_:genid344 <http://xmlns.com/foaf/0.1/mbox> "info@example.com" .
+_:genid344 <http://xmlns.com/foaf/0.1/name> "Contact Point" .
+_:genid355 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/PeriodOfTime> .
+_:genid355 <http://www.w3.org/ns/dcat#endDate> "2034-12-31"^^<http://www.w3.org/2001/XMLSchema#date> .
+_:genid355 <http://www.w3.org/ns/dcat#startDate> "2020-03-01"^^<http://www.w3.org/2001/XMLSchema#date> .
+_:genid366 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Agent> .
+<http://example.healthdata.nl/set/dataset> <http://data.europa.eu/r5r/applicableLegislation> <http://data.europa.eu/eli/reg/2022/868/oj> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#analytics> <http://example.com/analytics> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#hasCodeValues> <http://example.com/code1> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#hasCodeValues> <http://example.com/code2> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#hasCodingSystem> <http://www.wikidata.org/entity/P1690> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#hasCodingSystem> <http://www.wikidata.org/entity/P4229> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#hasPersonalData> <https://w3id.org/dpv/dpv-pd#Age> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#hasPersonalData> <https://w3id.org/dpv/dpv-pd#Gender> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#hasPersonalData> <https://w3id.org/dpv/dpv-pd#HealthRecord> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#hdab> _:genid333 .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#healthCategory> <http://example.com/ontology/resource/authority/healthcategories/DIOH> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#healthCategory> <http://example.com/ontology/resource/authority/healthcategories/EHRS> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#healthCategory> <http://example.com/ontology/resource/authority/healthcategories/IDHP> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#healthCategory> <http://example.com/ontology/resource/authority/healthcategories/PHDR> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#healthTheme> <http://www.wikidata.org/entity/Q58624061> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#healthTheme> <http://www.wikidata.org/entity/Q7907952> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#maxTypicalAge> "110"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#minTypicalAge> "0"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#numberOfRecords> "123456789"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#numberOfUniqueIndividuals> "7654321"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#populationCoverage> "This example includes a very non-descript population" .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#publisherType> <http://example.com/publisherType/undefined> .
+<http://example.healthdata.nl/set/dataset> <http://healthdataportal.eu/ns/health#retentionPeriod> _:genid355 .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/accessRights> <http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC> .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/accrualPeriodicity> <http://publications.europa.eu/resource/authority/frequency/DAILY> .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/conformsTo> <http://www.wikidata.org/entity/Q19597236> .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/creator> _:genid300 .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/creator> _:genid322 .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/description> "This dataset is an example of using HealthDCAT-AP in CKAN" .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/identifier> <http://example.com/dataset/1234567890> .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/identifier> "e7ccf79d-705c-427f-8e96-f87bcd6e5318" .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/isReferencedBy> <https://doi.org/10.1038/sdata.2016.18> .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/isReferencedBy> <https://dx.doi.org/10.1002/jmri.28679> .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/issued> "2024-01-01T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/issued> "2024-12-02T19:00:30.897399"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/language> <http://publications.europa.eu/resource/authority/language/ENG> .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/language> <http://publications.europa.eu/resource/authority/language/FRA> .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/language> <http://publications.europa.eu/resource/authority/language/NLD> .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/licence> "" .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/modified> "2024-12-02T19:00:30.897406"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/modified> "2024-12-31T23:59:59+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/provenance> "This example dataset is partly sourced from TEHDAS2" .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/publisher> _:genid344 .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/title> "HealthDCAT-AP test dataset" .
+<http://example.healthdata.nl/set/dataset> <http://purl.org/dc/terms/type> "n1049372e768c4429a6b2200c22f5f1a4b7" .
+<http://example.healthdata.nl/set/dataset> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Dataset> .
+<http://example.healthdata.nl/set/dataset> <http://www.w3.org/ns/dcat#Relationship> _:genid311 .
+<http://example.healthdata.nl/set/dataset> <http://www.w3.org/ns/dcat#contactPoint> <http://wwww.example.com/contact/Contact%20Point> .
+<http://example.healthdata.nl/set/dataset> <http://www.w3.org/ns/dcat#keyword> "Test 1" .
+<http://example.healthdata.nl/set/dataset> <http://www.w3.org/ns/dcat#keyword> "Test 2" .
+<http://example.healthdata.nl/set/dataset> <http://www.w3.org/ns/dcat#keyword> "Test 3" .
+<http://example.healthdata.nl/set/dataset> <http://www.w3.org/ns/dcat#temporalResolution> "P1D"^^<http://www.w3.org/2001/XMLSchema#duration> .
+<http://example.healthdata.nl/set/dataset> <http://www.w3.org/ns/dcat#theme> <http://publications.europa.eu/resource/authority/data-theme/HEAL> .
+<http://example.healthdata.nl/set/dataset> <http://xmlns.com/foaf/0.1/page> "n1049372e768c4429a6b2200c22f5f1a4b9" .
+<http://example.healthdata.nl/set/dataset> <https://w3id.org/dpv/hasLegalBasis> <https://w3id.org/dpv#Consent> .
+<http://example.healthdata.nl/set/dataset> <https://w3id.org/dpv/hasPurpose> <https://w3id.org/dpv#AcademicResearch> .
+<http://example.healthdata.nl/set/dataset> <https://www.w3.org/ns/adms#identifier> "internalURI:admsIdentifier0" .
+<http://example.healthdata.nl/set/dataset> <https://www.w3.org/ns/adms#versionNotes> "Dataset continuously updated" .
+<http://wwww.example.com/contact/Contact%20Point> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2006/vcard/ns#Kind> .
+<http://wwww.example.com/contact/Contact%20Point> <http://www.w3.org/2006/vcard/ns#fn> "Contact Point" .
+<http://wwww.example.com/contact/Contact%20Point> <http://www.w3.org/2006/vcard/ns#hasEmail> "covacsurv@sciensano.be" .
