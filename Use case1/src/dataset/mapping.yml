@@ -1,0 +1,80 @@
+prefixes:
+  ex: "http://example.org/"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcat: "http://www.w3.org/ns/dcat#"
+  dcterms: "http://purl.org/dc/terms/"
+  foaf: "http://xmlns.com/foaf/0.1/"
+
+sources:
+  dataset_source:
+    [dataset.json~jsonpath, "$"]
+  publisher_source:
+    [dataset.json~jsonpath, "$.publisher"]
+  creator_source:
+    [dataset.json~jsonpath, "$.creator"]
+  distribution_source:
+    [dataset.json~jsonpath, "$.distribution[*]"]
+
+mappings:
+  dataset:
+    sources: dataset_source
+    s: ex:dataset/$(title)
+    po:
+      - [a, dcat:Dataset]
+      - [dcterms:title, $(title), en~lang]
+      - [dcterms:description, $(description), en~lang]
+      - [dcterms:identifier, $(identifier)]
+      - [dcat:landingPage, $(landingPage)~iri]
+      - [dcterms:issued, $(issued), xsd:date]
+      - [dcterms:modified, $(modified), xsd:date]
+      - [dcterms:language, "http://id.loc.gov/vocabulary/iso639-1/$(language[*])~iri"]
+      - [dcat:keyword, "$(keyword[*])"]
+      - p: dcterms:publisher
+        o:
+          - mapping: publisher
+            # condition: 
+            #   function: equal
+            #   parameters:
+            #     - [str1, $(publisher.name), s]
+            #     - [str2, $(name), o]
+
+      - p: dcterms:creator
+        o:
+          - mapping: creator
+            # condition:
+            #   function: equal
+            #   parameters:
+            #     - [str1, $(creator.name), s]
+            #     - [str2, $(name), o]
+
+      - p: dcat:distribution
+        o:
+          - mapping: distribution
+
+  publisher:
+    sources: publisher_source
+    s: ex:publisher/$(name)
+    po:
+      - [a, foaf:Agent]
+      - [foaf:name, $(name)]
+      - [foaf:mbox, $(email)]
+      
+
+  creator:
+    sources: creator_source
+    s: ex:creator/$(name)
+    po:
+      - [a, foaf:Agent]
+      - [foaf:name, $(name)]
+      - [foaf:mbox, $(email)]
+
+  distribution:
+    sources: distribution_source
+    s: null
+    po:
+      - [a, dcat:Distribution]
+      - [dcat:accessURL, $(accessURL)~iri]
+      - [dcat:byteSize, $(byteSize)]
+      - [dcterms:description, $(description)]
+      - [dcterms:format, $(format)]
+      - [dcterms:title, $(title)]
