@@ -1,0 +1,98 @@
+_:genid300 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/PeriodOfTime> .
+_:genid300 <http://www.w3.org/ns/dcat#endDate> "2013-01-05"^^<http://www.w3.org/2001/XMLSchema#date> .
+_:genid300 <http://www.w3.org/ns/dcat#startDate> "1905-03-01"^^<http://www.w3.org/2001/XMLSchema#date> .
+_:genid311 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/PeriodOfTime> .
+_:genid311 <http://www.w3.org/ns/dcat#endDate> "2024-05-29"^^<http://www.w3.org/2001/XMLSchema#date> .
+_:genid311 <http://www.w3.org/ns/dcat#startDate> "2024-04-10"^^<http://www.w3.org/2001/XMLSchema#date> .
+_:genid322 <http://www.w3.org/ns/dcat#bbox> "POLYGON((-179.15 51.21, -179.15 71.54, -129.98 71.54, -129.98 51.21, -179.15 51.21)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+_:genid333 <http://www.w3.org/ns/dcat#bbox> "POLYGON((-125.0 24.4, -125.0 49.4, -66.9 49.4, -66.9 24.4, -125.0 24.4)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
+_:genid344 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/Location> .
+_:genid344 <http://www.w3.org/2004/02/skos/core#prefLabel> "Tarragona" .
+_:genid344 <http://www.w3.org/ns/dcat#bbox> "{type=Polygon, coordinates=[[[-2.1604, 42.7611], [-2.0938, 42.7611], [-2.0938, 42.7931], [-2.1604, 42.7931], [-2.1604, 42.7611]]]}"^^<http://www.opengis.net/ont/geosparql#geoJSONLiteral> .
+_:genid344 <http://www.w3.org/ns/dcat#centriod> "{type=Point, coordinates=[1.26639, 41.12386]}"^^<http://www.opengis.net/ont/geosparql#geoJSONLiteral> .
+_:genid344 <http://www.w3.org/ns/locn#geometry> "{type=Polygon, coordinates=[[[11.9936, 54.0486], [11.9936, 54.2466], [12.3045, 54.2466], [12.3045, 54.0486], [11.9936, 54.0486]]]}"^^<https://www.iana.org/assignments/media-types/application/vnd.geo+json> .
+_:genid355 <http://purl.org/dc/terms/relation> "http://example.com/dataset/3.141592" .
+_:genid355 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Relationship> .
+_:genid355 <http://www.w3.org/ns/dcat#hadRole> "http://www.iana.org/assignments/relation/related" .
+<http://wwww.example.com/contact/Contact%201> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2006/vcard/ns#Kind> .
+<http://wwww.example.com/contact/Contact%201> <http://www.w3.org/2006/vcard/ns#fn> "Contact 1" .
+<http://wwww.example.com/contact/Contact%201> <http://www.w3.org/2006/vcard/ns#hasEmail> "contact1@example.org" .
+<http://wwww.example.com/contact/Contact%202> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2006/vcard/ns#Kind> .
+<http://wwww.example.com/contact/Contact%202> <http://www.w3.org/2006/vcard/ns#fn> "Contact 2" .
+<http://wwww.example.com/contact/Contact%202> <http://www.w3.org/2006/vcard/ns#hasEmail> "contact2@example.org" .
+<http://wwww.example.com/creator/Test%20Creator> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Agent> .
+<http://wwww.example.com/creator/Test%20Creator> <http://xmlns.com/foaf/0.1/homepage> <https://example.org> .
+<http://wwww.example.com/creator/Test%20Creator> <http://xmlns.com/foaf/0.1/mbox> "creator@example.org" .
+<http://wwww.example.com/creator/Test%20Creator> <http://xmlns.com/foaf/0.1/name> "Test Creator" .
+<http://wwww.example.com/creator/Test%20Publisher> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Agent> .
+<http://wwww.example.com/creator/Test%20Publisher> <http://xmlns.com/foaf/0.1/homepage> <https://example.org> .
+<http://wwww.example.com/creator/Test%20Publisher> <http://xmlns.com/foaf/0.1/mbox> "publisher@example.org" .
+<http://wwww.example.com/creator/Test%20Publisher> <http://xmlns.com/foaf/0.1/name> "Test Publisher" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/accessRights> "https://resources.data.gov/vocab/access-right/TODO/PUBLIC" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/accrualPeriodicity> <http://purl.org/cld/terms/annual> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/conformsTo> "https://resources.data.gov/vocab/TODO/ProtocolValue/DCAT_US_3_0" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/creator> <http://wwww.example.com/creator/Test%20Creator> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/description> "Lorem ipsum" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/identifier> "xx-some-dataset-id-yy" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/isReferencedBy> "https://doi.org/10.1038/sdata.2018.22" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/issued> "2024-05-01"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/language> "http://id.loc.gov/vocabulary/iso639-1/ca" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/language> "http://id.loc.gov/vocabulary/iso639-1/en" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/language> "http://id.loc.gov/vocabulary/iso639-1/es" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/modified> "2024-05-05"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/provenance> "https://example.org/some-provenance-statement.html" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/publisher> <http://wwww.example.com/creator/Test%20Publisher> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/spatial> _:genid344 .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/temporal> _:genid300 .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/temporal> _:genid311 .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/title> "Test DCAT dataset" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://purl.org/dc/terms/type> "http://purl.org/dc/dcmitype/Dataset" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://resources.data.gov/ontology/dcat-us#describedBy> "{url=https://example.org/some-data-dictionary, format=https://resources.data.gov/vocab/file-type/TODO/JSON, license=https://resources.data.gov/vocab/license/TODO/CC_BYNC_4_0}" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://resources.data.gov/ontology/dcat-us#liabilityStatement> "Some statement about liability" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://resources.data.gov/ontology/dcat-us#purpose> "Some notes about the purpose of the dataset" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Dataset> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/2002/07/owl#versionInfo> "1.0b" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/2004/02/skos/core#scopeNote> "Some notes about the usage of the dataset" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#bbox> _:genid322 .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#bbox> _:genid333 .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#contactPoint> <http://wwww.example.com/contact/Contact%201> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#contactPoint> <http://wwww.example.com/contact/Contact%202> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#distribution> <http://wwww.example.com/distribution/Resource%201> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#keyword> "Tag 1" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#keyword> "Tag 2" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#landingPage> <http://example.org/ds1> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#qualifiedRelation> _:genid355 .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#spatialResolutionInMeters> "1.5" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#temporalResolution> "PT15M"^^<http://www.w3.org/2001/XMLSchema#duration> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#theme> "https://example.org/uri/theme1" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#theme> "https://example.org/uri/theme2" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://www.w3.org/ns/dcat#theme> "https://example.org/uri/theme3" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <http://xmlns.com/foaf/0.1/page> <https://example.org/some-doc.html> .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <https://www.w3.org/ns/adms#identifier> "https://org1.example.org/datasets/alt-id-1" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <https://www.w3.org/ns/adms#identifier> "https://org2.example.org/datasets/alt-id-2" .
+<http://wwww.example.com/dataset/Test%20DCAT%20dataset> <https://www.w3.org/ns/adms#versionNotes> "Some version notes" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/conformsTo> "https://resources.data.gov/vocab/TODO/ProtocolValue/DCAT_US_3_0" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/description> "Some description" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/format> "https://resources.data.gov/vocab/file-type/TODO/CSV" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/issued> "2024-05-01T01:20:33"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/language> "http://id.loc.gov/vocabulary/iso639-1/ca" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/language> "http://id.loc.gov/vocabulary/iso639-1/en" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/language> "http://id.loc.gov/vocabulary/iso639-1/es" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/license> "https://resources.data.gov/vocab/license/TODO/CC_BYNC_4_0" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/modified> "2024-05-05T09:33:20"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/rights> "This dataset is provided by the United States Malacological Commission (USMC)" .
+<http://wwww.example.com/distribution/Resource%201> <http://purl.org/dc/terms/title> "Resource 1" .
+<http://wwww.example.com/distribution/Resource%201> <http://resources.data.gov/ontology/dcat-us#describedBy> "{url=https://example.org/some-data-dictionary, format=https://resources.data.gov/vocab/file-type/TODO/JSON, license=https://resources.data.gov/vocab/license/TODO/CC_BYNC_4_0}" .
+<http://wwww.example.com/distribution/Resource%201> <http://spdx.org/rdf/terms#algorithm> "http://spdx.org/rdf/terms#checksumAlgorithm_sha1" .
+<http://wwww.example.com/distribution/Resource%201> <http://spdx.org/rdf/terms#checksum> "4304cf2e751e6053c90b1804c89c0ebb758f395a" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Distribution> .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/2008/content#characterEncoding> "UTF-8" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#accessURL> <https://example.com/data.csv> .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#byteSize> "12323" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#compressFormat> "http://www.iana.org/assignments/media-types/application/gzip" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#downloadURL> <https://example.com/data.csv> .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#mediaType> "http://www.iana.org/assignments/media-types/text/csv" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#packageFormat> "http://publications.europa.eu/resource/authority/file-type/TAR" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#spatialResolutionInMeters> "1.5" .
+<http://wwww.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#temporalResolution> "PT15M"^^<http://www.w3.org/2001/XMLSchema#duration> .
+<http://wwww.example.com/distribution/Resource%201> <https://www.w3.org/ns/adms#status> "http://purl.org/adms/status/Completed" .
