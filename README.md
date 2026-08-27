@@ -10,5 +10,4 @@ In contrast, declarative mapping languages offer a more systematic alternative t
       
 This repository contains the  datasets and source code for all three use cases listed above.
 
-## Acknowledgments
-This development of pnkg was led by Nayomi Ranamuka and Nenad Radosevic, with contributions from all of the researchers at the [RMIT Geographic Knowledge Lab](http://gkl.rmit.melbourne/about): Alexis Horde Vo, Prawal Lohani, Mohammad Kazemi Beydokhti, Ozzy Yaguang Tao, and GKL Director [Prof Matt Duckham](https://academics.rmit.edu.au/matt-duckham).
+
