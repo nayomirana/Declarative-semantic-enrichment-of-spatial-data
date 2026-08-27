@@ -36,7 +36,7 @@ The below image shows the snapshot of the classes, Object Property (OP), and Dat
 ![Place Name Ontology Diagram](images/placename-ontology.png)
 
 ## Geographical Names Model
-
+The image below provides an overview of the main classes and object properties defined in the [Geographical Names Model](https://spatial-information-qld.github.io/geographical-names-model/model.html).
 <p align="center">
   <img src="images/GeographicalNamesModel.png" alt="Geographical Names Model" width="70%">
 </p>
