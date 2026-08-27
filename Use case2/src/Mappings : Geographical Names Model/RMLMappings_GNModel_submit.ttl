@@ -1,0 +1,1882 @@
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix csvw: <http://www.w3.org/ns/csvw#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sd:  <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix sf: <http://www.opengis.net/ont/sf#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix loci: <http://linked.data.gov.au/def/loci#> .
+@prefix vc: <http://www.w3.org/2006/vcard/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix fsdf: <http://linked.data.gov.au/def/fsdf/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix grel:    <http://users.ugent.be/~bjdmeest/function/grel.ttl#> .
+@prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
+@prefix fno: <http://w3id.org/function/ontology#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix onto: <http://example.di.uoa.gr/ontology#>.
+@prefix sdo: <https://schema.org/> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix lm: <https://linked.data.gov.au/def/lifecycle> .
+@prefix gpt: <https://linked.data.gov.au/def/gn-part-types/> .
+@prefix goc: <https://linked.data.gov.au/def/go-categories/> .
+@prefix gn: <https://linked.data.gov.au/def/gn/> .
+@prefix cn: <https://linked.data.gov.au/def/cn/> .
+@prefix pnkg: <http://geosensor.net/ns/pnkg#>.
+@base <http://geosensor.net/ns/pnkg#>.
+
+<#ACTSitesSource> a rml:LogicalSource;
+    rml:source "../data/ACT/ACT2026Q1.csv";
+    rml:referenceFormulation ql:CSV .
+
+<#NTSitesSource> a rml:LogicalSource;
+    rml:source "../data/NT/NT2026Q1.csv";
+    rml:referenceFormulation ql:CSV .
+
+<#WASitesSource> a rml:LogicalSource;
+    rml:source "../data/WA/WA2026Q1.csv";
+    rml:referenceFormulation ql:CSV .
+
+<#QLDSitesSource> a rml:LogicalSource;
+    rml:source "../data/QLD/QLD2026Q1.csv";
+    rml:referenceFormulation ql:CSV .
+
+<#TASSitesSource> a rml:LogicalSource;
+    rml:source "../data/TAS/TAS2026Q1.csv";
+    rml:referenceFormulation ql:CSV .
+
+<#VICRoadsSource> a rml:LogicalSource;
+    rml:source "../data/VIC/VIC_roads2026Q1.csv";
+    rml:referenceFormulation ql:CSV .
+
+<#VICSitesSource> a rml:LogicalSource;
+    rml:source "../data/VIC/VIC_places2026Q1.csv";
+    rml:referenceFormulation ql:CSV .
+
+<#NSWSitesSource> a rml:LogicalSource;
+    rml:source "../data/NSW/NSW2026Q1.csv";
+    rml:referenceFormulation ql:CSV .
+
+<#SASitesSource> a rml:LogicalSource;
+    rml:source "../data/SA/SA_Sites2026Q1.csv";
+    rml:referenceFormulation ql:CSV .
+
+<#SAAreasSource> a rml:LogicalSource;
+    rml:source "../data/SA/SA_Areas2026Q1.csv";
+    rml:referenceFormulation ql:CSV .
+
+<#SALinesSource> a rml:LogicalSource;
+    rml:source "../data/SA/SA_Lines2026Q1.csv";
+    rml:referenceFormulation ql:CSV.
+
+<#PlaceNameDataSource> a rml:LogicalSource;
+    rml:source "../data/AustralianPlacenamesMetadata.csv";
+    rml:referenceFormulation ql:CSV .
+
+
+############ ACT #############################################################################
+<#ACTGeographicalObjectMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#ACTSitesSource>;
+    
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/Place/{AUTHORITY}/{AUTH_ID}";
+      rr:class gn:GeographicalObject, geo:Feature;
+      ];
+      
+    rr:predicateObjectMap [
+      rr:predicate sdo:name ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/PlaceName/{AUTHORITY}/{AUTH_ID}";
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate sdo:additionalType;
+      rr:objectMap [
+        rr:template "https://linked.data.gov.au/def/go-categories/{FEATURE}";
+        ]
+    ];
+  
+  rr:predicateObjectMap [
+    rr:predicate geo:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap <#ACTGeometryMapping>;  
+      ]
+  ].
+    
+<#ACTGeometryMapping> a rr:TriplesMap;
+   rml:logicalSource <#ACTSitesSource>;
+    
+   rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Geometry/Point/{AUTHORITY}/{AUTH_ID}";
+    rr:class geo:Geometry;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate geo:asWKT;
+      rr:objectMap [
+        rml:reference "geometry";
+        rr:datatype geo:wktLiteral;
+        ]
+    ] .
+
+<#ACTGeographicalNameMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#ACTSitesSource>;
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/PlaceName/{AUTHORITY}/{AUTH_ID}";
+      rr:class gn:GeographicalName;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate cn:isNameFor ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/Place/{AUTHORITY}/{AUTH_ID}";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate cn:hasCompoundedName;
+        rr:objectMap [
+          fnml:functionValue [
+            rr:predicateObjectMap [
+              rr:predicate fno:executes ;
+              rr:objectMap [ rr:constant grel:string_toTitlecase ] ] ;
+            rr:predicateObjectMap [
+              rr:predicate grel:valueParameter ;
+              rr:objectMap [ rml:reference "NAME";
+              rr:language "en";
+               ] ]
+          ]
+        ]
+      ];
+
+    # https://linked.data.gov.au/def/gn-part-types/geographicalGivenName
+    rr:predicateObjectMap [
+       rr:predicate sdo:additionalType;
+       rr:objectMap [
+            rr:constant gpt:geographicalGivenName;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+       rr:predicate lm:hasLifeCycleStage;
+        rr:objectMap [
+            rr:parentTriplesMap <#ACTPlaceNameLifeCycleStageMapping> 
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+      rr:predicate prov:wasDerivedFrom;
+      rr:objectMap [
+        rr:parentTriplesMap <#PlaceNameDataMapping>;
+        rr:joinCondition [
+          rr:child "AUTHORITY"; 
+          rr:parent "ShortenName";
+          ]
+      ]
+    ].
+
+<#ACTPlaceNameLifeCycleStageMapping> a rr:TriplesMap;
+    rml:logicalSource <#ACTSitesSource>;
+    
+    rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/LifecycleStage/{STATUS}/{AUTHORITY}/{AUTH_ID}";
+        rr:class lm:LifecycleStage;
+    ];
+
+    rr:predicateObjectMap [
+    rr:predicate sdo:additionalType ;
+     rr:objectMap [
+      rr:template "http://geosensor.net/ns/pnkg/stage/{STATUS}"
+    ]
+  ] .
+
+########### NT ####################################################################
+<#NTGeographicalObjectMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#NTSitesSource>;
+    
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/Place/{AUTHORITY}/{AUTH_ID}";
+      rr:class gn:GeographicalObject, geo:Feature;
+      ];
+      
+    rr:predicateObjectMap [
+      rr:predicate sdo:name ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/PlaceName/{AUTHORITY}/{AUTH_ID}";
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate sdo:additionalType;
+      rr:objectMap [
+        rr:template "https://linked.data.gov.au/def/go-categories/{FEATURE}";
+        ]
+    ];
+  
+  rr:predicateObjectMap [
+    rr:predicate geo:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap <#NTGeometryMapping>;  
+      ]
+  ].
+    
+  <#NTGeometryMapping> a rr:TriplesMap;
+   rml:logicalSource <#NTSitesSource>;
+    
+   rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Geometry/Point/{AUTHORITY}/{AUTH_ID}";
+    rr:class geo:Geometry;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate geo:asWKT;
+      rr:objectMap [
+        rml:reference "WKT";
+        rr:datatype geo:wktLiteral;
+        ]
+    ] .
+
+<#NTGeographicalNameMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#NTSitesSource>;
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/PlaceName/{AUTHORITY}/{AUTH_ID}";
+      rr:class gn:GeographicalName;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate cn:isNameFor ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/Place/{AUTHORITY}/{AUTH_ID}";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate cn:hasCompoundedName;
+        rr:objectMap [
+          fnml:functionValue [
+            rr:predicateObjectMap [
+              rr:predicate fno:executes ;
+              rr:objectMap [ rr:constant grel:string_toTitlecase ] ] ;
+            rr:predicateObjectMap [
+              rr:predicate grel:valueParameter ;
+              rr:objectMap [ rml:reference "NAME";
+              rr:language "en";
+               ] ]
+          ]
+        ]
+      ];
+
+    # https://linked.data.gov.au/def/gn-part-types/geographicalGivenName
+    rr:predicateObjectMap [
+       rr:predicate sdo:additionalType;
+       rr:objectMap [
+            rr:constant gpt:geographicalGivenName;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+       rr:predicate lm:hasLifeCycleStage;
+        rr:objectMap [
+            rr:parentTriplesMap <#NTPlaceNameLifeCycleStageMapping> 
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+      rr:predicate prov:wasDerivedFrom;
+      rr:objectMap [
+        rr:parentTriplesMap <#PlaceNameDataMapping>;
+        rr:joinCondition [
+          rr:child "AUTHORITY"; 
+          rr:parent "ShortenName";
+          ]
+      ]
+    ].
+   
+<#NTPlaceNameLifeCycleStageMapping> a rr:TriplesMap;
+    rml:logicalSource <#NTSitesSource>;
+    
+    rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/LifecycleStage/{STATUS}/{AUTHORITY}/{AUTH_ID}";
+        rr:class lm:LifecycleStage;
+    ];
+
+    rr:predicateObjectMap [
+    rr:predicate sdo:additionalType ;
+     rr:objectMap [
+      rr:template "http://geosensor.net/ns/pnkg/stage/{STATUS}"
+    ]
+  ] .
+
+
+# ############  WA ###################################################################
+<#WAGeographicalObjectMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#WASitesSource>;
+    
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/Place/{AUTHORITY}/{ID}";
+      rr:class gn:GeographicalObject, geo:Feature;
+      ];
+      
+    rr:predicateObjectMap [
+      rr:predicate sdo:name ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/PlaceName/{AUTHORITY}/{ID}";
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate sdo:additionalType;
+      rr:objectMap [
+        rr:template "https://linked.data.gov.au/def/go-categories/{FEATURE}";
+        ]
+    ];
+  
+  rr:predicateObjectMap [
+    rr:predicate geo:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap <#WAGeometryMapping>;  
+      ]
+  ].
+    
+  <#WAGeometryMapping> a rr:TriplesMap;
+   rml:logicalSource <#WASitesSource>;
+    
+   rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Geometry/Point/{AUTHORITY}/{ID}";
+    rr:class geo:Geometry;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate geo:asWKT;
+      rr:objectMap [
+        rml:reference "geometry_wkt";
+        rr:datatype geo:wktLiteral;
+        ]
+    ] .
+
+<#WAGeographicalNameMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#WASitesSource>;
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/PlaceName/{AUTHORITY}/{ID}";
+      rr:class gn:GeographicalName;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate cn:isNameFor ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/Place/{AUTHORITY}/{ID}";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate cn:hasCompoundedName;
+        rr:objectMap [
+          fnml:functionValue [
+            rr:predicateObjectMap [
+              rr:predicate fno:executes ;
+              rr:objectMap [ rr:constant grel:string_toTitlecase ] ] ;
+            rr:predicateObjectMap [
+              rr:predicate grel:valueParameter ;
+              rr:objectMap [ rml:reference "NAME";
+              rr:language "en";
+               ] ]
+          ]
+        ]
+      ];
+
+    # https://linked.data.gov.au/def/gn-part-types/geographicalGivenName
+    rr:predicateObjectMap [
+       rr:predicate sdo:additionalType;
+       rr:objectMap [
+            rr:constant gpt:geographicalGivenName;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+       rr:predicate lm:hasLifeCycleStage;
+        rr:objectMap [
+            rr:parentTriplesMap <#WAPlaceNameLifeCycleStageMapping> 
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+      rr:predicate prov:wasDerivedFrom;
+      rr:objectMap [
+        rr:parentTriplesMap <#PlaceNameDataMapping>;
+        rr:joinCondition [
+          rr:child "AUTHORITY"; 
+          rr:parent "ShortenName";
+          ]
+      ]
+    ].
+
+<#WAPlaceNameLifeCycleStageMapping> a rr:TriplesMap;
+    rml:logicalSource <#WASitesSource>;
+    
+    rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/LifecycleStage/{status}/{AUTHORITY}/{ID}";
+        rr:class lm:LifecycleStage;
+    ];
+
+    rr:predicateObjectMap [
+    rr:predicate sdo:additionalType ;
+     rr:objectMap [
+      rr:template "http://geosensor.net/ns/pnkg/stage/{status}"
+    ]
+  ] .
+
+# ############  QLD ###################################################################
+<#QLDGeographicalObjectMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#QLDSitesSource>;
+    
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/Place/{State}/{Ref number}";
+      rr:class gn:GeographicalObject, geo:Feature;
+      ];
+      
+    rr:predicateObjectMap [
+      rr:predicate sdo:name ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/PlaceName/{State}/{Ref number}";
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate sdo:additionalType;
+      rr:objectMap [
+        rr:template "https://linked.data.gov.au/def/go-categories/{Description}";
+        ]
+    ];
+  
+  rr:predicateObjectMap [
+    rr:predicate geo:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap <#QLDGeometryMapping>;  
+      ]
+  ].
+    
+  <#QLDGeometryMapping> a rr:TriplesMap;
+   rml:logicalSource <#QLDSitesSource>;
+    
+   rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Geometry/Point/{State}/{Ref number}";
+    rr:class geo:Geometry;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate geo:asWKT;
+      rr:objectMap [
+        rml:reference "Geometry";
+        rr:datatype geo:wktLiteral;
+        ]
+    ] .
+
+<#QLDGeographicalNameMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#QLDSitesSource>;
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/PlaceName/{State}/{Ref number}";
+      rr:class gn:GeographicalName;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate cn:isNameFor ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/Place/{State}/{Ref number}";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate cn:hasCompoundedName;
+        rr:objectMap [
+          fnml:functionValue [
+            rr:predicateObjectMap [
+              rr:predicate fno:executes ;
+              rr:objectMap [ rr:constant grel:string_toTitlecase ] ] ;
+            rr:predicateObjectMap [
+              rr:predicate grel:valueParameter ;
+              rr:objectMap [ rml:reference "Place name";
+              rr:language "en";
+               ] ]
+          ]
+        ]
+      ];
+
+
+    # https://linked.data.gov.au/def/gn-part-types/geographicalGivenName
+    rr:predicateObjectMap [
+       rr:predicate sdo:additionalType;
+       rr:objectMap [
+            rr:constant gpt:geographicalGivenName;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+       rr:predicate lm:hasLifeCycleStage;
+        rr:objectMap [
+            rr:parentTriplesMap <#QLDPlaceNameLifeCycleStageMapping> 
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+      rr:predicate prov:wasDerivedFrom;
+      rr:objectMap [
+        rr:parentTriplesMap <#PlaceNameDataMapping>;
+        rr:joinCondition [
+          rr:child "State"; 
+          rr:parent "ShortenName";
+          ]
+      ]
+    ].
+
+<#QLDPlaceNameLifeCycleStageMapping> a rr:TriplesMap;
+    rml:logicalSource <#QLDSitesSource>;
+    
+    rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/LifecycleStage/{Name_status}/{State}/{Ref number}";
+        rr:class lm:LifecycleStage;
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate sdo:additionalType ;
+     rr:objectMap [
+      rr:template "http://geosensor.net/ns/pnkg/stage/{Name_status}"
+    ]
+  ] ;
+
+  rr:predicateObjectMap [
+    rr:predicate time:hasTime ;
+    rr:objectMap [ 
+      rr:parentTriplesMap <#QLD_TimeMap> 
+      ]
+  ] .
+
+<#QLD_TimeMap> a rr:TriplesMap;
+    rml:logicalSource <#QLDSitesSource>;
+
+   rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/Time/{State}/{Ref number}/gazetted";
+       rr:class time:TemporalEntity ;
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate time:hasBeginning ;
+    rr:objectMap [
+      rr:parentTriplesMap <#QLD_TimeStart>
+    ]
+  ] .
+
+<#QLD_TimeStart> a rr:TriplesMap;
+    rml:logicalSource <#QLDSitesSource>;
+   rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/Time/Start/{State}/{Ref number}/gazetted";
+       rr:class time:Instant ;
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate time:inXSDDate ;
+    rr:objectMap [ 
+      rml:reference "Gazetted date" ; 
+      rr:datatype  xsd:date]
+  ] .
+
+
+# ############ TAS ###################################################################
+<#TASGeographicalObjectMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#TASSitesSource>;
+    
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/Place/{AUTHORITY}/{AUTH_ID}";
+      rr:class gn:GeographicalObject, geo:Feature;
+      ];
+      
+    rr:predicateObjectMap [
+      rr:predicate sdo:name ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/PlaceName/{AUTHORITY}/{AUTH_ID}";
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate sdo:additionalType;
+      rr:objectMap [
+        rr:template "https://linked.data.gov.au/def/go-categories/{FEATURE}";
+        ]
+    ];
+  
+  rr:predicateObjectMap [
+    rr:predicate geo:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap <#TASGeometryMapping>;  
+      ]
+  ].
+    
+  <#TASGeometryMapping> a rr:TriplesMap;
+   rml:logicalSource <#TASSitesSource>;
+    
+   rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Geometry/Point/{AUTHORITY}/{AUTH_ID}";
+    rr:class geo:Geometry;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate geo:asWKT;
+      rr:objectMap [
+        rml:reference "WKT";
+        rr:datatype geo:wktLiteral;
+        ]
+    ] .
+
+<#TASGeographicalNameMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#TASSitesSource>;
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/PlaceName/{AUTHORITY}/{AUTH_ID}";
+      rr:class gn:GeographicalName;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate cn:isNameFor ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/Place/{AUTHORITY}/{AUTH_ID}";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate cn:hasCompoundedName;
+        rr:objectMap [
+          fnml:functionValue [
+            rr:predicateObjectMap [
+              rr:predicate fno:executes ;
+              rr:objectMap [ rr:constant grel:string_toTitlecase ] ] ;
+            rr:predicateObjectMap [
+              rr:predicate grel:valueParameter ;
+              rr:objectMap [ rml:reference "NAME";
+              rr:language "en";
+               ] ]
+          ]
+        ]
+      ];
+
+    # https://linked.data.gov.au/def/gn-part-types/geographicalGivenName
+    rr:predicateObjectMap [
+       rr:predicate sdo:additionalType;
+       rr:objectMap [
+            rr:constant gpt:geographicalGivenName;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+       rr:predicate lm:hasLifeCycleStage;
+        rr:objectMap [
+            rr:parentTriplesMap <#TASPlaceNameLifeCycleStageMapping> 
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+      rr:predicate prov:wasDerivedFrom;
+      rr:objectMap [
+        rr:parentTriplesMap <#PlaceNameDataMapping>;
+        rr:joinCondition [
+          rr:child "AUTHORITY"; 
+          rr:parent "ShortenName";
+          ]
+      ]
+    ].
+
+<#TASPlaceNameLifeCycleStageMapping> a rr:TriplesMap;
+    rml:logicalSource <#TASSitesSource>;
+    
+    rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/LifecycleStage/{status}/{AUTHORITY}/{AUTH_ID}";
+        rr:class lm:LifecycleStage;
+    ];
+
+    rr:predicateObjectMap [
+    rr:predicate sdo:additionalType ;
+     rr:objectMap [
+      rr:template "http://geosensor.net/ns/pnkg/stage/{status}"
+    ]
+  ] .
+
+# # ################### VIC - Roads ##########################################################
+<#VICRoadsGeographicalObjectMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#VICRoadsSource>;
+    
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/Place/{State}/{Place Id}";
+      rr:class gn:GeographicalObject, geo:Feature;
+      ];
+      
+    rr:predicateObjectMap [
+      rr:predicate sdo:name ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/PlaceName/{State}/{Name Id}";
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate sdo:additionalType;
+      rr:objectMap [
+        rr:template "https://linked.data.gov.au/def/go-categories/{Feature Type}";
+        ]
+    ];
+  
+  rr:predicateObjectMap [
+    rr:predicate geo:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap <#VICRoadsGeometryMapping>;  
+      ]
+  ].
+    
+<#VICRoadsGeometryMapping> a rr:TriplesMap;
+   rml:logicalSource <#VICRoadsSource>;
+    
+   rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Geometry/Point/{State}/{Place Id}";
+    rr:class geo:Geometry;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate geo:asWKT;
+      rr:objectMap [
+        rml:reference "WKT";
+        rr:datatype geo:wktLiteral;
+        ]
+    ] .
+
+<#VICRoadsGeographicalNameMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#VICRoadsSource>;
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/PlaceName/{State}/{Name Id}";
+      rr:class gn:GeographicalName;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate cn:isNameFor ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/Place/{State}/{Place Id}";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate cn:hasCompoundedName;
+        rr:objectMap [
+          fnml:functionValue [
+            rr:predicateObjectMap [
+              rr:predicate fno:executes ;
+              rr:objectMap [ rr:constant grel:string_toTitlecase ] ] ;
+            rr:predicateObjectMap [
+              rr:predicate grel:valueParameter ;
+              rr:objectMap [ rml:reference "Place Name";
+              rr:language "en";
+               ] ]
+          ]
+        ]
+      ];
+
+    # https://linked.data.gov.au/def/gn-part-types/geographicalGivenName
+    rr:predicateObjectMap [
+       rr:predicate sdo:additionalType;
+       rr:objectMap [
+            rr:constant gpt:geographicalGivenName;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+       rr:predicate lm:hasLifeCycleStage;
+        rr:objectMap [
+            rr:parentTriplesMap <#VICRoadsPlaceNameLifeCycleStageMapping> 
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+       rr:predicate lm:hasLifeCycleStage;
+        rr:objectMap [
+            rr:parentTriplesMap <#VICRoadsPlaceNameLifeCycleStageGazettedMapping> 
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+      rr:predicate prov:wasDerivedFrom;
+      rr:objectMap [
+        rr:parentTriplesMap <#PlaceNameDataMapping>;
+        rr:joinCondition [
+          rr:child "State"; 
+          rr:parent "ShortenName";
+          ]
+      ]
+    ].
+
+<#VICRoadsPlaceNameLifeCycleStageMapping> a rr:TriplesMap;
+    rml:logicalSource <#VICRoadsSource>;
+    
+    rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/LifecycleStage/{PlaceNameStatusLower}/{State}/{Name Id}";
+        rr:class lm:LifecycleStage;
+    ];
+
+    rr:predicateObjectMap [
+    rr:predicate sdo:additionalType ;
+     rr:objectMap [
+      rr:template "http://geosensor.net/ns/pnkg/stage/{PlaceNameStatusLower}"
+    ]
+  ] .
+
+
+<#VICRoadsPlaceNameLifeCycleStageGazettedMapping> a rr:TriplesMap;
+    rml:logicalSource <#VICRoadsSource>;
+    
+    rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/LifecycleStage/gazetted/{State}/{Name Id}";
+        rr:class lm:LifecycleStage;
+    ];
+
+
+    rr:predicateObjectMap [
+    rr:predicate sdo:additionalType ;
+     rr:objectMap [
+      rr:template "http://geosensor.net/ns/pnkg/stage/gazetted"
+    ]
+  ] ;
+
+  rr:predicateObjectMap [
+    rr:predicate time:hasTime ;
+    rr:objectMap [ 
+      rr:parentTriplesMap <#VICRoads_TimeMap> 
+      ]
+  ] .
+
+<#VICRoads_TimeMap> a rr:TriplesMap;
+    rml:logicalSource <#VICRoadsSource>;
+
+ rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/Time/{State}/{Name Id}/gazetted";
+       rr:class time:TemporalEntity  ;
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate time:hasBeginning ;
+    rr:objectMap [
+      rr:parentTriplesMap <#VICRoads_TimeStart>
+    ]
+  ] .
+
+<#VICRoads_TimeStart> a rr:TriplesMap;
+    rml:logicalSource <#VICRoadsSource>;
+
+ rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/Time/Start/{State}/{Name Id}/gazetted";
+       rr:class time:Instant ;
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate time:inXSDDate ;
+    rr:objectMap [ 
+      rml:reference "Gazette Published date" ; 
+      rr:datatype  xsd:date]
+  ] .
+
+################### VIC - Sites ##########################################################
+<#VICSitesGeographicalObjectMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#VICSitesSource>;
+    
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/Place/{State}/{Place Id}";
+      rr:class gn:GeographicalObject, geo:Feature;
+      ];
+      
+    rr:predicateObjectMap [
+      rr:predicate sdo:name ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/PlaceName/{State}/{Name Id}";
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate sdo:additionalType;
+      rr:objectMap [
+        rr:template "https://linked.data.gov.au/def/go-categories/{Feature Type}";
+        ]
+    ];
+  
+  rr:predicateObjectMap [
+    rr:predicate geo:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap <#VICSitesGeometryMapping>;  
+      ]
+  ].
+    
+  <#VICSitesGeometryMapping> a rr:TriplesMap;
+   rml:logicalSource <#VICSitesSource>;
+    
+   rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Geometry/Point/{State}/{Place Id}";
+    rr:class geo:Geometry;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate geo:asWKT;
+      rr:objectMap [
+        rml:reference "WKT";
+        rr:datatype geo:wktLiteral;
+        ]
+    ] .
+
+<#VICSitesGeographicalNameMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#VICSitesSource>;
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/PlaceName/{State}/{Name Id}";
+      rr:class gn:GeographicalName;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate cn:isNameFor ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/Place/{State}/{Place Id}";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate cn:hasCompoundedName;
+        rr:objectMap [
+          fnml:functionValue [
+            rr:predicateObjectMap [
+              rr:predicate fno:executes ;
+              rr:objectMap [ rr:constant grel:string_toTitlecase ] ] ;
+            rr:predicateObjectMap [
+              rr:predicate grel:valueParameter ;
+              rr:objectMap [ rml:reference "Place Name";
+              rr:language "en";
+               ] ]
+          ]
+        ]
+      ];
+
+    # https://linked.data.gov.au/def/gn-part-types/geographicalGivenName
+    rr:predicateObjectMap [
+       rr:predicate sdo:additionalType;
+       rr:objectMap [
+            rr:constant gpt:geographicalGivenName;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+       rr:predicate lm:hasLifeCycleStage;
+        rr:objectMap [
+            rr:parentTriplesMap <#VICSitesPlaceNameLifeCycleStageMapping> 
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+       rr:predicate lm:hasLifeCycleStage;
+        rr:objectMap [
+            rr:parentTriplesMap <#VICSitesPlaceNameLifeCycleStageGazettedMapping> 
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+      rr:predicate prov:wasDerivedFrom;
+      rr:objectMap [
+        rr:parentTriplesMap <#PlaceNameDataMapping>;
+        rr:joinCondition [
+          rr:child "State"; 
+          rr:parent "ShortenName";
+          ]
+      ]
+    ].
+
+<#VICSitesPlaceNameLifeCycleStageMapping> a rr:TriplesMap;
+    rml:logicalSource <#VICSitesSource>;
+    
+    rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/LifecycleStage/{PlaceNameStatusLower}/{State}/{Name Id}";
+        rr:class lm:LifecycleStage;
+    ];
+
+    rr:predicateObjectMap [
+    rr:predicate sdo:additionalType ;
+     rr:objectMap [
+      rr:template "http://geosensor.net/ns/pnkg/stage/{PlaceNameStatusLower}"
+    ]
+  ] .
+
+<#VICSitesPlaceNameLifeCycleStageGazettedMapping> a rr:TriplesMap;
+    rml:logicalSource <#VICSitesSource>;
+    
+    rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/LifecycleStage/gazetted/{State}/{Name Id}";
+        rr:class lm:LifecycleStage;
+    ];
+
+    rr:predicateObjectMap [
+    rr:predicate sdo:additionalType ;
+     rr:objectMap [
+      rr:template "http://geosensor.net/ns/pnkg/stage/gazetted"
+    ]
+  ] ;
+
+  rr:predicateObjectMap [
+    rr:predicate time:hasTime ;
+    rr:objectMap [ 
+      rr:parentTriplesMap <#VICSites_TimeMap> 
+      ]
+  ] .
+
+<#VICSites_TimeMap> a rr:TriplesMap;
+    rml:logicalSource <#VICSitesSource>;
+
+ rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/Time/{State}/{Name Id}/gazetted";
+       rr:class time:TemporalEntity  ;
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate time:hasBeginning ;
+    rr:objectMap [
+      rr:parentTriplesMap <#VICSites_TimeStart>
+    ]
+  ] .
+
+<#VICSites_TimeStart> a rr:TriplesMap;
+    rml:logicalSource <#VICSitesSource>;
+
+ rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/Time/Start/{State}/{Name Id}/gazetted";
+       rr:class time:Instant ;
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate time:inXSDDate ;
+    rr:objectMap [ 
+      rml:reference "Gazette Published date" ; 
+      rr:datatype  xsd:date]
+  ] .
+
+# ############## NSW #################################################
+<#NSWSitesGeographicalObjectMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#NSWSitesSource>;
+    
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/Place/{STATE}/{REFERENCE}";
+      rr:class gn:GeographicalObject, geo:Feature;
+      ];
+      
+    rr:predicateObjectMap [
+      rr:predicate sdo:name ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/PlaceName/{STATE}/{REFERENCE}";
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate sdo:additionalType;
+      rr:objectMap [
+        rr:template "https://linked.data.gov.au/def/go-categories/{DESIGNATION}";
+        ]
+    ];
+  
+  rr:predicateObjectMap [
+    rr:predicate geo:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap <#NSWSitesGeometryMapping>;  
+      ]
+  ].
+    
+<#NSWSitesGeometryMapping> a rr:TriplesMap;
+   rml:logicalSource <#NSWSitesSource>;
+    
+   rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Geometry/Point/{STATE}/{REFERENCE}";
+    rr:class geo:Geometry;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate geo:asWKT;
+      rr:objectMap [
+        rml:reference "WKT";
+        rr:datatype geo:wktLiteral;
+        ]
+    ] .
+
+<#NSWSitesGeographicalNameMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#NSWSitesSource>;
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/PlaceName/{STATE}/{REFERENCE}";
+      rr:class gn:GeographicalName;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate cn:isNameFor ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/Place/{STATE}/{REFERENCE}";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate cn:hasCompoundedName;
+        rr:objectMap [
+          fnml:functionValue [
+            rr:predicateObjectMap [
+              rr:predicate fno:executes ;
+              rr:objectMap [ rr:constant grel:string_toTitlecase ] ] ;
+            rr:predicateObjectMap [
+              rr:predicate grel:valueParameter ;
+              rr:objectMap [ rml:reference "PLACENAME";
+              rr:language "en";
+               ] ]
+          ]
+        ]
+      ];
+
+    # https://linked.data.gov.au/def/gn-part-types/geographicalGivenName
+    rr:predicateObjectMap [
+       rr:predicate sdo:additionalType;
+       rr:objectMap [
+            rr:constant gpt:geographicalGivenName;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+       rr:predicate lm:hasLifeCycleStage;
+        rr:objectMap [
+            rr:parentTriplesMap <#NSWSitesPlaceNameLifeCycleStageMapping> 
+        ]
+    ] ;
+
+
+    rr:predicateObjectMap [
+       rr:predicate lm:hasLifeCycleStage;
+        rr:objectMap [
+            rr:parentTriplesMap <#NSWSitesPlaceNameLifeCycleStageGazettedMapping> 
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+      rr:predicate prov:wasDerivedFrom;
+      rr:objectMap [
+        rr:parentTriplesMap <#PlaceNameDataMapping>;
+        rr:joinCondition [
+          rr:child "STATE"; 
+          rr:parent "ShortenName";
+          ]
+      ]
+    ].
+
+<#NSWSitesPlaceNameLifeCycleStageMapping> a rr:TriplesMap;
+    rml:logicalSource <#NSWSitesSource>;
+    
+    rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/LifecycleStage/{STATUS_L}/{STATE}/{REFERENCE}";
+        rr:class lm:LifecycleStage;
+    ];
+
+    rr:predicateObjectMap [
+    rr:predicate sdo:additionalType ;
+     rr:objectMap [
+      rr:template "http://geosensor.net/ns/pnkg/stage/{STATUS_L}"
+    ]
+  ] .
+
+<#NSWSitesPlaceNameLifeCycleStageGazettedMapping> a rr:TriplesMap;
+    rml:logicalSource <#NSWSitesSource>;
+    
+    rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/LifecycleStage/gazetted/{STATE}/{REFERENCE}";
+        rr:class lm:LifecycleStage;
+    ];
+
+
+    rr:predicateObjectMap [
+    rr:predicate sdo:additionalType ;
+     rr:objectMap [
+      rr:template "http://geosensor.net/ns/pnkg/stage/gazetted"
+    ]
+  ] ;
+
+  rr:predicateObjectMap [
+    rr:predicate time:hasTime ;
+    rr:objectMap [ 
+      rr:parentTriplesMap <#NSWSites_TimeMap> 
+      ]
+  ] .
+
+<#NSWSites_TimeMap> a rr:TriplesMap;
+    rml:logicalSource <#NSWSitesSource>;
+
+ rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/Time/{STATE}/{REFERENCE}/gazetted";
+       rr:class time:TemporalEntity  ;
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate time:hasBeginning ;
+    rr:objectMap [
+      rr:parentTriplesMap <#NSWSites_TimeStart>
+    ]
+  ] .
+
+<#NSWSites_TimeStart> a rr:TriplesMap;
+    rml:logicalSource <#NSWSitesSource>;
+
+ rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/Time/Start/{STATE}/{REFERENCE}/gazetted";
+       rr:class time:Instant ;
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate time:inXSDDate ;
+    rr:objectMap [ 
+      rml:reference "MOST_RECENT_GAZETTE_DATE" ; 
+      rr:datatype  xsd:date]
+  ] .
+
+# ############## SA ##################################################################################
+
+<#SASitesGeographicalObjectMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#SASitesSource>;
+    
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/Place/{state}/{recno}";
+      rr:class gn:GeographicalObject, geo:Feature;
+      ];
+      
+    rr:predicateObjectMap [
+      rr:predicate sdo:name ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/PlaceName/{state}/{recno}";
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate sdo:additionalType;
+      rr:objectMap [
+        rr:template "https://linked.data.gov.au/def/go-categories/{feature_type}";
+        ]
+    ];
+  
+  rr:predicateObjectMap [
+    rr:predicate geo:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap <#SASitesGeometryMapping>;  
+      ]
+  ];
+
+ # Geometry - POLYGON
+    rr:predicateObjectMap [
+        rr:predicate geo:hasGeometry;
+        rr:objectMap [
+          rr:parentTriplesMap <#SAAreasGeometryMapping>;
+          rr:joinCondition [
+            rr:child "recno"; 
+            rr:parent "recno"; 
+          ];
+        ] ;
+      
+    ];
+
+    # Geometry - LINES
+    rr:predicateObjectMap [
+        rr:predicate geo:hasGeometry;
+         rr:objectMap [
+          rr:parentTriplesMap <#SALinesGeometryMapping>;  
+          rr:joinCondition [
+            rr:child "recno"; 
+            rr:parent "recno" ;
+          ];
+      ]
+    ] .
+   
+<#SASitesGeometryMapping> a rr:TriplesMap;
+   rml:logicalSource <#SASitesSource>;
+    
+   rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Geometry/Point/{state}/{recno}";
+    rr:class geo:Geometry;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate geo:asWKT;
+      rr:objectMap [
+        rml:reference "geometry";
+        rr:datatype geo:wktLiteral;
+        ]
+    ] .
+
+<#SAAreasGeometryMapping> a rr:TriplesMap;
+    rml:logicalSource <#SAAreasSource>;
+    rr:subjectMap [
+        rr:template "http://geosensor.net/ns/pnkg/Geometry/MultiPolygon/{state}/{recno}";
+         rr:class sf:MultiPolygon;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate geo:asWKT;
+        rr:objectMap [
+            rml:reference "geometry";
+            rr:datatype geo:wktLiteral;
+        ]
+    ] .
+
+  <#SALinesGeometryMapping> a rr:TriplesMap;
+    rml:logicalSource <#SALinesSource>;
+    rr:subjectMap [
+        rr:template "http://geosensor.net/ns/pnkg/Geometry/MultiLineString/{state}/{recno}";
+        rr:class sf:MultiLineString;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate geo:asWKT;
+        rr:objectMap [
+            rml:reference "geometry";
+            rr:datatype geo:wktLiteral;
+        ]
+    ] .
+
+<#SASitesGeographicalNameMapping>
+    a rr:TriplesMap;
+    rml:logicalSource <#SASitesSource>;
+    rr:subjectMap [
+      rr:template  "http://geosensor.net/ns/pnkg/PlaceName/{state}/{recno}";
+      rr:class gn:GeographicalName;
+    ];
+    
+    rr:predicateObjectMap [
+      rr:predicate cn:isNameFor ;
+      rr:objectMap [
+        rr:template "http://geosensor.net/ns/pnkg/Place/{state}/{recno}";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate cn:hasCompoundedName;
+        rr:objectMap [
+          fnml:functionValue [
+            rr:predicateObjectMap [
+              rr:predicate fno:executes ;
+              rr:objectMap [ rr:constant grel:string_toTitlecase ] ] ;
+            rr:predicateObjectMap [
+              rr:predicate grel:valueParameter ;
+              rr:objectMap [ rml:reference "name";
+              rr:language "en";
+               ] ]
+          ]
+        ]
+      ];
+
+    # https://linked.data.gov.au/def/gn-part-types/geographicalGivenName
+    rr:predicateObjectMap [
+       rr:predicate sdo:additionalType;
+       rr:objectMap [
+            rr:constant gpt:geographicalGivenName;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+       rr:predicate lm:hasLifeCycleStage;
+        rr:objectMap [
+            rr:parentTriplesMap <#SASitesPlaceNameLifeCycleStageGazettedMapping> 
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+      rr:predicate prov:wasDerivedFrom;
+      rr:objectMap [
+        rr:parentTriplesMap <#PlaceNameDataMapping>;
+        rr:joinCondition [
+          rr:child "dataset_identifier"; 
+          rr:parent "DatasetIdentifier";
+          ]
+      ]
+    ].
+
+<#SASitesPlaceNameLifeCycleStageGazettedMapping> a rr:TriplesMap;
+    rml:logicalSource <#SASitesSource>;
+    
+    rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/LifecycleStage/gazetted/{state}/{recno}";
+        rr:class lm:LifecycleStage;
+    ];
+
+
+    rr:predicateObjectMap [
+    rr:predicate sdo:additionalType ;
+     rr:objectMap [
+      rr:template "http://geosensor.net/ns/pnkg/stage/gazetted"
+    ]
+  ] ;
+
+  rr:predicateObjectMap [
+    rr:predicate time:hasTime ;
+    rr:objectMap [ 
+      rr:parentTriplesMap <#SASites_TimeMap> 
+      ]
+  ] .
+
+<#SASites_TimeMap> a rr:TriplesMap;
+    rml:logicalSource <#SASitesSource>;
+
+ rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/Time/{state}/{recno}/gazetted";
+       rr:class time:TemporalEntity  ;
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate time:hasBeginning ;
+    rr:objectMap [
+      rr:parentTriplesMap <#SASites_TimeStart>
+    ]
+  ] .
+
+<#SASites_TimeStart> a rr:TriplesMap;
+    rml:logicalSource <#SASitesSource>;
+
+ rr:subjectMap [
+       rr:template "http://geosensor.net/ns/pnkg/Time/Start/{state}/{recno}/gazetted";
+       rr:class time:Instant ;
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate time:inXSDDate ;
+    rr:objectMap [ 
+      rml:reference "gazdate" ; 
+      rr:datatype  xsd:date]
+  ] .
+
+# ################################## Place Name Data Mapping ##################################
+<#PlaceNameDataMapping> a rr:TriplesMap;
+   rml:logicalSource <#PlaceNameDataSource>;
+
+rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/{ShortenName}/{Title}";
+    rr:class dcat:DataSet;
+  ];
+  
+ rr:predicateObjectMap [
+    rr:predicate dcterms:identifier;
+    rr:objectMap [
+      rml:reference "DatasetIdentifier";
+      rr:datatype xsd:string;
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:title;
+    rr:objectMap [
+      rml:reference "Title";
+      rr:datatype xsd:string;
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate fsdf:hasCustodian;
+    rr:objectMap [
+       rr:parentTriplesMap <#PlaceNameDataCustodianMapping>;  
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:description;
+    rr:objectMap [
+      rml:reference "Description";
+      rr:datatype xsd:string;
+    ]
+  ];
+
+## Map DataQuality-Lineage
+rr:predicateObjectMap [
+    rr:predicate dqv:hasQualityMeasurement;
+       rr:objectMap [
+       rr:parentTriplesMap <#PlaceNameDataQualityLineageMapping>;  
+    ]
+  ];
+
+## Map DataQuality-Completeness
+rr:predicateObjectMap [
+    rr:predicate dqv:hasQualityMeasurement;
+       rr:objectMap [
+       rr:parentTriplesMap <#PlaceNameDataQualityCompletenessMapping>;  
+    ]
+  ];
+  
+## Map DataQuality - Positional Accuracy
+rr:predicateObjectMap [
+    rr:predicate dqv:hasQualityMeasurement;
+       rr:objectMap [
+       rr:parentTriplesMap <#PlaceNameDataQualityPositionalAccMapping>;  
+    ]
+  ];
+
+## Map DataQuality - Attribute Accuracy
+rr:predicateObjectMap [
+    rr:predicate dqv:hasQualityMeasurement;
+       rr:objectMap [
+       rr:parentTriplesMap <#PlaceNameDataQualityAttributeAccMapping>;  
+    ]
+  ];
+
+## Map DataQuality - Logical Consistency
+rr:predicateObjectMap [
+    rr:predicate dqv:hasQualityMeasurement;
+       rr:objectMap [
+       rr:parentTriplesMap <#PlaceNameDataQualityLogConsistencyMapping>;  
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate fsdf:hasJurisdiction;
+    rr:objectMap [
+       rr:parentTriplesMap <#PlaceNameData_Jurisdiction>;  
+    ]
+  ];
+
+ rr:predicateObjectMap [
+    rr:predicate dcterms:spatial;
+       rr:objectMap [
+       rr:parentTriplesMap <#LocationOfNameData>;  
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:issued;
+    rr:objectMap [
+      rml:reference "InitiallyAcquiredOn";
+      rr:datatype xsd:date;
+    ]
+  ];
+
+ rr:predicateObjectMap [
+    rr:predicate dcat:contactPoint;
+       rr:objectMap [
+       rr:parentTriplesMap <#PlaceNameDataOrganizationMapping>;  
+    ]
+  ];
+
+rr:predicateObjectMap [
+    rr:predicate dcat:landingPage;
+       rr:objectMap [
+      rml:reference "WebAddress";
+      rr:termType rr:IRI;
+    ]
+  ];
+
+ rr:predicateObjectMap [
+    rr:predicate dcat:distribution;
+       rr:objectMap [
+       rr:parentTriplesMap <#PlaceNameDatasetDistribution>;  
+    ]
+  ];
+  
+ rr:predicateObjectMap [
+    rr:predicate dcterms:publisher;
+       rr:objectMap [
+       rr:parentTriplesMap <#PlaceNameDataPublisherMapping>;  
+    ]
+  ] .
+
+<#PlaceNameDatasetDistribution> a rr:TriplesMap;
+  rml:logicalSource <#PlaceNameDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/PlaceNameDatasetDistribution/{ShortenName}";
+    rr:class dcat:Distribution
+  ];
+
+rr:predicateObjectMap [
+    rr:predicate dcat:downloadURL;
+    rr:objectMap [
+      rml:reference "DataDownloadLink";
+      rr:termType rr:IRI;
+    ]
+  ].
+
+<#PlaceNameDataCustodianMapping> a rr:TriplesMap;
+  rml:logicalSource <#PlaceNameDataSource>;
+ rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Custodian/{ShortenName}/{DataAuthority}";
+    rr:class fsdf:Agency;
+  ];
+
+ rr:predicateObjectMap [
+   rr:predicate sdo:name;
+    rr:objectMap [
+      rml:reference "DataProvider";
+      rr:language "en" ;
+    ]
+  ].
+
+ <#PlaceNameDataOrganizationMapping> a rr:TriplesMap;
+  rml:logicalSource <#PlaceNameDataSource>;
+ 
+  rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Organization/{ShortenName}";
+    rr:class vc:Organization;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:organization-name;
+    rr:objectMap [
+      rml:reference "Organization";
+      rr:datatype xsd:string;
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:street-address; 
+    rr:objectMap [
+      rml:reference "StreetAddress";
+      rr:datatype xsd:string;
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:hasEmail; 
+    rr:objectMap [
+      rml:reference "Email";  
+      rr:termType rr:IRI;
+        ] 
+    ];
+  
+  rr:predicateObjectMap [
+    rr:predicate vc:hasTelephone;
+       rr:objectMap [
+       rr:parentTriplesMap <#PlaceNameData_Contacts_Organization_Telephone>;  
+    ]
+  ].
+
+ <#PlaceNameDataQualityLineageMapping> a rr:TriplesMap;
+  rml:logicalSource <#PlaceNameDataSource>;
+ 
+  rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/DataQuality/Lineage/{ShortenName}";
+    rr:class dqv:QualityMeasurement;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dqv:isMeasurementOf;
+    rr:objectMap [
+     rr:parentTriplesMap <#LineageMetric>;
+    ]
+  ] .
+
+<#LineageMetric> a rr:TriplesMap;
+rml:logicalSource <#PlaceNameDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/DataQuality/LineageMetric/{ShortenName}";
+    rr:class dqv:Metric;
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate dqv:value;
+    rr:objectMap [
+      rml:reference "DataQualityLineage";
+    ]
+  ] .
+
+ <#PlaceNameDataQualityCompletenessMapping> a rr:TriplesMap;
+  rml:logicalSource <#PlaceNameDataSource>;
+ 
+  rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/DataQuality/Completeness/{ShortenName}";
+    rr:class dqv:QualityMeasurement;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dqv:isMeasurementOf;
+    rr:objectMap [
+     rr:parentTriplesMap <#CompletenessMetric>;
+    ]
+  ] .
+  
+<#CompletenessMetric> a rr:TriplesMap;
+rml:logicalSource <#PlaceNameDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/DataQuality/CompletenessMetric/{ShortenName}";
+    rr:class dqv:Metric;
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate dqv:value;
+    rr:objectMap [
+      rml:reference "DataQualityCompleteness";
+    ]
+  ] .
+
+ <#PlaceNameDataQualityPositionalAccMapping> a rr:TriplesMap;
+  rml:logicalSource <#PlaceNameDataSource>;
+ 
+  rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/DataQuality/PositionalAccuracy/{ShortenName}";
+    rr:class dqv:QualityMeasurement;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dqv:isMeasurementOf;
+    rr:objectMap [
+     rr:parentTriplesMap <#PositionalAccuracyMetric>;
+    ]
+  ] .
+
+<#PositionalAccuracyMetric> a rr:TriplesMap;
+rml:logicalSource <#PlaceNameDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/DataQuality/PositionalAccuracyMetric/{ShortenName}";
+    rr:class dqv:Metric;
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate dqv:value;
+    rr:objectMap [
+      rml:reference "DataQualityPositionalAccuracy";
+    ]
+  ] .
+
+ <#PlaceNameDataQualityAttributeAccMapping> a rr:TriplesMap;
+  rml:logicalSource <#PlaceNameDataSource>;
+ 
+  rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/DataQuality/AttributeAccuracy/{ShortenName}";
+    rr:class dqv:QualityMeasurement;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dqv:isMeasurementOf;
+    rr:objectMap [
+     rr:parentTriplesMap <#AttributeAccuracyMetric>;
+    ]
+  ] .
+
+<#AttributeAccuracyMetric> a rr:TriplesMap;
+rml:logicalSource <#PlaceNameDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/DataQuality/AttributeAccuracyMetric/{ShortenName}";
+    rr:class dqv:Metric;
+  ];
+
+ rr:predicateObjectMap [
+    rr:predicate dqv:value;
+    rr:objectMap [
+      rml:reference "DataQualityAttributeAccuracy";
+    ]
+  ] .
+
+<#PlaceNameDataQualityLogConsistencyMapping> a rr:TriplesMap;
+  rml:logicalSource <#PlaceNameDataSource>;
+ 
+  rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/DataQuality/LogicalConsistency/{ShortenName}";
+    rr:class dqv:QualityMeasurement;
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate dqv:isMeasurementOf;
+    rr:objectMap [
+     rr:parentTriplesMap <#LogicalConsistencyMetric>;
+    ]
+  ] .
+
+<#LogicalConsistencyMetric> a rr:TriplesMap;
+rml:logicalSource <#PlaceNameDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/DataQuality/LogicalConsistencyMetric/{ShortenName}";
+    rr:class dqv:Metric;
+  ];
+
+ rr:predicateObjectMap [
+    rr:predicate dqv:value;
+    rr:objectMap [
+      rml:reference "DataQualityLogicalConsistency";
+    ]
+  ] .
+
+<#PlaceNameData_Jurisdiction> a rr:TriplesMap;
+  rml:logicalSource <#PlaceNameDataSource>;
+
+ rr:subjectMap [
+  rr:template "http://geosensor.net/ns/pnkg/{Jurisdiction}/{ShortenName}";
+  rr:class fsdf:Jurisdiction;
+   ].
+
+
+<#PlaceNameData_Contacts_Organization_Telephone> a rr:TriplesMap;
+  rml:logicalSource <#PlaceNameDataSource>;
+ 
+  rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Organization/Telephone/{ShortenName}";
+    rr:class vc:TelephoneType;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:hasValue;
+       rr:objectMap [
+        rml:reference "Phone";
+        rr:datatype xsd:string;
+    ]
+  ].
+
+<#LocationOfNameData> a rr:TriplesMap;
+rml:logicalSource <#PlaceNameDataSource>;
+
+  rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Location/{ShortenName}";
+    rr:class dcterms:Location;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate skos:prefLabel;
+       rr:objectMap [
+        rml:reference "GeographicExtent";
+        rr:datatype xsd:string;
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcat:bbox;
+       rr:objectMap [
+        rml:reference "BoundingBox";
+        rr:datatype geo:wktLiteral;
+    ]
+  ].
+
+ <#PlaceNameDataPublisherMapping> a rr:TriplesMap;
+  rml:logicalSource <#PlaceNameDataSource>;
+ 
+  rr:subjectMap [
+    rr:template "http://geosensor.net/ns/pnkg/Publisher/{ShortenName}";
+    rr:class foaf:Agent;
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate foaf:name;
+    rr:objectMap [
+      rml:reference "Publisher/Agency";
+      rr:datatype xsd:string;
+    ]
+  ].
