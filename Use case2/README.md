@@ -47,3 +47,23 @@ The image below provides an overview of the main classes and object properties d
   <img src="images/SemanticEnrichmentProcess.png" alt="Semantic Enrichment Process" width="70%">
 </p>
 
+## RML mapping and processing
+
+RML mapping rules are written and included in [1](PlaceNameMapping.ttl) and [2](). 
+The following execution command should specify the relevant paths for the mapping and output files:
+ ``` 
+java -jar ./target/jarFile -m mappingFile.ttl -o output.ttl
+ ``` 
+The target location of each data source file in the RML mapping file must be updated to match the correct file paths on your local machine.
+Example: 
+<pre><#ACTSitesSource> a rml:LogicalSource;
+      rml:source "../Data/ACT.csv";  
+      rml:referenceFormulation ql:CSV .</pre>
+Modify the execution command as needed, specifying the locations of the JAR file, mapping file, and the destination for the output file. 
+Example:
+```
+java -jar ./lib/rmlmapper-17.0.0-r449-all.jar -m ./src/PlaceNameKGAus/RML/PlaceNameMapping.ttl -o ./src/PlaceNameKGAus/out/pnkg_out.ttl
+```
+The PNKG in ttl file format will be stored in ```./src/PlaceNameKGAus/out/pnkg_out.ttl```
+In this project, the knowledge graph was built using [RMLmapper-java](https://github.com/mduckham/semadaten/blob/main/lib/README.md). Alternatively, other RML processors, can be used to construct the PNKG. 
+
