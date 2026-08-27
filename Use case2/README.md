@@ -38,5 +38,5 @@ The below image shows the snapshot of the classes, Object Property (OP), and Dat
 ## Geographical Names Model
 
 <p align="center">
-  <img src="images/GeograhicalNamesModel.png" alt="Geographical Names Model" width="70%">
+  <img src="images/GeographicalNamesModel.png" alt="Geographical Names Model" width="70%">
 </p>
