@@ -43,3 +43,7 @@ The image below provides an overview of the main classes and object properties d
 </p>
 
 ## Semantic Enrichment Process
+<p align="center">
+  <img src="images/SemanticEnrichmentProcess.png" alt="Semantic Enrichment Process" width="70%">
+</p>
+
