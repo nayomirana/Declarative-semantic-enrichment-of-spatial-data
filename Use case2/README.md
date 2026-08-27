@@ -41,3 +41,5 @@ The image below provides an overview of the main classes and object properties d
 <p align="center">
   <img src="images/GeographicalNamesModel.png" alt="Geographical Names Model" width="70%">
 </p>
+
+## Semantic Enrichment Process
