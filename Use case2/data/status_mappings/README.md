@@ -1,2 +1,1 @@
-To align the status values in the place name data with the Place Name Ontology, the [status.csv](\status.csv) file was used as the source dataset. Each existing status value in the file was mapped to the corresponding status class defined in the Place Name Ontology, ensuring consistency between the dataset and the ontology.
-
+Some status values in the datasets did not exactly match the status classes defined in the Place Name Ontology. Therefore, the `status.csv` file was used to map these status values to the most relevant corresponding status classes in the Place Name Ontology. This mapping ensures that the status information is aligned with the ontology and used during the semantic enrichment process.
