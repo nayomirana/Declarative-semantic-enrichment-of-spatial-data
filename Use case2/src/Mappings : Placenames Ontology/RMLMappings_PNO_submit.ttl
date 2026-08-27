@@ -69,7 +69,7 @@
     rml:referenceFormulation ql:CSV.
 
 <#PlaceNameDataSource> a rml:LogicalSource;
-    rml:source "../data/AustralianPlacenamesMetadata.csv";
+    rml:source "../data/MetaData/AustralianPlacenamesMetadata.csv";
     rml:referenceFormulation ql:CSV .
 
 <#PlaceNameStatusDataSource> a rml:LogicalSource;
