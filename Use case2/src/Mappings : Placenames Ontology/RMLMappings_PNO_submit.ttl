@@ -73,7 +73,7 @@
     rml:referenceFormulation ql:CSV .
 
 <#PlaceNameStatusDataSource> a rml:LogicalSource;
-    rml:source "../data/status.csv";
+    rml:source "../data/status_mappings/status.csv";
     rml:referenceFormulation ql:CSV .
 
 
