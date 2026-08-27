@@ -31,9 +31,10 @@ The approach uses [RML (RDF Mapping Language)](https://rml.io/specs/rml/) to con
 
 
 ## Place Name ontology
-The below image shows the snapshot of the classes, Object Property (OP), and Data Property (DP) of the [Geoscience Australia Place Name ontology](https://geoscienceaustralia.github.io/Placenames-Ontology/placenames.html). Defined relations in the ontology are used for RML mapping and building PNKG. In the figure below, yellow circles represent classes, blue rectangles indicate object properties, and green rectangles depict data properties.
-
-![Place Name Ontology Diagram](images/placename-ontology.png)
+The image below provides an overview of the main classes and object properties defined in the [Geoscience Australia Place Name ontology](https://geoscienceaustralia.github.io/Placenames-Ontology/placenames.html).
+<p align="center">
+  <img src="images/PlaceNameOntology.png" alt="Place Name Ontology" width="60%">
+</p>
 
 ## Geographical Names Model
 The image below provides an overview of the main classes and object properties defined in the [Geographical Names Model](https://spatial-information-qld.github.io/geographical-names-model/model.html).
