@@ -1,0 +1,32 @@
+﻿CurrentStatus,MappingStatus,State
+historical,historical,ALL
+informal,informal,ALL
+gazetted,gazetted,ALL
+published,published,ALL
+released,released,ALL
+retired,retired,ALL
+archived,retired,VIC
+base,informal,VIC
+dual,informal,VIC
+recorded,informal,VIC
+registered,gazetted,VIC
+traditional,informal,VIC
+abandoned,informal,NSW
+applicant to review comments,informal,NSW
+board to consider,released,NSW
+closed for public comment,informal,NSW
+concurred,released,NSW
+deferred,informal,NSW
+discontinued,retired,NSW
+dual - closed for public comment,informal,NSW
+official assigned,published,NSW
+official assigned edu,published,NSW
+official assigned npws,published,NSW
+official recorded,published,NSW
+pending gazette,published,NSW
+proposed,informal,NSW
+recommendation with minister,released,NSW
+rejected,informal,NSW
+variant,informal,NSW
+withdrawn,informal,NSW
+dual - official assigned,published,NSW
