@@ -1,18 +1,8 @@
 # Use case 2 - Australian placename data
 This repository contains source code and datasets for transparent and reusable semantic data enrichment of Australian place names data.  
-The approach uses [RML (RDF Mapping Language)](https://rml.io/specs/rml/) to construct two national placenames knowledge graphs from publicly available state-based placenames CSV data: one based on the [Geoscience Australia Placenames Ontology](https://geoscienceaustralia.github.io/Placenames-Ontology/) and the other based on the Geographical Names Model.
+The approach uses [RML (RDF Mapping Language)](https://rml.io/specs/rml/) to construct two national placenames knowledge graphs from publicly available state-based placenames CSV data: one based on the [Geoscience Australia Placenames Ontology](https://geoscienceaustralia.github.io/Placenames-Ontology/) and the other based on the [Geographical Names Model]((https://spatial-information-qld.github.io/geographical-names-model/model.html)).
 
 The approach uses [RML (RDF Mapping Language)](https://rml.io/specs/rml/) to construct two national placenames knowledge graphs from publicly available state-based placenames CSV data: one based on the [Geoscience Australia Placenames Ontology](https://geoscienceaustralia.github.io/Placenames-Ontology/) and the other based on Spatial Information Queensland’s [Geographical Names Model](https://spatial-information-qld.github.io/geographical-names-model/model.html).
-
-## Key resources 
-
-- [Geoscience Australia Place Names Ontology](https://geoscienceaustralia.github.io/Placenames-Ontology/placenames.html);
-- [Geoscience Australia Place-Names GitHub repository](https://github.com/GeoscienceAustralia/Placenames-Ontology);
-- [Geographical Names Model](https://spatial-information-qld.github.io/geographical-names-model/model.html);
-- [Composite Gazetteer of Australia](https://placenames.fsdf.org.au/);
-- [Data Product Specification for the Composite Gazetteer of Australia](data/CompositeGazetteerDPS.pdf);
-- [Linked Data API codebase for National Composite Gazetteer of Australia](https://github.com/GeoscienceAustralia/placenames-dataset); and
-- [RML tools](https://rml.io/tools/).
 
 ## Repository structure
 
@@ -67,3 +57,12 @@ java -jar ./lib/rmlmapper-17.0.0-r449-all.jar -m ./src/PlaceNameKGAus/RML/PlaceN
 The PNKG in ttl file format will be stored in ```./src/PlaceNameKGAus/out/pnkg_out.ttl```
 In this project, the knowledge graph was built using [RMLmapper-java](https://github.com/mduckham/semadaten/blob/main/lib/README.md). Alternatively, other RML processors, can be used to construct the PNKG. 
 
+## Key resources 
+
+- [Geoscience Australia Place Names Ontology](https://geoscienceaustralia.github.io/Placenames-Ontology/placenames.html);
+- [Geoscience Australia Place-Names GitHub repository](https://github.com/GeoscienceAustralia/Placenames-Ontology);
+- [Geographical Names Model](https://spatial-information-qld.github.io/geographical-names-model/model.html);
+- [Composite Gazetteer of Australia](https://placenames.fsdf.org.au/);
+- [Data Product Specification for the Composite Gazetteer of Australia](data/CompositeGazetteerDPS.pdf);
+- [Linked Data API codebase for National Composite Gazetteer of Australia](https://github.com/GeoscienceAustralia/placenames-dataset); and
+- [RML tools](https://rml.io/tools/).
