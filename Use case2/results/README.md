@@ -3,7 +3,7 @@ This link provides access to download the [Knowledge Graph (KG)](https://drive.g
 The figure below shows a snapshot of a section of the Knowledge Graph.
 
 <div align="center">
-  <img src="../images/PNKG_PNO_snapshot.png" alt="PNKG" style="width:65%;">
+  <img src="../images/PNKG_PNO_snapshot.png" alt="PNKG" style="width:60%;">
 </div>
 
 
@@ -13,5 +13,5 @@ This link provides access to download the [Knowledge Graph (KG)](https://drive.g
 The figure below shows a snapshot of a section of the Knowledge Graph.
 
 <div align="center">
-  <img src="../images/PNKG_GNM_snapshot.png" alt="PNKG" style="width:65%;">
+  <img src="../images/PNKG_GNM_snapshot.png" alt="PNKG" style="width:60%;">
 </div>
