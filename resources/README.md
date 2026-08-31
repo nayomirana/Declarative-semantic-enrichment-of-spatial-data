@@ -13,7 +13,9 @@
 The following execution command should specify the relevant paths for the mapping and output files:
  ``` 
 java -jar ./target/jarFile -m mappingFile.ttl -o output.ttl
- ``` 
+ ```
+
+#### Example:
 The target location of each data source file in the RML mapping file must be updated to match the correct file paths on your local machine.
 Example: 
 <pre><#ACTSitesSource> a rml:LogicalSource;
