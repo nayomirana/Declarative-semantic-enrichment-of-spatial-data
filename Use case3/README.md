@@ -10,6 +10,8 @@ This repository contains source code and datasets for transparent and reusable s
 ## Data
 
 ## Semantic enrichment process
-
+<p align="center">
+  <img src="images/dvmSDEProcess.png" alt="Semantic Enrichment Process" width="70%">
+</p>
 ## Key resources 
 
