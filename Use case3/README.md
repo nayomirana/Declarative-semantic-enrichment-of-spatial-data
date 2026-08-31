@@ -9,7 +9,7 @@ This repository contains source code and datasets for transparent and reusable s
 
 ## Data
 
-## Semantic Enrichment Process
+## Semantic enrichment process
 
 ## Key resources 
 
