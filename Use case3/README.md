@@ -15,4 +15,5 @@ This repository contains source code and datasets for transparent and reusable s
 </p>
 
 ## Key resources 
-
+- **Research Paper:** [Semantic data enrichment for maintenance of foundation spatial data](https://www.sciencedirect.com/science/article/pii/S0198971526000128) - Computers, Environment and Urban Systems, Volume 126, 102410.
+- [RML tools](https://rml.io/tools/).
