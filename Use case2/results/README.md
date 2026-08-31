@@ -3,7 +3,7 @@ This link provides access to download the [Knowledge Graph (KG)](https://drive.g
 The figure below shows a snapshot of a section of the Knowledge Graph.
 
 <div align="center">
-  <img src="./images/PNKG_PNO_snapshot.png" alt="PNKG" style="width:75%;">
+  <img src="../images/PNKG_PNO_snapshot.png" alt="PNKG" style="width:65%;">
 </div>
 
 
@@ -11,3 +11,7 @@ The figure below shows a snapshot of a section of the Knowledge Graph.
 ## Knowledge Graph Generated Using the Geographical Names Model 
 This link provides access to download the [Knowledge Graph (KG)](https://drive.google.com/file/d/1ONQjw-sG7HqN5ojujU3NZtswACI5b_q7/view?usp=drive_link), which integrates place-name data from all Australian states and territories.
 The figure below shows a snapshot of a section of the Knowledge Graph.
+
+<div align="center">
+  <img src="../images/PNKG_GNM_snapshot.png" alt="PNKG" style="width:65%;">
+</div>
