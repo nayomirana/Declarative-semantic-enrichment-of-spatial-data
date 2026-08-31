@@ -1,3 +1,11 @@
+## Data
+
+- Gazetteers directly available in the repository for ACT, NSW, NT, QLD, TAS, VIC, and WA.
+- For SA only external link available to download official place names gazatteer due to large file size.
+- Data downloaded from authoritative organisations (state) for NSW, QLD, SA and VIC.
+- For ACT, NT,WA and TAS place names gazetteers were downloaded from the national database, the Composite Gazetteer of Australia. 
+- The list of authoritative and non-authoritative organisations for place name gazetteers is available on the [Intergovernmental Committee on Surveying and Mapping (ICSM) website](https://www.icsm.gov.au/individual-state-and-territory-gazetteers).
+
 
 | Jursdiction | Metadata |                                                                Download Link                                             | Data in GitHub | Last Updated |
 | :-------: | ----------- | ------------------------------------------------------------------------------------------------------------------------- | :--------------: | :------------:|
