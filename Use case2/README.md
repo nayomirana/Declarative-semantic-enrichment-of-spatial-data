@@ -65,4 +65,7 @@ In this project, the knowledge graph was built using [RMLmapper-java](https://gi
 - [Composite Gazetteer of Australia](https://placenames.fsdf.org.au/);
 - [Data Product Specification for the Composite Gazetteer of Australia](data/CompositeGazetteerDPS.pdf);
 - [Linked Data API codebase for National Composite Gazetteer of Australia](https://github.com/GeoscienceAustralia/placenames-dataset); and
-- [RML tools](https://rml.io/tools/).
+- [RML tools](https://rml.io/tools/)
+- [RML: A Generic Language for Integrated RDF Mappings of Heterogeneous Data](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=f0b98c4fc3a542a83349666f4073359ed56d1a17)
+- [The RML Ontology: A Community-Driven Modular Redesign After a Decade of Experience in Mapping Heterogeneous Data to RDF](https://link.springer.com/content/pdf/10.1007/978-3-031-47243-5_9.pdf)
+
