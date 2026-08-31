@@ -13,7 +13,7 @@ This repository contains source code and datasets for transparent and reusable s
 <p align="center">
   <img src="images/dvmSDEProcess.png" alt="Semantic Enrichment Process" width="70%">
   <br>
-  <strong>Figure 1: Semantic Enrichment Process</strong>
+  <strong> Figure : Four-step semantic enrichment process for Dynamic Vicmap hydrological spatial data</strong>
 </p>
 
 ## Key resources 
