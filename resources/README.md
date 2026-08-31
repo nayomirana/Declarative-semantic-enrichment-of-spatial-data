@@ -1,6 +1,5 @@
 ###  RMLmapper-java 
-[RMLMapper-java](https://github.com/RMLio/rmlmapper-java) executes RML rules and generates the [Place Name Knowledge Graph (PNKG)](http://gkl.rmit.melbourne/kg/pnkg.20250911.ttl). 
-
+[RMLMapper-java](https://github.com/RMLio/rmlmapper-java) is used to execute RML rules to generate RDF triples from the given data sources.
 #### Prerequisites
 * Java 17 is the minimum required version for compiling and running the current version of the project. <br>
 * Development environments (IDEs) such as Visual Studio Code (VS Code), Eclipse IDE . <br>
