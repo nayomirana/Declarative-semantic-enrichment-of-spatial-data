@@ -9,7 +9,7 @@ The approach uses [RML (RDF Mapping Language)](https://rml.io/specs/rml/) to con
 - **data**: Folder with data from official gazetteers and place names.
 - **images**: Project documentation and examples. 
 - **src**: RML mapping rules for enriching Place Name Data.
-- **lib**: RML processors and dependencies.
+- **results**: Place name knowledge graphs
 
 ## Data
 
