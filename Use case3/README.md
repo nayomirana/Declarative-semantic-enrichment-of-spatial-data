@@ -6,7 +6,7 @@ This repository contains source code and datasets for transparent and reusable s
 - **data**: Folder with data from official gazetteers and place names.
 - **images**: Project documentation and examples. 
 - **src**: RML mapping rules for enriching Place Name Data.
-- **results**:
+- **results**: Knowledge graph
 
 ## Semantic enrichment process
 <p align="center">
