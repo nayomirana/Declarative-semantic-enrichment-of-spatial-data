@@ -4,7 +4,7 @@
 - For SA only external link available to download official place names gazatteer due to large file size.
 - Data downloaded from authoritative organisations (state) for NSW, QLD, SA and VIC.
 - For ACT, NT,WA and TAS place names gazetteers were downloaded from the national database, the Composite Gazetteer of Australia.
-- Place classifications follow the [ICSM Permanent Committee on Place Names classification scheme](/CoositeGazeeter), as represented in the Geoscience Australia Place Names Ontology.
+- Place classifications are based on the [ICSM Permanent Committee on Place Names classification scheme](/CompositeGazetteerDPS.pdf).
 
 
 | Jursdiction | Metadata |                                                                Download Link                                             | Data in GitHub | Last Updated |
