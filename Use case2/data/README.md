@@ -17,3 +17,27 @@
 | **TAS** | [Web Link](https://data.thelist.tas.gov.au/datagn/srv/eng/main.home?uuid=d193cd7a-d93a-4ca8-a0a3-670929ad247a)         | [TAS place names in the Composite Gazetteer of Australia](https://placenames.fsdf.org.au/)                     |  [TAS2026Q1.csv](TAS/TAS2026Q1.csv) | 17/01/26 |
 | **VIC** | [Web Link](https://metashare.maps.vic.gov.au/geonetwork/srv/eng/catalog.search#/metadata/b236fd06-a7fc-5ced-8b98-1f022a329b11)          | [Official VIC place names gazetteer](https://maps.land.vic.gov.au/lassi/VicnamesUI.jsp)   | [VIC_places2026Q1.csv.zip](VIC/VIC_places2026Q1.csv.zip); [VIC_roads2026Q1.csv.zip](VIC/VIC_roads2026Q1.csv.zip)   | 26/01/26 |
 | **WA**  | [Web Link](https://catalogue.data.wa.gov.au/dataset/geographic-names-geonoma) | [WA place names in the Composite Gazetteer of Australia](https://placenames.fsdf.org.au/)           | [WA2026Q1.csv.zip](WA/WA2026Q1.csv.zip)               | 27/01/26 |
+
+
+### Place name data formatting 
+- ACT,TAS,NT,WA
+    - Added a new column to record “status” as gazetted
+    - Added a new column to store the geometry in WKT format
+- NSW
+    - Added a new column to record the most recent gazzete date ("MOST_RECENT_GAZETTE_DATE")
+    - Added a new column to record the state abbreviation
+    - Added a new column IS_INDIGENOUS to record whether the record is indigenous name based on the values of column"ABORIGINAL NAME"
+
+- QLD
+    - Added a new column to record “status” as gazetted
+    - Added a new column to record the state abbreviation
+    - Added a new column to store the geometry in WKT format
+
+- VIC (Places)
+  - Added a new `IS_INDIGENOUS` column to indicate whether a record represents an Indigenous name. The value is derived from the `Aboriginal Origins` column.
+
+- SA (Sites)
+  Renamed (feature_category, feature_type, feature_sub_type) as (feature_group, feature_category, feature_type) since the existing values did not align with the definitions of the ICSM Permanent Committee on Place Names
+
+
+
