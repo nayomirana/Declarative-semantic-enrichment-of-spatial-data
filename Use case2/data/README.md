@@ -19,7 +19,7 @@
 | **WA**  | [Web Link](https://catalogue.data.wa.gov.au/dataset/geographic-names-geonoma) | [WA place names in the Composite Gazetteer of Australia](https://placenames.fsdf.org.au/)           | [WA2026Q1.csv.zip](WA/WA2026Q1.csv.zip)               | 27/01/26 |
 
 
-### Place name data formatting 
+### Data Preparation 
 - ACT, TAS, NT, WA
     - Added a new column to record the status of place names as `gazetted`
     - Added a new column to store the geometry in WKT format
