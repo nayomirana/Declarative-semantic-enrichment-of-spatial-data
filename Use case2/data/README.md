@@ -21,10 +21,10 @@
 
 ### Place name data formatting 
 - ACT, TAS, NT, WA
-    - Added a new column to record the status of place names as 'gazetted'
+    - Added a new column to record the status of place names as `gazetted`
     - Added a new column to store the geometry in WKT format
 - NSW
-    - Identified records containing multiple values in the GAZETTE DATE column and added a new 'MOST_RECENT_GAZETTE_DATE' column to record the most recent gazette date.
+    - Identified records containing multiple values in the GAZETTE DATE column and added a new `MOST_RECENT_GAZETTE_DATE` column to record the most recent gazette date.
     - Added a new column to record the state abbreviation
     - Added a new column `IS_INDIGENOUS` to record whether the record is indigenous name based on the values of column `ABORIGINAL NAME`.
 
@@ -37,7 +37,7 @@
   - Added a new `IS_INDIGENOUS` column to indicate whether a record represents an Indigenous name. The value is derived from the `Aboriginal Origins` column.
 
 - SA (Sites)
-  Renamed (feature_category, feature_type, feature_sub_type) as (feature_group, feature_category, feature_type) since the existing values did not align with the definitions of the ICSM Permanent Committee on Place Names
+  Renamed (`feature_category`, `feature_type`, `feature_sub_type`) as (`feature_group`, `feature_category`, `feature_type`) since the existing values did not align with the definitions of the ICSM Permanent Committee on Place Names
 
 
 
