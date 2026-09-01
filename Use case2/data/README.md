@@ -20,16 +20,16 @@
 
 
 ### Place name data formatting 
-- ACT,TAS,NT,WA
-    - Added a new column to record “status” as gazetted
+- ACT, TAS, NT, WA
+    - Added a new column to record the status of place names as 'gazetted'
     - Added a new column to store the geometry in WKT format
 - NSW
-    - Added a new column to record the most recent gazzete date ("MOST_RECENT_GAZETTE_DATE")
+    - Identified records containing multiple values in the GAZETTE DATE column and added a new 'MOST_RECENT_GAZETTE_DATE' column to record the most recent gazette date.
     - Added a new column to record the state abbreviation
-    - Added a new column IS_INDIGENOUS to record whether the record is indigenous name based on the values of column"ABORIGINAL NAME"
+    - Added a new column `IS_INDIGENOUS` to record whether the record is indigenous name based on the values of column `ABORIGINAL NAME`.
 
 - QLD
-    - Added a new column to record “status” as gazetted
+    - Added a new column to record the status of place names as 'gazetted'
     - Added a new column to record the state abbreviation
     - Added a new column to store the geometry in WKT format
 
