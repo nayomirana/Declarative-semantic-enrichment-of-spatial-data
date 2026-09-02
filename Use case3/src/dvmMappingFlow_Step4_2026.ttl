@@ -1,0 +1,464 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rrx: <http://www.w3.org/ns/r2rml-ext#>.
+@prefix rrxf: <http://www.w3.org/ns/r2rml-ext/functions/def/>.
+@prefix rrf: <http://kdeg.scss.tcd.ie/ns/rrf#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix rmlt: <http://semweb.mmlab.be/ns/rml-target#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix onto: <http://example.di.uoa.gr/ontology#>.
+@prefix fno: <http://w3id.org/function/ontology#> .
+@prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
+@prefix formats: <https://www.w3.org/ns/formats/> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix dynamicVicMapVocab: <http://example.org/ns/DV_Project#> .
+@prefix smurf: <https://linked.data.gov.au/def/smurf> .
+@prefix ex: <http://example.com/functions#> .
+@base <http://example.com/> .
+
+<#SPARQLEndpoint> a sd:Service;
+  sd:endpoint <http://13.211.150.184:7200/repositories/dvicmap/statements> ;
+  sd:supportedLanguage sd:SPARQL11Update.
+
+<#TargetSPARQL> a rmlt:LogicalTarget;
+  rmlt:target <#SPARQLEndpoint>.
+
+<#InputSPARQL>
+    a sd:Service ;
+    sd:endpoint <http://13.211.150.184:7200/repositories/dvicmap> ;
+    sd:supportedLanguage sd:SPARQL11Query ;
+    sd:resultFormat <http://www.w3.org/ns/formats/SPARQL_Results_JSON>; .
+
+
+ <#LogicalSource_CreateWBInstances_HY_WA_POLYGON>
+  rml:logicalSource [
+        rml:source <#InputSPARQL>;
+        rml:referenceFormulation ql:JSONPath;
+        rml:iterator "$.results.bindings[*]";
+		rml:query """
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+PREFIX DV_Project: <http://example.org/ns/DV_Project#>
+
+SELECT ?geom1 ?objectid1 ?geometryType1 ?dataset1 ?geom2 ?objectid2 ?geometryType2 ?dataset2
+WHERE {
+    # 1) Return geometries related to HY_WATER_AREA_POLYGON
+    # =========================================================
+    {
+        ?geom1 a geo:Geometry ;
+            DV_Project:hasGeometryCRS4326AfterBuffer ?geometry1 ;
+            DV_Project:hasObjectID ?objectid1 ;
+            DV_Project:hasGeometryType ?geometryType1 ;
+            DV_Project:dataset ?dataset1 ;
+			DV_Project:dataset "HY_WATER_AREA_POLYGON";
+            DV_Project:isPrimary true .
+            BIND(STRDT(STR(?geometry1), geo:wktLiteral) AS ?buffer_geometry1)
+
+		# ----------------------------------
+        # ML or LIDAR polygons that intersect
+		# ----------------------------------
+        {
+            ?geom2 a geo:Geometry ;
+                geo:asWKT ?geometry2 ;
+                DV_Project:hasObjectID ?objectid2 ;
+                DV_Project:hasGeometryType ?geometryType2 ;
+                DV_Project:dataset ?dataset2 .
+
+            VALUES ?dataset2 {
+                "HY_WATER_AREA_ML"
+                "HY_WATER_AREA_LIDAR"
+            }
+            ?geom2 geo:sfIntersects ?buffer_geometry1.
+          ## FILTER(geof:sfIntersects(?geometry2, ?geometry1))
+        }
+        UNION
+        # ----------------------------------
+        # Water points within the polygon
+        # ----------------------------------
+        {
+            ?geom2 a geo:Geometry ;
+                geo:asWKT ?geometry2 ;
+                DV_Project:hasObjectID ?objectid2 ;
+                DV_Project:hasGeometryType ?geometryType2 ;
+                DV_Project:dataset ?dataset2 ;
+				DV_Project:dataset "HY_WATER_POINT".
+           
+             ?geom2 geo:sfWithin ?buffer_geometry1.
+          ##  FILTER(geof:sfWithin(?geometry2, ?geometry1) )
+        }
+    }
+
+    UNION
+    # =========================================================
+    # 2) Return HY_WATER_AREA_POLYGON itself
+    # =========================================================
+    {
+        ?geom1 a geo:Geometry ;
+            DV_Project:hasGeometryCRS4326AfterBuffer ?geometry1 ;
+            DV_Project:hasObjectID ?objectid1 ;
+            DV_Project:hasGeometryType ?geometryType1 ;
+            DV_Project:dataset ?dataset1 ;
+            DV_Project:isPrimary true ;
+			DV_Project:dataset "HY_WATER_AREA_POLYGON".
+    }
+}
+"""
+ ].
+
+ <#LogicalSource_CreateWBInstances_HY_WA_ML>
+  rml:logicalSource [
+        rml:source <#InputSPARQL>;
+        rml:referenceFormulation ql:JSONPath;
+        rml:iterator "$.results.bindings[*]";
+		rml:query """
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+PREFIX DV_Project: <http://example.org/ns/DV_Project#>
+
+SELECT ?geom1 ?objectid1 ?geometryType1 ?dataset1 ?geom2 ?objectid2 ?geometryType2 ?dataset2
+WHERE {
+    # =========================================================
+    # 1. Return geometries related to HY_WATER_AREA_ML
+    # =========================================================
+    {
+        ?geom1 a geo:Geometry ;
+            DV_Project:hasGeometryCRS4326AfterBuffer ?geometry1 ;
+            DV_Project:hasObjectID ?objectid1 ;
+            DV_Project:hasGeometryType ?geometryType1 ;
+            DV_Project:dataset ?dataset1 ;
+            DV_Project:isPrimary true ;
+			DV_Project:dataset "HY_WATER_AREA_ML".
+            BIND(STRDT(STR(?geometry1), geo:wktLiteral) AS ?buffer_geometry1)
+
+        # -------------------------------------
+        # ML or LIDAR polygons that intersect
+        # ------------------------------------
+        {
+            ?geom2 a geo:Geometry ;
+                geo:asWKT ?geometry2 ;
+                DV_Project:hasObjectID ?objectid2 ;
+                DV_Project:hasGeometryType ?geometryType2 ;
+                DV_Project:dataset ?dataset2 ;
+				DV_Project:dataset "HY_WATER_AREA_LIDAR".
+
+            ?geom2 geo:sfIntersects ?buffer_geometry1.
+          ##  FILTER(geof:sfIntersects(?geometry2, ?geometry1) )
+        }
+
+        UNION
+
+        # ----------------------------------
+        # Water points within the ML polygon
+        # ----------------------------------
+        {
+            ?geom2 a geo:Geometry ;
+                geo:asWKT ?geometry2 ;
+                DV_Project:hasObjectID ?objectid2 ;
+                DV_Project:hasGeometryType ?geometryType2 ;
+                DV_Project:dataset ?dataset2 ;
+				DV_Project:dataset "HY_WATER_POINT".
+           
+             ?geom2 geo:sfWithin ?buffer_geometry1.
+          ##  FILTER(geof:sfWithin(?geometry2, ?geometry1) )
+        }
+    }
+
+    UNION
+
+    # =========================================================
+    # 2. Also return HY_WATER_AREA_ML itself
+    # =========================================================
+    {
+        ?geom1 a geo:Geometry ;
+            DV_Project:hasGeometryCRS4326AfterBuffer ?geometry1 ;
+            DV_Project:hasObjectID ?objectid1 ;
+            DV_Project:hasGeometryType ?geometryType1 ;
+            DV_Project:dataset ?dataset1 ;
+            DV_Project:isPrimary true ;
+			DV_Project:dataset "HY_WATER_AREA_ML".
+
+    }
+}
+"""
+ ].
+
+ <#LogicalSource_CreateWBInstances_HY_WA_LIDAR>
+  rml:logicalSource [
+        rml:source <#InputSPARQL>;
+        rml:referenceFormulation ql:JSONPath;
+        rml:iterator "$.results.bindings[*]";
+		rml:query """
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+PREFIX DV_Project: <http://example.org/ns/DV_Project#>
+
+SELECT ?geom1 ?objectid1 ?geometryType1 ?dataset1 ?geom2 ?objectid2 ?geometryType2 ?dataset2
+WHERE {
+
+    # =====================================================
+    # 1. HY_WATER_POINT within primary HY_WATER_AREA_LIDAR
+    # =====================================================
+    {
+        ?geom1 a geo:Geometry ;
+               DV_Project:hasGeometryCRS4326AfterBuffer ?geometry1 ;
+               DV_Project:hasObjectID ?objectid1 ;
+               DV_Project:hasGeometryType ?geometryType1 ;
+               DV_Project:dataset ?dataset1 ;
+               DV_Project:isPrimary true ;
+			   DV_Project:dataset "HY_WATER_AREA_LIDAR".
+              BIND(STRDT(STR(?geometry1), geo:wktLiteral) AS ?buffer_geometry1)
+
+        # ---------------------------------------------
+        # Water points within LIDAR geometry
+        # ---------------------------------------------
+        ?geom2 a geo:Geometry ;
+               geo:asWKT ?geometry2 ;
+               DV_Project:hasObjectID ?objectid2 ;
+               DV_Project:hasGeometryType ?geometryType2 ;
+               DV_Project:dataset ?dataset2;
+			   DV_Project:dataset "HY_WATER_POINT".
+        
+             ?geom2 geo:sfWithin ?buffer_geometry1.
+         ##  FILTER(geof:sfWithin(?geometry2, ?geometry1))
+    }
+
+    UNION
+
+    # =====================================================
+    # 2. Return all primary HY_WATER_AREA_LIDAR geometries
+    # =====================================================
+    {
+        ?geom1 a geo:Geometry ;
+               DV_Project:hasGeometryCRS4326AfterBuffer ?geometry1 ;
+               DV_Project:hasObjectID ?objectid1 ;
+               DV_Project:hasGeometryType ?geometryType1 ;
+               DV_Project:dataset ?dataset1 ;
+               DV_Project:isPrimary true ;
+			   DV_Project:dataset "HY_WATER_AREA_LIDAR".
+    }
+}
+"""
+ ].
+
+ <#LogicalSource_CreateWBInstances_HY_WATER_POINT>
+  rml:logicalSource [
+        rml:source <#InputSPARQL>;
+        rml:referenceFormulation ql:JSONPath;
+        rml:iterator "$.results.bindings[*]";
+		rml:query """
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX DV_Project: <http://example.org/ns/DV_Project#>
+
+SELECT ?geom1 ?objectid1 ?geometryType1 ?dataset1
+WHERE {
+
+    ?geom1 a geo:Geometry ;
+           geo:asWKT ?geometry1 ;
+           DV_Project:hasObjectID ?objectid1 ;
+           DV_Project:hasGeometryType ?geometryType1 ;
+           DV_Project:dataset "HY_WATER_POINT" .
+
+    BIND("HY_WATER_POINT" AS ?dataset1)
+
+    MINUS {
+
+        SELECT DISTINCT ?geom1
+        WHERE {
+
+            VALUES ?dataset2 {
+                "HY_WATER_AREA_POLYGON"
+                "HY_WATER_AREA_ML"
+                "HY_WATER_AREA_LIDAR"
+            }
+
+            ?geom2 a geo:Geometry ;
+                   DV_Project:dataset ?dataset2 ;
+                   DV_Project:hasGeometryCRS4326AfterBuffer ?geometry2 .
+
+            BIND(
+                STRDT(STR(?geometry2), geo:wktLiteral)
+                AS ?buffer_geometry2
+            )
+
+            ?geom1 geo:sfWithin ?buffer_geometry2 .
+        }
+    }
+}
+"""
+ ].
+
+ <#LogicalSource_CreateWBInstances_PARCELS_AND_FLOOD>
+  rml:logicalSource [
+        rml:source <#InputSPARQL>;
+        rml:referenceFormulation ql:JSONPath;
+        rml:iterator "$.results.bindings[*]";
+		rml:query """
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX DV_Project: <http://example.org/ns/DV_Project#>
+
+SELECT ?geom ?objectid ?geometryType ?dataset
+WHERE {
+    ?geom a geo:Geometry ;
+           geo:asWKT ?geometry ;
+           DV_Project:hasObjectID ?objectid ;
+           DV_Project:hasGeometryType ?geometryType ;
+           DV_Project:dataset ?dataset .
+
+    VALUES ?dataset {
+        "V_PARCEL_MP"
+        "FLOOD_NON_AUTHORITATIVE"
+        "FLOOD_AUTHORITATIVE"
+    }
+}
+"""
+ ].
+
+############################################################## Create Waterbody Instances ##############################################################
+
+<#CreateWBWbInstances_HY_WA_POLYGON>
+    a rr:TriplesMap;
+   rml:logicalSource <#LogicalSource_CreateWBInstances_HY_WA_POLYGON>;
+
+        rr:subjectMap [
+            rr:template  "http://example.org/ns/DV_Project#wb_{dataset1.value}_{objectid1.value}";
+            rr:class geosparql:Feature;
+            rml:logicalTarget <#TargetSPARQL>
+        ];
+
+    	rr:predicateObjectMap [
+            rr:predicate smurf:waterbodyID ;
+             rr:objectMap [
+              rml:reference "objectid1.value";
+              rr:datatype xsd:integer
+    ]
+        ];
+
+	rr:predicateObjectMap [
+            rr:predicate geosparql:hasGeometry ;
+             rr:objectMap [
+             rr:template "http://example.org/ns/DV_Project#{dataset1.value}_{geometryType1.value}{objectid1.value}"
+    ]
+        ];
+
+        rr:predicateObjectMap [
+			rr:predicate geosparql:hasGeometry ;
+             rr:objectMap [
+             rr:template "http://example.org/ns/DV_Project#{dataset2.value}_{geometryType2.value}{objectid2.value}"
+    ]
+        ] .
+
+<#CreateWBWbInstances_HY_WA_ML>
+    a rr:TriplesMap;
+   rml:logicalSource <#LogicalSource_CreateWBInstances_HY_WA_ML>;
+
+        rr:subjectMap [
+            rr:template  "http://example.org/ns/DV_Project#wb_{dataset1.value}_{objectid1.value}";
+            rr:class geosparql:Feature;
+            rml:logicalTarget <#TargetSPARQL>
+        ];
+
+    	rr:predicateObjectMap [
+            rr:predicate smurf:waterbodyID ;
+             rr:objectMap [
+              rml:reference "objectid1.value";
+              rr:datatype xsd:integer
+    ]
+        ];
+
+	rr:predicateObjectMap [
+            rr:predicate geosparql:hasGeometry ;
+             rr:objectMap [
+             rr:template "http://example.org/ns/DV_Project#{dataset1.value}_{geometryType1.value}{objectid1.value}"
+    ]
+        ];
+
+        rr:predicateObjectMap [
+			rr:predicate geosparql:hasGeometry ;
+             rr:objectMap [
+             rr:template "http://example.org/ns/DV_Project#{dataset2.value}_{geometryType2.value}{objectid2.value}"
+    ]
+        ] .
+
+<#CreateWBWbInstances_HY_WA_LIDAR>
+    a rr:TriplesMap;
+   rml:logicalSource <#LogicalSource_CreateWBInstances_HY_WA_LIDAR>;
+
+        rr:subjectMap [
+            rr:template  "http://example.org/ns/DV_Project#wb_{dataset1.value}_{objectid1.value}";
+            rr:class geosparql:Feature;
+            rml:logicalTarget <#TargetSPARQL>
+        ];
+
+    	rr:predicateObjectMap [
+            rr:predicate smurf:waterbodyID ;
+             rr:objectMap [
+              rml:reference "objectid1.value";
+              rr:datatype xsd:integer
+    ]
+        ];
+
+	rr:predicateObjectMap [
+            rr:predicate geosparql:hasGeometry ;
+             rr:objectMap [
+             rr:template "http://example.org/ns/DV_Project#{dataset1.value}_{geometryType1.value}{objectid1.value}"
+    ]
+        ];
+
+        rr:predicateObjectMap [
+			rr:predicate geosparql:hasGeometry ;
+             rr:objectMap [
+             rr:template "http://example.org/ns/DV_Project#{dataset2.value}_{geometryType2.value}{objectid2.value}"
+    ]
+        ] .
+    
+<#CreateWBWbInstances_HY_WATER_POINT>
+    a rr:TriplesMap;
+   rml:logicalSource <#LogicalSource_CreateWBInstances_HY_WATER_POINT>;
+
+        rr:subjectMap [
+            rr:template  "http://example.org/ns/DV_Project#wb_{dataset1.value}_{objectid1.value}";
+            rr:class geosparql:Feature;
+            rml:logicalTarget <#TargetSPARQL>
+        ];
+
+    	rr:predicateObjectMap [
+            rr:predicate smurf:waterbodyID ;
+             rr:objectMap [
+              rml:reference "objectid1.value";
+              rr:datatype xsd:integer
+    ]
+        ];
+
+	rr:predicateObjectMap [
+            rr:predicate geosparql:hasGeometry ;
+             rr:objectMap [
+             rr:template "http://example.org/ns/DV_Project#{dataset1.value}_{geometryType1.value}{objectid1.value}"
+    ]
+        ] .
+
+<#CreateWBWbInstances_PARCELS_AND_FLOOD>
+    a rr:TriplesMap;
+   rml:logicalSource <#LogicalSource_CreateWBInstances_PARCELS_AND_FLOOD>;
+
+        rr:subjectMap [
+            rr:template  "http://example.org/ns/DV_Project#wb_{dataset.value}_{objectid.value}";
+            rr:class geosparql:Feature;
+            rml:logicalTarget <#TargetSPARQL>
+        ];
+
+    	rr:predicateObjectMap [
+            rr:predicate smurf:waterbodyID ;
+             rr:objectMap [
+              rml:reference "objectid.value";
+              rr:datatype xsd:integer
+    ]
+        ];
+
+	rr:predicateObjectMap [
+            rr:predicate geosparql:hasGeometry ;
+             rr:objectMap [
+             rr:template "http://example.org/ns/DV_Project#{dataset.value}_{geometryType.value}{objectid.value}"
+    ]
+        ] .

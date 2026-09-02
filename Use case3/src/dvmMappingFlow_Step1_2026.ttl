@@ -1,0 +1,1130 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rrx: <http://www.w3.org/ns/r2rml-ext#>.
+@prefix rrxf: <http://www.w3.org/ns/r2rml-ext/functions/def/>.
+@prefix rrf: <http://kdeg.scss.tcd.ie/ns/rrf#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix rmlt: <http://semweb.mmlab.be/ns/rml-target#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix onto: <http://example.di.uoa.gr/ontology#>.
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fsdf: <http://linked.data.gov.au/def/fsdf/> .
+@prefix geogrel: <https://raw.githubusercontent.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/refs/heads/main/Usea%20case3/src/GeoGREL/geofunctions.ttl#> .
+@prefix fno: <http://w3id.org/function/ontology#> .
+@prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
+@prefix vc: <http://www.w3.org/2006/vcard/ns#> .
+@prefix formats: <https://www.w3.org/ns/formats/> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix dynamicVicMapVocab: <http://example.org/ns/DV_Project#> .
+@prefix sd:  <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix smurf: <https://linked.data.gov.au/def/smurf> .
+@prefix ex: <http://example.com/functions#> .
+@base <http://example.com/> .
+
+
+<#DB_source> a d2rq:Database;
+  d2rq:jdbcDSN "jdbc:postgresql://localhost:5432/dvm";
+  d2rq:jdbcDriver "org.postgresql.Driver";
+  d2rq:username "gis_admin";
+  d2rq:password "PgAdmin@1234" .
+
+<#SPARQLEndpoint> a sd:Service;
+  sd:endpoint <http://32.236.243.86:7200/repositories/dvicmap/statements> ;
+  sd:supportedLanguage sd:SPARQL11Update.
+
+<#TargetSPARQL> a rmlt:LogicalTarget ;
+  rmlt:target <#SPARQLEndpoint> .
+
+### Union of all hydro spatial data sets
+<#LogicalSource_WBResources>
+  rml:logicalSource [
+    rml:source <#DB_source>;
+    rr:sqlVersion rr:SQL2008;
+    rml:query """
+ 
+    (SELECT gid, ST_AsText(geom) as geom, SUBSTRING(ST_GeometryType(geom), 4) geomtype, 'HY_WATER_POINT' as dataset, objectid, pfi, ufi, f_type_cod, 
+    c_date_pfi::text AS c_date_pfi, 'false' as isCrown 
+    from dvm_ds.HY_WATER_POINT ORDER BY MD5(objectid::text), objectid FETCH FIRST 220000  ROWS ONLY)
+    
+    UNION
+    (SELECT gid, ST_AsText(geom) as geom, SUBSTRING(ST_GeometryType(geom), 4) geomtype, 'HY_WATER_AREA_POLYGON' as dataset ,objectid, pfi, ufi, f_type_cod, 
+    c_date_pfi::text AS c_date_pfi, 'false' as isCrown
+    from dvm_ds.hy_water_area_polygon_geomchecked ORDER BY MD5(objectid::text), objectid FETCH FIRST 150000  ROWS ONLY)
+
+    UNION
+
+    (SELECT gid, ST_AsText(geom) as geom,  SUBSTRING(ST_GeometryType(geom), 4) geomtype, 'HY_WATER_AREA_ML' as dataset, objectid, pfi, ufi, f_type_cod,
+    c_date_pfi::text AS c_date_pfi, 'false' as isCrown from dvm_ds.dampredictions_preliminary_v2) 
+
+    UNION
+
+   (SELECT gid, ST_AsText(geom) AS geom, SUBSTRING(ST_GeometryType(geom), 4) AS geomtype,'V_PARCEL_MP' AS dataset, 
+    CAST(gid AS BIGINT) AS objectid, CAST(parcel_pfi AS BIGINT) AS pfi, CAST(parcel_ufi AS BIGINT) AS ufi,
+    'parcels' AS f_type_cod, parcel_reg::text as c_date_pfi, 
+     CASE WHEN parcel_cro = 'C' THEN 'true' ELSE 'false' END AS isCrown FROM dvm_ds.vicmap_parcels ORDER BY MD5(gid::text), gid FETCH FIRST 300000  ROWS ONLY )
+
+    UNION
+
+    (SELECT gid, ST_AsText(geom) as geom, SUBSTRING(ST_GeometryType(geom), 4) geomtype, 'HY_WATER_AREA_LIDAR' as dataset, gid as objectid,
+     CAST(NULLIF('', '') AS BIGINT) AS pfi, CAST(NULLIF('', '') AS BIGINT) AS ufi, '' as f_type_cod,
+    '0001-01-01'::text as c_date_pfi, 'false' as isCrown from dvm_ds.bendigo_2020mar05_lakes_mga55) 
+
+    UNION
+
+    (SELECT gid, ST_AsText(geom) as geom, SUBSTRING(ST_GeometryType(geom), 4) geomtype, 'FLOOD_NON_AUTHORITATIVE' as dataset, gid as objectid,  
+    CAST(NULLIF('', '') AS BIGINT) AS pfi, CAST(NULLIF('', '') AS BIGINT) AS ufi, 'Flood_NonAuthoritative' as f_type_cod,
+    '0001-01-01'::text as c_date_pfi, 'false' as isCrown from dvm_ds.fullfloodextents_25jan_detailed)
+
+    UNION
+
+   (SELECT gid, ST_AsText(geom) as geom,  SUBSTRING(ST_GeometryType(geom), 4) geomtype, 'FLOOD_AUTHORITATIVE' as dataset,
+    gid as objectid,  CAST(NULLIF('', '') AS BIGINT) AS pfi, CAST(NULLIF('', '') AS BIGINT) AS ufi, 'Flood_Authoritative' as f_type_cod,
+    obs_create::text AS c_date_pfi, 'false' as isCrown from dvm_ds.vic_flood_history_public)
+
+ """ ;
+
+    rml:referenceFormulation ql:SQL
+  ].
+
+## Hydro spatial data sets - HY_WATER_POINT and HY_WATER_AREA_POLYGON
+<#LogicalSource_WBResources_point_poly>
+  rml:logicalSource [
+    rml:source <#DB_source>;
+    rr:sqlVersion rr:SQL2008;
+    rml:query """
+
+    (SELECT gid, ST_AsText(geom) as geom, SUBSTRING(ST_GeometryType(geom), 4) geomtype, 'HY_WATER_POINT' as dataset, objectid, pfi, ufi, f_type_cod, 
+    c_date_pfi::text as c_date_pfi, 'false' as isCrown 
+    from dvm_ds.HY_WATER_POINT ORDER BY MD5(objectid::text), objectid FETCH FIRST 220000  ROWS ONLY)
+    
+    UNION
+    (SELECT gid, ST_AsText(geom) as geom, SUBSTRING(ST_GeometryType(geom), 4) geomtype, 'HY_WATER_AREA_POLYGON' as dataset ,objectid, pfi, ufi, f_type_cod, 
+    c_date_pfi::text AS c_date_pfi, 'false' as isCrown
+    from dvm_ds.hy_water_area_polygon_geomchecked ORDER BY MD5(objectid::text), objectid FETCH FIRST 150000  ROWS ONLY)
+
+ """ ;
+
+    rml:referenceFormulation ql:SQL
+  ].
+
+## Hydro spatial data set - HY_WATER_AREA_ML
+<#LogicalSource_WBResources_ml>
+  rml:logicalSource [
+    rml:source <#DB_source>;
+    rr:sqlVersion rr:SQL2008;
+    rml:query """
+
+   SELECT gid, ST_AsText(geom) as geom,  SUBSTRING(ST_GeometryType(geom), 4) geomtype, 'HY_WATER_AREA_ML' as dataset, objectid, pfi, ufi, f_type_cod,
+    c_date_pfi::text as c_date_pfi, 'false' as isCrown from dvm_ds.dampredictions_preliminary_v2
+
+  """ ;
+
+    rml:referenceFormulation ql:SQL
+  ].
+
+## Hydro spatial data set - V_PARCEL_MP
+<#LogicalSource_WBResources_parcels>
+  rml:logicalSource [
+    rml:source <#DB_source>;
+    rr:sqlVersion rr:SQL2008;
+    rml:query """
+
+SELECT gid, ST_AsText(geom) AS geom, SUBSTRING(ST_GeometryType(geom), 4) AS geomtype,'V_PARCEL_MP' AS dataset, CAST(gid AS BIGINT) AS objectid, CAST(parcel_pfi AS BIGINT) AS pfi, CAST(parcel_ufi AS BIGINT) AS ufi,
+  'parcels' AS f_type_cod, parcel_reg::text  AS c_date_pfi, CASE WHEN parcel_cro = 'C' THEN 'true' ELSE 'false' END AS isCrown
+   FROM dvm_ds.vicmap_parcels ORDER BY MD5(gid::text), gid FETCH FIRST 300000  ROWS ONLY
+
+ """ ;
+
+    rml:referenceFormulation ql:SQL
+  ].
+
+## Hydro spatial data set - HY_WATER_AREA_LIDAR
+<#LogicalSource_WBResources_lidar>
+  rml:logicalSource [
+    rml:source <#DB_source>;
+    rr:sqlVersion rr:SQL2008;
+    rml:query """
+
+  SELECT gid, ST_AsText(geom) as geom, SUBSTRING(ST_GeometryType(geom), 4) geomtype, 'HY_WATER_AREA_LIDAR' as dataset, gid  as objectid, CAST(NULLIF('', '') AS BIGINT) AS pfi, CAST(NULLIF('', '') AS BIGINT) AS ufi, '' as f_type_cod,
+    '0001-01-01'::text as c_date_pfi, 'false' as isCrown from dvm_ds.bendigo_2020mar05_lakes_mga55
+
+ """ ;
+
+    rml:referenceFormulation ql:SQL
+  ].
+
+## Hydro spatial data sets - FLOOD_NON_AUTHORITATIVE & FLOOD_AUTHORITATIVE
+<#LogicalSource_WBResources_flood_auth_non_auth>
+  rml:logicalSource [
+    rml:source <#DB_source>;
+    rr:sqlVersion rr:SQL2008;
+    rml:query """
+   
+    (SELECT gid, ST_AsText(geom) as geom, SUBSTRING(ST_GeometryType(geom), 4) geomtype, 'FLOOD_NON_AUTHORITATIVE' as dataset, gid as objectid,  CAST(NULLIF('', '') AS BIGINT) AS pfi, CAST(NULLIF('', '') AS BIGINT) AS ufi, 'Flood_NonAuthoritative' as f_type_cod,
+    '0001-01-01'::text as c_date_pfi, 'false' as isCrown from dvm_ds.fullfloodextents_25jan_detailed)
+
+    UNION
+
+   (SELECT gid, ST_AsText(geom) as geom,  SUBSTRING(ST_GeometryType(geom), 4) geomtype, 'FLOOD_AUTHORITATIVE' as dataset, gid as objectid,  CAST(NULLIF('', '') AS BIGINT) AS pfi,
+     CAST(NULLIF('', '') AS BIGINT) AS ufi, 'Flood_Authoritative' as f_type_cod,
+    obs_create::text AS c_date_pfi, 'false' as isCrown from dvm_ds.vic_flood_history_public)
+   
+  
+ """ ;
+
+    rml:referenceFormulation ql:SQL
+  ].
+
+
+# # ############## RML mapings for - Meta Data of each hydro spatial datasets #############################################################################
+<#MetaDataSource>
+  rml:source "metadata_hydro.csv" ;
+  rml:referenceFormulation ql:CSV;
+  rml:csvw:delimiter ".".
+
+
+<#MetadataHydro> a rr:TriplesMap;
+  rml:logicalSource <#MetaDataSource>;
+
+  rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}" ;
+   # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dcat:DataSet
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:identifier;
+    rr:objectMap [
+      rml:reference "Anzlic ID:";
+      rr:datatype xsd:string
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate dcterms:title;
+    rr:objectMap [
+      rml:reference "Title:";
+      rr:datatype xsd:string
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:available;
+    rr:objectMap [
+      rml:reference "Metadata Date:";
+      rr:datatype xsd:Date
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate dcat:keyword;
+    rr:objectMap [
+      rml:reference "Search Words:";
+      rr:datatype xsd:string
+    ]
+  ];
+  
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:source;
+    rr:objectMap [
+      rml:reference "Data Source:";
+      rr:datatype xsd:string
+    ]
+  ];
+  
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:description;
+    rr:objectMap [
+      rml:reference "Purpose:";
+      rr:datatype xsd:string
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate dcterms:abstract;
+    rr:objectMap [
+      rml:reference "Abstract:";
+      rr:datatype xsd:string
+    ]
+  ];
+  
+rr:predicateObjectMap [
+    rr:predicate dcat:contactPoint ;
+       rr:objectMap [
+       rr:parentTriplesMap <#MetaData_Contacts_Organization> ;  
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate fsdf:hasCustodian ;  
+    rr:objectMap [
+      rr:parentTriplesMap <#MetaData_Custodian> ;  
+        ] 
+    ];
+    
+   rr:predicateObjectMap [
+    rr:predicate fsdf:hasJurisdiction ;  
+    rr:objectMap [
+      rr:parentTriplesMap <#MetaData_Jurisdiction> ;  
+        ] 
+    ];
+    
+  rr:predicateObjectMap [
+    rr:predicate dcterms:spatial;
+    rr:objectMap [
+       rr:parentTriplesMap <#MetaData_DataSetLocation> ;  
+    ]
+  ];
+  
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:temporal;
+    rr:objectMap [
+       rr:parentTriplesMap <#MetaData_Temporal> ;  
+    ]
+  ];
+
+ rr:predicateObjectMap [
+    rr:predicate dcterms:accrualPeriodicity;
+   rr:objectMap [
+      rml:reference "Maintainence and Update Frequency:";
+      rr:datatype xsd:string
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcat:distribution;
+    rr:objectMap [
+       rr:parentTriplesMap <#MetaData_Distribution> ;  
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:accessRights;
+    rr:objectMap [
+       rr:parentTriplesMap <#MetaData_AccessRights> ;  
+    ]
+  ];
+
+rr:predicateObjectMap [
+    rr:predicate dqv:hasQualityMeasurement;
+       rr:objectMap [
+       rr:parentTriplesMap <#PositionalAccuracy> ;  
+    ]
+  ];
+  
+rr:predicateObjectMap [
+    rr:predicate dqv:hasQualityMeasurement;
+       rr:objectMap [
+       rr:parentTriplesMap <#AttributeAccuracy> ;  
+    ]
+  ];
+
+rr:predicateObjectMap [
+    rr:predicate dqv:hasQualityMeasurement;
+       rr:objectMap [
+       rr:parentTriplesMap <#LogicalConsistency> ;  
+    ]
+  ];
+
+rr:predicateObjectMap [
+    rr:predicate dqv:hasQualityMeasurement;
+       rr:objectMap [
+       rr:parentTriplesMap <#Accessibility> ;  
+    ]
+  ] .
+  
+<#MetaData_Contacts_Organization> a rr:TriplesMap;
+  rml:logicalSource <#MetaDataSource>;
+ 
+  rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}/organization";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class vc:Kind
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:organization-name;
+    rr:objectMap [
+      rml:reference "Contact Organisation:";
+      rr:datatype xsd:string
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:role;
+    rr:objectMap [
+      rml:reference "Contact Position:";
+      rr:datatype xsd:string
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:hasEmail ;
+       rr:objectMap [
+        rml:reference "Email Address:";
+        rr:termType rr:IRI
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:hasAddress ;
+       rr:objectMap [
+       rr:parentTriplesMap <#MetaData_Contacts_Organization_Address> ;  
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:hasTelephone ;
+       rr:objectMap [
+       rr:parentTriplesMap <#MetaData_Contacts_Organization_Telephone> ;  
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:hasTelephone ;
+       rr:objectMap [
+       rr:parentTriplesMap <#MetaData_Contacts_Organization_Fax> ;  
+    ]
+  ].
+
+
+<#MetaData_Contacts_Organization_Address> a rr:TriplesMap;
+ rml:logicalSource <#MetaDataSource>;
+  rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}/organization/Address";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class vc:Address
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:street-address;
+    rr:objectMap [
+      rml:reference "Address:";
+      rr:datatype xsd:string
+    ]
+  ];
+
+rr:predicateObjectMap [
+    rr:predicate vc:locality;
+    rr:objectMap [
+      rml:reference "Locality:";
+      rr:datatype xsd:string
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:country-name;
+    rr:objectMap [
+      rml:reference "Country Name:";
+      rr:datatype xsd:string
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:region;
+    rr:objectMap [
+      rml:reference "Region:";
+      rr:datatype xsd:string
+    ]
+  ].
+
+<#MetaData_Contacts_Organization_Telephone> a rr:TriplesMap;
+  rml:logicalSource <#MetaDataSource>;
+ 
+  rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}/organization/Telephone";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class vc:Cell
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:hasValue ;
+       rr:objectMap [
+        rml:reference "Telephone:";
+        rr:datatype xsd:string
+    ]
+  ].
+
+<#MetaData_Contacts_Organization_Fax> a rr:TriplesMap;
+  rml:logicalSource <#MetaDataSource>;
+ 
+  rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}/organization/Fax";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class vc:Fax
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate vc:hasValue ;
+       rr:objectMap [
+        rml:reference "Facsimile:";
+        rr:datatype xsd:string
+    ]
+  ].
+
+<#MetaData_Custodian> a rr:TriplesMap;
+  rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+  rr:template "http://example.com/MetaData{Resource Name:}/{Custodian:}";
+  # rml:logicalTarget <#TargetSPARQL>;
+  rr:class fsdf:Agency
+   ].
+
+<#MetaData_Jurisdiction> a rr:TriplesMap;
+  rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+  rr:template "http://example.com/MetaData{Resource Name:}/{Jurisdiction:}";
+  # rml:logicalTarget <#TargetSPARQL>;
+  rr:class fsdf:Jurisdiction
+   ].
+
+<#MetaData_DataSetLocation> a rr:TriplesMap;
+  rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}/DatasetLocation";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dcterms:Location
+  ];
+
+ rr:predicateObjectMap [
+    rr:predicate dcat:bbox;
+    rr:objectMap [
+      rml:reference "Geographic Bounding Box:";
+      rr:datatype xsd:string
+    ]
+  ].
+
+<#MetaData_Temporal> a rr:TriplesMap;
+  rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}/Temporal";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dcterms:PeriodOfTime
+  ];
+
+ rr:predicateObjectMap [
+    rr:predicate dcat:startDate;
+    rr:objectMap [
+      rml:reference "Beginning Date:";
+      rr:datatype xsd:date
+    ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcat:endDate;
+    rr:objectMap [
+      rml:reference "Ending Date:";
+      rr:datatype xsd:date
+    ]
+  ].
+
+
+<#MetaData_Distribution> a rr:TriplesMap;
+  rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}/Distribution_{Stored Data Format:}";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dcat:Distribution
+  ].
+
+<#MetaData_AccessRights> a rr:TriplesMap;
+  rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}/AccessRights_{Access Constraint:}";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dcterms:RightsStatement
+  ].
+
+## Positional Accuracy
+<#PositionalAccuracy> a rr:TriplesMap;
+  rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}/_positional_accuracy";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dqv:QualityMeasurement
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dqv:value;
+    rr:objectMap [
+      rml:reference "Positional_Acc_Value";
+      rr:datatype xsd:string
+    ]
+  ];
+  
+ rr:predicateObjectMap [
+    rr:predicate smurf:isAuthoritativeData;
+    rr:objectMap [
+      rml:reference "IsAuthoritativeData";
+      rr:datatype xsd:boolean
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate dqv:isMeasurementOf;
+    rr:objectMap [
+     rr:parentTriplesMap <#PositionalAccuracyMetric> ;
+    ]
+  ] .
+
+<#PositionalAccuracyMetric> a rr:TriplesMap;
+rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}_positional_accuracy_metric";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dqv:Metric
+  ];
+  
+ rr:predicateObjectMap [
+    rr:predicate dqv:inDimension;
+     rr:objectMap [
+       rr:parentTriplesMap <#Accuracy_Dim> ;  
+    ]
+  ].
+
+<#AttributeAccuracy> a rr:TriplesMap;
+rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}/_attribute_accuracy";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dqv:QualityMeasurement
+  ];
+
+ rr:predicateObjectMap [
+    rr:predicate dqv:value;
+    rr:objectMap [
+      rml:reference "Attribute_Acc_Value";
+      rr:datatype xsd:string
+    ]
+  ];
+  
+ rr:predicateObjectMap [
+    rr:predicate smurf:isAuthoritativeData;
+    rr:objectMap [
+      rml:reference "IsAuthoritativeData";
+      rr:datatype xsd:boolean
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate dqv:isMeasurementOf;
+    rr:objectMap [
+     rr:parentTriplesMap <#AttributeAccuracyMetric> ;
+    ]
+  ] .
+
+<#AttributeAccuracyMetric> a rr:TriplesMap;
+rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}_attribute_accuracy_metric";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dqv:Metric
+  ];
+  
+ rr:predicateObjectMap [
+    rr:predicate dqv:inDimension;
+     rr:objectMap [
+       rr:parentTriplesMap <#Accuracy_Dim> ;  
+    ]
+  ].
+
+<#LogicalConsistency> a rr:TriplesMap;
+rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}/_logical_consistency";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dqv:QualityMeasurement
+  ];
+
+ rr:predicateObjectMap [
+    rr:predicate dqv:value;
+    rr:objectMap [
+      rml:reference "Logical_Consistency_Value";
+      rr:datatype xsd:string
+    ]
+  ];
+  
+ rr:predicateObjectMap [
+    rr:predicate smurf:isAuthoritativeData;
+    rr:objectMap [
+      rml:reference "IsAuthoritativeData";
+      rr:datatype xsd:boolean
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate dqv:isMeasurementOf;
+    rr:objectMap [
+     rr:parentTriplesMap <#LogicalConsistencyMetric> ;
+    ]
+  ] .
+
+<#LogicalConsistencyMetric> a rr:TriplesMap;
+rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}_logical_consistency_metric";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dqv:Metric
+  ];
+  
+ rr:predicateObjectMap [
+    rr:predicate dqv:inDimension;
+     rr:objectMap [
+       rr:parentTriplesMap <#Consistency_Dim> ;  
+    ]
+  ].
+
+<#Accessibility> a rr:TriplesMap;
+rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}/_accessbility";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dqv:QualityMeasurement
+  ];
+
+ rr:predicateObjectMap [
+    rr:predicate dqv:value;
+    rr:objectMap [
+      rml:reference "Accessibility_Value";
+      rr:datatype xsd:string
+    ]
+  ];
+  
+ rr:predicateObjectMap [
+    rr:predicate smurf:isAuthoritativeData;
+    rr:objectMap [
+      rml:reference "IsAuthoritativeData";
+      rr:datatype xsd:boolean
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate dqv:isMeasurementOf;
+    rr:objectMap [
+     rr:parentTriplesMap <#AccessibilityMetric> ;
+    ]
+  ] .
+
+<#AccessibilityMetric> a rr:TriplesMap;
+rml:logicalSource <#MetaDataSource>;
+
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}_accessbility_metric";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dqv:Metric
+  ];
+  
+ rr:predicateObjectMap [
+    rr:predicate dqv:inDimension;
+     rr:objectMap [
+       rr:parentTriplesMap <#Accessibility_Dim> ;  
+    ]
+  ].
+
+<#Accuracy_Dim> a rr:TriplesMap;
+rml:logicalSource <#MetaDataSource>;
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}_accuracy_dim";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dqv:Dimension
+  ].
+
+<#Consistency_Dim> a rr:TriplesMap;
+rml:logicalSource <#MetaDataSource>;
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}_consistency_dim";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dqv:Dimension
+  ].
+
+<#Accessibility_Dim> a rr:TriplesMap;
+rml:logicalSource <#MetaDataSource>;
+ rr:subjectMap [
+    rr:template "http://example.com/MetaData{Resource Name:}_accessbility_dim";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class dqv:Dimension
+  ].
+
+############################################# RML Mappings for Geometries in Hydrospatial Datasets ##################################################
+<#DVM_GeometryInstancesWB> a rr:TriplesMap;
+  rml:logicalSource <#LogicalSource_WBResources>;
+
+    rr:subjectMap [
+    rr:template "http://example.org/ns/DV_Project#{dataset}_{geomtype}{OBJECTID}";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class geosparql:Geometry
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dynamicVicMapVocab:hasObjectID;
+    rr:objectMap [
+      rml:reference "OBJECTID";
+      rr:datatype xsd:integer;
+    ]
+  ];
+
+  # rr:predicateObjectMap [
+  #   rr:predicate geosparql:asWKT;
+  #   rr:objectMap [
+  #     rml:reference "geom";
+  #     rr:datatype geosparql:wktLiteral
+  #   ]
+  # ];
+
+  rr:predicateObjectMap [
+    rr:predicate dynamicVicMapVocab:dataset;
+    rr:objectMap [
+      rml:reference "dataset";
+      rr:datatype xsd:string
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dynamicVicMapVocab:hasGeometryType;
+    rr:objectMap [
+      rml:reference "geomtype";
+      rr:datatype xsd:string
+    ]
+  ];
+
+ rr:predicateObjectMap [
+    rr:predicate dynamicVicMapVocab:createDate;
+    rr:objectMap [
+      fnml:functionValue [
+      	rr:predicateObjectMap [
+      		rr:predicate fno:executes ;
+      		rr:objectMap [ rr:constant geogrel:formatDate ] ] ;
+      	rr:predicateObjectMap [
+      		rr:predicate geogrel:valueParameter ;
+      		rr:objectMap [ rml:reference "C_DATE_PFI" ] ]
+      ];
+      rr:datatype xsd:Date
+    ]
+  ]; 
+
+  rr:predicateObjectMap [
+    rr:predicate smurf:varietyOf;
+    rr:objectMap [
+      rml:reference "f_type_cod";
+      rr:datatype xsd:string
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate smurf:PFI;
+    rr:objectMap [
+      rml:reference "pfi";
+      rr:datatype xsd:integer
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate smurf:UFI;
+    rr:objectMap [
+      rml:reference "ufi";
+      rr:datatype xsd:integer
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate smurf:isCrown;
+    rr:objectMap [
+      rml:reference "isCrown";
+      rr:datatype xsd:boolean
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate smurf:hasGeometryProvenance;
+    rr:objectMap [
+       rr:parentTriplesMap <#MetadataHydro> ; 
+       rr:joinCondition [
+            rr:child "dataset";
+            rr:parent "Dataset";
+        ]; 
+    ]
+  ].
+
+######################           RML Mappings for Mapping Geometry Values in each Hydrospatial Datasets ##################
+########### HY_WATER_POINT and HY_WATER_AREA_POLYGON ######################
+<#DVM_GeometryInstancesWB_point_poly> a rr:TriplesMap;
+  rml:logicalSource <#LogicalSource_WBResources_point_poly>;
+
+    rr:subjectMap [
+    rr:template "http://example.org/ns/DV_Project#{dataset}_{geomtype}{OBJECTID}";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class geosparql:Geometry
+  ];
+
+  rr:predicateObjectMap [
+          rr:predicate geosparql:asWKT;
+          rr:objectMap <#FunctionMapConvertToCRS_EPSG_4326_From_4283>
+   ] ;
+
+    rr:predicateObjectMap [
+          rr:predicate dynamicVicMapVocab:geometryCRS32755;
+          rr:objectMap <#FunctionMapConvertToCRS_EPSG_32755_From_4283>
+    ] .
+
+########### HY_WATER_AREA_ML #######################
+<#DVM_GeometryInstancesWB_ML> a rr:TriplesMap;
+  rml:logicalSource <#LogicalSource_WBResources_ml>;
+
+    rr:subjectMap [
+    rr:template "http://example.org/ns/DV_Project#{dataset}_{geomtype}{OBJECTID}";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class geosparql:Geometry
+  ];
+
+   rr:predicateObjectMap [
+          rr:predicate geosparql:asWKT;
+          rr:objectMap <#FunctionMapConvertToCRS_EPSG_4326_From_7899>
+   ] ;
+
+ rr:predicateObjectMap [
+   rr:predicate dynamicVicMapVocab:geometryCRS32755;
+   rr:objectMap <#FunctionMapConvertToCRS_EPSG_32755_From_7899>
+ ].
+
+###########  HY_WATER_AREA_LIDAR #######################
+<#DVM_GeometryInstancesWB_Lidar> a rr:TriplesMap;
+  rml:logicalSource <#LogicalSource_WBResources_lidar>;
+
+    rr:subjectMap [
+    rr:template "http://example.org/ns/DV_Project#{dataset}_{geomtype}{OBJECTID}";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class geosparql:Geometry
+  ];
+
+   rr:predicateObjectMap [
+          rr:predicate geosparql:asWKT;
+          rr:objectMap <#FunctionMapConvertToCRS_EPSG_4326_From_7855>
+   ] ;
+
+  rr:predicateObjectMap [
+   rr:predicate dynamicVicMapVocab:geometryCRS32755;
+   rr:objectMap <#FunctionMapConvertToCRS_EPSG_32755_From_7855>
+ ].
+
+########### V_PARCEL_MP #######################
+<#DVM_GeometryInstancesWB_Parcels> a rr:TriplesMap;
+  rml:logicalSource <#LogicalSource_WBResources_parcels>;
+
+    rr:subjectMap [
+    rr:template "http://example.org/ns/DV_Project#{dataset}_{geomtype}{OBJECTID}";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class geosparql:Geometry
+  ];
+
+     rr:predicateObjectMap [
+          rr:predicate geosparql:asWKT;
+          rr:objectMap <#FunctionMapConvertToCRS_EPSG_4326_From_7899>
+   ] .
+
+###########  FLOOD_NON_AUTHORITATIVE & FLOOD_AUTHORITATIVE #######################
+<#DVM_GeometryInstancesWB_Flood> a rr:TriplesMap;
+  rml:logicalSource <#LogicalSource_WBResources_flood_auth_non_auth>;
+
+    rr:subjectMap [
+    rr:template "http://example.org/ns/DV_Project#{dataset}_{geomtype}{OBJECTID}";
+    # rml:logicalTarget <#TargetSPARQL>;
+    rr:class geosparql:Geometry
+  ];
+
+     rr:predicateObjectMap [
+          rr:predicate geosparql:asWKT;
+          rr:objectMap <#FunctionMapConvertToCRS_EPSG_4326_From_7844>
+   ] .
+
+
+  ########## Custom Functions to transform CRS codes ################
+    <#FunctionMapConvertToCRS_EPSG_32755_From_4283> a fnml:FunctionMap ;
+    fnml:functionValue [
+      rr:predicateObjectMap [
+        rr:predicate fno:executes ;
+        rr:objectMap [ rr:constant geogrel:setGeomToCRSForGivenSourceTargetCodes ]
+      ] ;
+
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam ;
+         rr:objectMap [ rml:reference "geom" ]
+      ];
+      
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam2 ;
+        rr:objectMap [ rr:constant "EPSG:4283" ] ]; 
+
+     rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam3 ;
+        rr:objectMap [ rr:constant "EPSG:32755" ] ]
+    ] ;
+
+    rr:termType rr:Literal ;
+    rr:datatype geosparql:wktLiteral .
+
+    <#FunctionMapConvertToCRS_EPSG_4326_From_4283>  a fnml:FunctionMap ;
+    fnml:functionValue [
+      rr:predicateObjectMap [
+        rr:predicate fno:executes ;
+        rr:objectMap [ rr:constant geogrel:setGeomToCRSForGivenSourceTargetCodes]
+      ] ;
+
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam ;
+        rr:objectMap [ rml:reference "geom" ]
+      ];
+      
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam2 ;
+        rr:objectMap [ rr:constant "EPSG:4283" ] ];
+
+     rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam3 ;
+        rr:objectMap [ rr:constant "EPSG:4326" ] ]
+    ] ;
+
+    rr:termType rr:Literal ;
+    rr:datatype geosparql:wktLiteral .
+
+  <#FunctionMapConvertToCRS_EPSG_32755_From_7855>  a fnml:FunctionMap ;
+    fnml:functionValue [
+      rr:predicateObjectMap [
+        rr:predicate fno:executes ;
+        rr:objectMap [ rr:constant geogrel:setGeomToCRSForGivenSourceTargetCodes ]
+      ] ;
+
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam ;
+         rr:objectMap [ rml:reference "geom" ]
+      ];
+      
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam2 ;
+        rr:objectMap [ rr:constant "EPSG:7855" ] ]; 
+
+     rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam3 ;
+        rr:objectMap [ rr:constant "EPSG:32755" ] ]
+    ] ;
+
+    rr:termType rr:Literal ;
+    rr:datatype geosparql:wktLiteral .
+
+  <#FunctionMapConvertToCRS_EPSG_4326_From_7855>  a fnml:FunctionMap ;
+    fnml:functionValue [
+      rr:predicateObjectMap [
+        rr:predicate fno:executes ;
+        rr:objectMap [ rr:constant geogrel:setGeomToCRSForGivenSourceTargetCodes ]
+      ] ;
+
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam ;
+         rr:objectMap [ rml:reference "geom" ]
+      ];
+      
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam2 ;
+        rr:objectMap [ rr:constant "EPSG:7855" ] ]; 
+
+     rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam3 ;
+        rr:objectMap [ rr:constant "EPSG:4326" ] ]
+    ] ;
+
+    rr:termType rr:Literal ;
+    rr:datatype geosparql:wktLiteral .
+
+  <#FunctionMapConvertToCRS_EPSG_4326_From_7844>  a fnml:FunctionMap ;
+    fnml:functionValue [
+      rr:predicateObjectMap [
+        rr:predicate fno:executes ;
+        rr:objectMap [ rr:constant geogrel:setGeomToCRSForGivenSourceTargetCodes ]
+      ] ;
+
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam ;
+        # rr:objectMap <#FunctionMapConvertToCRS_4283>
+         rr:objectMap [ rml:reference "geom" ]
+      ];
+      
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam2 ;
+        rr:objectMap [ rr:constant "EPSG:7844" ] ]; 
+
+     rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam3 ;
+        rr:objectMap [ rr:constant "EPSG:4326" ] ]
+    ] ;
+
+    rr:termType rr:Literal ;
+    rr:datatype geosparql:wktLiteral .
+
+    <#FunctionMapConvertToCRS_EPSG_32755_From_7899>  a fnml:FunctionMap ;
+    fnml:functionValue [
+      rr:predicateObjectMap [
+        rr:predicate fno:executes ;
+        rr:objectMap [ rr:constant geogrel:setGeomToCRSForGivenSourceTargetCodes ]
+      ] ;
+
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam ;
+         rr:objectMap [ rml:reference "geom" ]
+      ];
+      
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam2 ;
+        rr:objectMap [ rr:constant "EPSG:7899" ] ]; 
+
+     rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam3 ;
+        rr:objectMap [ rr:constant "EPSG:32755" ] ]
+    ] ;
+
+    rr:termType rr:Literal ;
+    rr:datatype geosparql:wktLiteral .
+
+  <#FunctionMapConvertToCRS_EPSG_4326_From_7899> a fnml:FunctionMap ;
+    fnml:functionValue [
+      rr:predicateObjectMap [
+        rr:predicate fno:executes ;
+        rr:objectMap [ rr:constant geogrel:setGeomToCRSForGivenSourceTargetCodes ]
+      ] ;
+
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam ;
+         rr:objectMap [ rml:reference "geom" ]
+      ];
+      
+      rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam2 ;
+        rr:objectMap [ rr:constant "EPSG:7899" ] ]; 
+
+     rr:predicateObjectMap [
+        rr:predicate geogrel:valueParam3 ;
+        rr:objectMap [ rr:constant "EPSG:4326" ] ]
+    ] ;
+
+    rr:termType rr:Literal ;
+    rr:datatype geosparql:wktLiteral .
