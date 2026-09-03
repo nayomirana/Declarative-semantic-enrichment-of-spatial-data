@@ -15,8 +15,6 @@ The following execution command should specify the relevant paths for the mappin
 java -jar ./target/jarFile -m mappingFile.ttl -o output.ttl
  ```
 
-
-
 #### Example:
 The target location of each data source file in the RML mapping file must be updated to match the correct file paths on your local machine.
 
@@ -35,5 +33,6 @@ The PNKG in ttl file format will be stored in ```./src/PlaceNameKGAus/out/pnkg_o
 ```
 java -jar rmlmapper.jar -m mapping.ttl -f functions.ttl -o output.ttl
 ```
-### Note:
+## Note:
+
 Alternatively, you can use the provided [RMLmapper-java JAR file]() directly instead of installing and compiling the mapper using the steps above.
