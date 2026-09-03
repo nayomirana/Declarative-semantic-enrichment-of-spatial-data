@@ -27,9 +27,9 @@ First, convert the YARRRML mapping into an RML mapping by specifying the appropr
 ```
 node bin/parser.js -i mapping.yml -o out.rml.ttl
 ```
-Then, execute the generated RML mapping with [RMLMapper](https://drive.google.com/drive/u/0/folders/1ub0g8ey82oF-6CAI02qOxmc82B0So-qp):
+Then, execute the generated RML mapping with [RMLMapper](https://drive.google.com/file/d/1wOW44Nlq9NA_ie_twcSx6sEzHPKuc6qs/view?usp=drive_link):
 ```
-java -jar rmlmapper.jar -m out.rml.ttl -o out.ttl
+java -jar rmlmapper-17.0.0-r449-all.jar -m out.rml.ttl -o out.ttl
 ```
 The resulting RDF output will be written to out.ttl.
 
