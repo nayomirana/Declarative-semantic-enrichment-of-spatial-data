@@ -37,7 +37,7 @@ The image below provides an overview of the main classes and object properties d
 
 ## RML mapping and processing
 
-RML mapping rules are written and included in [1](PlaceNameMapping.ttl) and [2](). 
+RML mapping rules are written and included in [1](src/RMLMappings_PNO.ttl) and [2](src/RMLMappings_GNModel.ttl). 
 The following execution command should specify the relevant paths for the mapping and output files:
  ``` 
 java -jar ./target/jarFile -m mappingFile.ttl -o output.ttl
