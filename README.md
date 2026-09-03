@@ -11,4 +11,4 @@ In contrast, declarative mapping languages offer a more systematic alternative t
 This repository contains the  datasets and source code for all three use cases listed above.
 
 ## Acknowledgments
-This declarative semantic enrichment of spatail data was led by Nayomi Ranamuka, with contributions from all of the researchers at the [RMIT Geographic Knowledge Lab](http://gkl.rmit.melbourne/about).
+This work on declarative semantic enrichment of spatial data was developed with contributions from the research team at the [RMIT Geographic Knowledge Lab](http://gkl.rmit.melbourne/about).
