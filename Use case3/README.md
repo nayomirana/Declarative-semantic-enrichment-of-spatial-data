@@ -36,6 +36,7 @@ java -Xms50g -Xmx62g \
   -s turtle \
   -f geofunctions.ttl
 ```
+All four mapping files should be executed sequentially, one after another, to complete the semantic enrichment process.
 
 ## Key resources 
 - **Research Paper:** [Semantic data enrichment for maintenance of foundation spatial data](https://www.sciencedirect.com/science/article/pii/S0198971526000128) - Computers, Environment and Urban Systems, Volume 126, 102410.
