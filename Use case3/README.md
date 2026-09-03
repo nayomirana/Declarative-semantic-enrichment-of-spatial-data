@@ -26,7 +26,7 @@ Before starting the enrichment process, the PostgreSQL database, created using o
 3.	Step 3: Performs the third enrichment step. The generated results must be transferred to the same triple store in GraphDB.
 4.	Step 4: Performs the final enrichment step and stores the resulting triples in the same triple store in GraphDB.
 
-
+In the mapping process, Steps 1 and 3 use functions declared in the [geofunctions.ttl](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/blob/main/Use%20case3/src/GeoGREL/geofunctions.ttl) file. Therefore, this file must be specified in the execution command.
 
 
 
