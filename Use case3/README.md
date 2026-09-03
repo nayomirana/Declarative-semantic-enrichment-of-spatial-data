@@ -28,9 +28,14 @@ Before starting the enrichment process, the PostgreSQL database, created using o
 
 In the mapping process, Steps 1 and 3 use functions declared in the [geofunctions.ttl](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/blob/main/Use%20case3/src/GeoGREL/geofunctions.ttl) file. Therefore, this file must be specified in the execution command.
 
-
-
-
+```
+java -Xms50g -Xmx62g \
+  -jar rmlmapper-17.0.0-r449-all.jar \
+  -m dvmMappingFlow_Step1_2026.ttl \
+  -o dvm1.ttl \
+  -s turtle \
+  -f geofunctions.ttl
+```
 
 ## Key resources 
 - **Research Paper:** [Semantic data enrichment for maintenance of foundation spatial data](https://www.sciencedirect.com/science/article/pii/S0198971526000128) - Computers, Environment and Urban Systems, Volume 126, 102410.
