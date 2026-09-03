@@ -31,5 +31,5 @@ The PNKG in ttl file format will be stored in ```./src/PlaceNameKGAus/out/pnkg_o
 
 ##### If the RML mapping uses custom Java functions, run the RMLMapper with the function definition file using:
 ```
-java -jar rmlmapper.jar -f functions.ttl -m mapping.ttl -o output.ttl -s turtle
+java -jar rmlmapper.jar -m mapping.ttl -f functions.ttl -o output.ttl
 ```
