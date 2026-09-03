@@ -1,0 +1,128 @@
+﻿Metadata,Resource Name:,Title:,Anzlic ID:,Custodian:,Owner:,Jurisdiction:,Abstract:,Search Words:,Purpose:,Geographic Extent Polygon:,Geographic Bounding Box:,Beginning to Ending Date:,Beginning Date:,Ending Date:,Maintainence and Update Frequency:,Stored Data Format:,Available Format(s) Types:,Positional Accuracy:,Attribute Accuracy:,Logical Consistency:,Data Source:,Contact Organisation:,Contact Position:,Address:,Telephone:,Facsimile:,Email Address:,Metadata Date:,Additional Metadata:,Access Constraint:,Country Name:,Locality:,Region:,Dataset,Positional_Acc_Value,Attribute_Acc_Value,Logical_Consistency_Value,Accessibility_Value,IsAuthoritativeData
+Description,V_PAVIC_FLOOD_HISTORY_PUBLICRCEL_MP,Victorian Flood History October 2022 Event Public,,,,,"Polygon features representing the observed, derived or estimated inundation extent for floods that have occurred in Victoria. These are not linked to modelled flood data.
+Confirmed flood observations are derived from the automated and manual processing of data from the sources listed below. Note that while flood observations have manual oversight and corrections during the event, they are based on a point in time and may not necessarily represent the maximum flood extent.
+-	Aerial photography
+-	AIG observation
+-	Air observation
+-	Linescans
+-	GPS
+-	Ground Observer
+-	Satellite imagery interpretations
+
+The derived flood extent is from automated and manual processing of satellite data. This data is usually used to fill in gaps outside of areas covered by confirmed flood observations.
+Note that this flood extent data was prepared by the SCC Mapping Team for operational use only. It may have missing or incomplete data that could lead to gaps in analysis or visualisations. The dataset does not capture the peak flood extent in all areas. The dataset does not capture the extent of flash flooding.
+Past and future layers may be added as the data becomes available. List of events included in Supplemental Information","Environment ,  Inland waters",,,"(141, -34, 147, -37)",2022-10-13 : 2022-12-27,2022-10-13,2022-12-27,Irregular,Shapefile,DIGITAL - All major formats available,The positional accuracy of the dataset varies as it is dependent on the varying positional accuracy of the remote sensed data used in its derivation.,,Not Known,"Data Source: Available remote sensing data at the time of each flood event. Flood extents have been derived from a wide range of sources, including but not limited to electro-optical satellite imagery, synthetic aperture radar satellite imagery, linescans, aerial optical imagery, handheld imagery, aerial observations, and ground-based observations. A combination of both manual feature and automated feature extraction methods were used to derive the flood extents from these sources. Managed by CMAs, VicSES and DEECA",DEECA,,,,,,6/7/2023,"History: Initial release May 2023 - loaded Oct 2022 flood extent across Victoria derived from various datasets available through the State Control Centre.
+22/08/2023 - The Oct 2022 flood extent dataset was updated to improve completeness. The updated version includes observed flood extents both in the proximity of Maribyrnong and to the east of Seymour.",,,,,FLOOD_AUTHORITATIVE,,,,TRUE,TRUE
+Description,HY_WATER_POINT,Vicmap Hydro - Water Point,ANZVI0803002493,,,Victoria,"This layer is part of Vicmap Hydro and contains point features delineating hydrological features. Includes; Rapids, Springs, Waterfalls & Water body points (dams). Attributed for name but necessarliy populated.","Elevation ,  Environment ,  Inland waters ,  Farming ,  Geoscientific information","Vicmap Hydro provides an accurate representation of natural and man made Hydrographic features across Victoria, at a capture scale of 1:25,000.  It is used in a variety of applications, particularly in emergency services, natural resource management, planning and development, and digital map publication.",,"(-34, 150, -39, 141)",1974-01-01 : 1995-01-01,1974-01-01,1995-01-01,Irregular,,All major digital formats,"The planimetric accuracy attainable will be the sum of errors from three sources:the positional accuracy of the source material, errors due to the conversion process, errors due to the manipulation process.  For topographic base derived data this represents an error of 8.3m on the ground for 1:25,000 data. A conservative estimate of 10m for the standard deviation will be used in any data quality information.  Alternate and equal ways of expressing this error are: not more than 10% of well-defined points will be in error by more than 16 m.  The worst case error for the data is +/- 30 m. For vertical positional accuracy of points determined from contours there is an expectation that the elevation accuracy (standard deviation) will be half the value of the contour interval.",The allowable error in attribute accuracy ranges between a 1% allowable error to 5% error.  For this product attribute accuracy ranges between a 1% to 5% error.  For this product attribute accuracy is a measure of the degree to which features and attribute values of spatial objects agree with the information on the source material.,"The allowable error in attribute accuracy ranges between 1% to 5% error.  Logical consistency is a measure of the degree to which data complies with the technical specification.  The test procedures are a mixture of scripts, microstation MGE program and on-screen visual checks.","Dataset Source: The line work and points were derived from the Vicmap Digital Topographic (VDT) map base coordinated by LIG. VDT evolved from Victoria's printed 1:25,000 Topographic Map Series program together with the need to supply a control framework for the creation of the rural Digital Cadastral Mapbase.  The capture scale is 1:25,000 Statewide and the coverage, except for minor border issues is also statewide. Dataset Originality: Primary",DEECA,,,,,,21/2/2020,www.delwp.vic.gov.au/vicmap,CC-BY,,,,HY_WATER_POINT,+/-30,1%-5%,,TRUE,TRUE
+Description,V_PARCEL_MP,Vicmap Property - Parcel Polygon with Parcel Detail,ANZVI0803003298,,,Victoria,"Vicmap Property Simplified Content includes
+      · Parcel and Property Polygons;
+      · Parcel and Property Identifiers - parcel descriptors (including Standard Parcel Identifiers (SPI)), 
+        Council reference numbers;
+      · Registered and proposed (All proposals entered prior to July 2002 are non-polygonal and all 
+        entered post July 2002 are polygonised) parcels;
+      · Crown and Freehold land differentiation;
+      · Cadastral Road Casements;
+      · Easements (Note: all new easements are being captured for the whole State. Previously, only 
+        easements in the metropolitan area were captured. There is no current program to review and 
+        capture missing easements);
+      · Unique Feature Identifiers, date stamps and data quality information.
+Spatial Datasets comprising Vicmap Property Simplified are listed below.  See their metadata entries for more detailed metadata.
+Annotation Text - Vicmap Property (ANNOTATION_TEXT)
+Cadastral Area Boundary - Vicmap Property (CAD_AREA_BDY)
+Centroid - Vicmap Property (CENTROID)
+Aspatial Table - Parcel  Property Table - Vicmap Property (PARCEL_PROPERTY)
+Parcel Map Polygons - Vicmap Property (PARCEL_MP)
+Property Map Polygons - Vicmap Property (PROPERTY_MP)
+Road Centre Line Chain - Vicmap Property (ROAD_CL_CHAIN)","Planning cadastre ,  Environment ,  Boundaries",,,,unknown - now,,,Continual,,All major digital formats,"Vicmap Property is classified as ""BB"" accuracy. That is, 90% of well-defined features are within 1mm (at plot scale) of their true position, eg 1:500 equates to +/- 0.5metre and 1:25,000 equates to +/- 25 metres. Anecdotal evidence suggests that the spatial accuracy of the major part of the data set (at all scales) is frequently better than BB.
+
+Where subdivisions have been submitted in digital form, the ""survey accurate"" data has been used to extend the accuracy of the surrounding detail. This information has not been included in the precision attribute but a proposal is being considered to populate the precision value for every point that describes the cadastral boundaries.
+
+Relative accuracy
+
+No ""shift"" of data as a means of ""cartographic enhancement"" to facilitate presentation has been employed for any real world feature.","For this product, feature and attribute accuracy is a measure of the degree to which the features and attribute values of spatial objects agree with the information on the source material. The allowable error in attribute accuracy ranges between a 1% (for new data additions) to 5% (for pre-maintenance contract data).","Logical consistency is a measure of the degree to which data complies with the technical specification. The allowable error in logical consistency ranges between 3% (new data additions) to 5% (pre-maintenance contract data). The test procedures are a mixture of software scripts and on-screen, visual checks.","	
+Dataset Source: Vicmap Property is derived from what were originally two logically and physically separated databases. Melbourne Water created a digital data set covering the Melbourne Metropolitan area.  Survey and Mapping Victoria created a similar data set covering rural Victoria. Both data sets consisted of  ""spaghetti"" line work (that is, unintelligent data).   
+
+Neither data set was suited to GIS applications, as neither was ""clean"" in terms of line work, topologically-structured, or held any significant degree of ""intelligence"". The main level of ""intelligence"" linked to the data was through line style, colour, level, etc, and a feature code, data link which defined the scale origins and type of boundary represented.
+
+The Metropolitan Base was created as a reference framework for Melbourne Water's assets and reflected Melbourne Water's business needs by holding subdivisions at both the proposed and approved stages. It focused on rateable properties and placed less emphasis on the cadastral changes that did not relate to 'property
+
+Survey and Mapping's rural data set reflected a more basic view of land administration, comprising transferable parcels of land. This project entailed a complete re-compilation of the source data, being original Parish plans, registered plans of subdivision and VicRoads survey plans. The process required the production of pencil-plot compilations at a chosen scale of 1:2,500 over towns and built- up areas (using survey-acquired control) and 1:25,000 for the balance of the state (using existing standard Vicmap 1:25,000 topographic mapping as control).  In a small number of areas, where existing base mapping could be used or where compilation at 1:25,000 was impractical (eg along the Murray River and parts of South Gippsland), mapping at 1:10,000 was produced.  Where other authorities' (Local Government or Water Boards) mapping at similar or better scale and accuracy was found, it was adopted or upgraded and used in preference to producing new compilations
+
+Both data sets were eventually brought under control of a single authority, that of the Office of Geographic Data Co-ordination (OGDC). Key challenges for OGDC were to provide a common structure to the data and to standardise the maintenance.  Government restructures have since seen administration changes through Geographic Data Victoria (GDV) to Land Victoria, but management of the data has remained stable.  Throughout this time, significant changes to the data (its structure, quality, content and maintenance) have occurred, one of the most noteworthy being the out-sourcing of data maintenance to a non-government agency.  Whilst full control and administration of the data remains with Information Services Branch (ISB), Vicmap Property is now maintained by an external provider.
+
+Other key changes to the property map base have included: 
+· amalgamation of the two map bases; 
+· translation into an Oracle® data base environment; 
+· line cleaning and topological; 
+· the identification and rectification of many ""gaps"" found in the data (for example, missing survey plan notings, and incomplete identification of Crown land).
+· Restructuring of the data to correctly map real world parcel and property relationships
+
+Improvements in the data continue, with improved input from local government and other key sources allowing faster turn-around of update information and added levels of attribution, for example Council property reference numbers.
+
+
+
+Dataset Originality: Primary",DEECA,,,,,,30/3/2023,"History: 
+Metropolitan Digital capture commenced in 1984 and initial coverage was obtained in 1990.
+
+Digital capture of the balance of Victoria, beyond the Metropolitan area, started in 1983 with Statewide coverage being obtained  in December 1994.
+
+Maintenance Standardised Statewide December 1996
+
+Linecleaning Commenced January 1997 and completed June 1997
+
+Data Migrated into single GIS structure  commencing June 1997 and completed Dec 1997.
+
+Model Restructured to correctly reflect real world parcel / property relationships (1999 - 2002)
+                     - Client consultation and education (1999 - 2001)
+                     - Model Development (June 2001 - April 2002)
+                     - Migration to the new model (May 2002 - Nov 2002)
+
+
+
+Current Design Issues: Property View Creation. 
+
+Work is being undertaken to correctly represent the property view of the State. The view will be created on an LGA basis and the initial councils to have the property view created will be the Rural LGA's.
+
+The Standard Parcel Identifier (SPI) Project: 
+
+The initial phase of providing unique identifiers to all parcels with identifiers common to more then one parcel (eg ""Part"" parcels) has been incorporated into the Vicmap Property. The next phase of this project is to verify every parcel identifier held in Vicmap Property against the Victorian On-line Titles System (VOTS). Suspect and duplicate SPI's are to be flagged, investigated and corrected in Vicmap Property. The project will process the SPI's on an LGA basis and will initially concentrate on achieving a 95% matching rate for Vicmap Property within VOTS for LGA's identified by Key Land Victoria Projects.
+
+Crown Land Status On-line: 
+
+Vicmap Property will provide the underlying map base for the Crown Land Status On-line project. A key outcome of this project will be verification of existing Crown land data and the accelerated inclusion of new/changed data.
+
+Incorporation of single-storey strata plans:
+
+A significant number of single level strata plans have been converted from a subdivision footprint to individual lot representation. Whilst there isn't a specific project to upgrade these plans, the internal lots are being included as they are being identified.
+
+Future Design Issues: Vicmap Property Precision: 
+
+A proposal is currently under consideration, to populate the precision of each point in the mapbase and to assign the survey accurate coordinate to all points created from digital input of survey geometry. This will enable Land Victoria to provide more accurate statistical information regarding the precision of every point within the mapbase.
+
+Streamlined Planning via Electronic Applications and Referrals (SPEAR): 
+
+SPEAR aims to improve land development processes in Victoria using the Internet. SPEAR will streamline planning and subdivision approvals by enabling electronic lodgment, referral and processing of applications. Mapbase benefits to be gained by this application include:
+              · the supply of survey geometry to improve the spatial accuracy
+              · early access to proposals
+              · subdivision version control management
+
+Fulfilment of strategic aims: 
+
+         Integration with other Vicmap Digital data sets (Roads and Topographic): 
+               As part of Land Victoria's spatial data framework strategy, work will continue to bring 
+               all Vicmap products into closer alignment, particularly in terms of vertical topology.
+
+'Single look and feel' text annotation: 
+
+Work is being undertaken to achieve a consistent presentation to annotation, regardless of its source and source scale. 
+
+
+
+Related Documents: Product Description Vicmap Property Version 5.1. - The document provides details about Vicmap Property including, Data Content, development, quality & application, Metadata, pricing, access and contact information. 
+URL www.land.vic.gov.au\spatial
+
+https://www.land.vic.gov.au/maps-and-spatial/spatial-data/vicmap-catalogue",CC-BY,,,,V_PARCEL_MP,+/-25,1%-5%,3%-5%,TRUE,TRUE
+Description,HY_WATER_AREA_POLYGON,Vicmap Hydro - Water Polygon,ANZVI0803002491,,,Victoria,"This layer is part of Vicmap Hydro and contains polygon features delineating hydrological features. Includes; Lakes, Flats (subject to inundation),  Wetlands, Pondages (saltpan & sewrage), Watercourse  Areas, Rapids & Waterfalls Attributed for name. Centroid layer also available.","Elevation ,  Inland waters ,  Environment ,  Farming ,  Geoscientific information","Vicmap Hydro provides an accurate representation of natural and man made Hydrographic features across Victoria, at a capture scale of 1:25,000.  It is used in a variety of applications, particularly in emergency services, natural resource management, planning and development, and digital map publication.",,"(-34, 150, -39, 141)",1974-01-01 : 1995-01-01,1974-01-01,1995-01-01,Irregular,,All major digital formats,"The planimetric accuracy attainable will be the sum of errors from three sources:the positional accuracy of the source material, errors due to the conversion process, errors due to the manipulation process.  For topographic base derived data this represents an error of 8.3m on the ground for 1:25,000 data. A conservative estimate of 10m for the standard deviation will be used in any data quality information.  Alternate and equal ways of expressing this error are: not more than 10% of well-defined points will be in error by more than 16 m.  The worst case error for the data is +/- 30 m. For vertical positional accuracy of points determined from contours there is an expectation that the elevation accuracy (standard deviation) will be half the value of the contour interval.",The allowable error in attribute accuracy ranges between a 1% allowable error to 5% error.  For this product attribute accuracy ranges between a 1% to 5% error.  For this product attribute accuracy is a measure of the degree to which features and attribute values of spatial objects agree with the information on the source material.,"The allowable error in attribute accuracy ranges between 1% to 5% error.  Logical consistency is a measure of the degree to which data complies with the technical specification.  The test procedures are a mixture of scripts, microstation MGE program and on-screen visual checks.","Dataset Source: The line work and points were derived from the Vicmap Digital Topographic (VDT) map base coordinated by LIG. VDT evolved from Victoria's printed 1:25,000 Topographic Map Series program together with the need to supply a control framework for the creation of the rural Digital Cadastral Mapbase.  The capture scale is 1:25,000 Statewide and the coverage, except for minor border issues is also statewide. Dataset Originality: Primary",DEECA,,,,,,21/2/2020,www.delwp.vic.gov.au/vicmap,CC-BY,,,,HY_WATER_AREA_POLYGON,+/-30,1%-5%,,TRUE,TRUE
+Description,HY_WATER_AREA_ML,HY_WATER_AREA_ML,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,HY_WATER_AREA_ML,+/-50,,,TRUE,FALSE
+Description,HY_WATER_AREA_LIDAR,HY_WATER_AREA_LIDAR,,,,,,,,,,,,,,,,,,,,organization_Woolpert,,"address_Suite3,Level_23,6_O’Connell_Street_Sydney,NSW_2000",61288791600,,,,https://aamgroup.com/contact-us/,,Australia,,,HY_WATER_AREA_LIDAR,2m,,,TRUE,FALSE
+Description,FLOOD_NON_AUTHORITATIVE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FLOOD_NON_AUTHORITATIVE,,,,TRUE,FALSE
