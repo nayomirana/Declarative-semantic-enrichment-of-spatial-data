@@ -3,7 +3,7 @@ This repository contains source code and datasets for transparent and reusable s
 
 ## Repository structure
 
-- **data**: Provides links to the Victorian State Hydrology Foundation spatial datasets used in this use case.
+- **data**: Provides links to download the Victorian State Hydrology Foundation spatial datasets used in this use case.
 - **images**: Contains diagrams, and other visual resources associated with the use case.
 - **src**: Contains the RML mapping rules used to transform and semantically enrich the Victorian hydrology spatial data.
 - **results**: Contains the generated knowledge graph
