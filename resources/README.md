@@ -27,3 +27,9 @@ Example:
 java -jar ./lib/rmlmapper-17.0.0-r449-all.jar -m ./src/PlaceNameKGAus/RML/PlaceNameMapping.ttl -o ./src/PlaceNameKGAus/out/pnkg_out.ttl
 ```
 The PNKG in ttl file format will be stored in ```./src/PlaceNameKGAus/out/pnkg_out.ttl```
+
+
+##### If the RML mapping uses custom Java functions, run the RMLMapper with the function definition file using:
+```
+java -jar rmlmapper.jar -f functions.ttl -m mapping.ttl -o output.ttl -s turtle
+```
