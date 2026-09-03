@@ -61,7 +61,7 @@ geogrel:setGeometryToCRSForGivenCode a fno:Function ;
 
 grelm:javaString
     a                  fnoi:JavaClass ;
-    doap:download-page "/Users/nayomiranamuka/Documents/GITHUB/rmlmapper-java/src/main/java/GeoProcessor.jar" ;
+    doap:download-page "../lib/GeoProcessor.jar" ;
     fnoi:class-name    "GeoProcessor" .
 
 grelm:setGeometryToCRSForGivenCode
