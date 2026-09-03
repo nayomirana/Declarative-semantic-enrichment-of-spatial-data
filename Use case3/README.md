@@ -15,6 +15,15 @@ This repository contains source code and datasets for transparent and reusable s
   <strong> Figure : Four-step semantic enrichment process for Dynamic Vicmap hydrological spatial data</strong>
 </p>
 
+## RML mapping and processing
+
+RML mapping rules are written and included in [1](src/dvmMappingFlow_Step1_2026.ttl),[2](src/dvmMappingFlow_Step2_2026.ttl),[3](dvmMappingFlow_Step3_2026.ttl) and [4](dvmMappingFlow_Step4_2026.ttl).
+
+
+
+
+
+
 ## Key resources 
 - **Research Paper:** [Semantic data enrichment for maintenance of foundation spatial data](https://www.sciencedirect.com/science/article/pii/S0198971526000128) - Computers, Environment and Urban Systems, Volume 126, 102410.
 - [SMURF Ontology](https://rmit-gkl.github.io/SMURF/smurf.html)
