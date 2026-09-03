@@ -3,10 +3,10 @@ This repository contains source code and datasets for transparent and reusable s
 
 ## Repository structure
 
-- **data**: Folder with data from official gazetteers and place names.
-- **images**: Project documentation and examples. 
-- **src**: RML mapping rules for enriching Place Name Data.
-- **results**: Knowledge graph
+- **data**: Provides links to the Victorian State Hydrology Foundation spatial datasets used in this use case.
+- **images**: Contains diagrams, and other visual resources associated with the use case.
+- **src**: Contains the RML mapping rules used to transform and semantically enrich the Victorian hydrology spatial data.
+- **results**: Contains the generated knowledge graph
 
 ## Semantic enrichment process
 <p align="center">
