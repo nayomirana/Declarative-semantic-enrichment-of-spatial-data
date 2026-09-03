@@ -8,6 +8,10 @@
 #### Installation steps 
 * Clone the application from the [GitHub repository](https://github.com/RMLio/rmlmapper-java).  
 * Build the application using the given command in the ReadMe file  (``` mvn install -DskipTests=true```  or  ```mvn test Dtest=!Mapper_OracleDB_Test```).
+
+### Note:
+Alternatively, you can use the provided [RMLmapper-java JAR file](https://drive.google.com/file/d/1wOW44Nlq9NA_ie_twcSx6sEzHPKuc6qs/view?usp=drive_link) to execute each commands directly instead of installing and compiling the mapper using the steps above.
+
   
 #### Execution
 The following execution command should specify the relevant paths for the mapping and output files:
@@ -33,6 +37,3 @@ The PNKG in ttl file format will be stored in ```./src/PlaceNameKGAus/out/pnkg_o
 ```
 java -jar rmlmapper.jar -m mapping.ttl -f functions.ttl -o output.ttl
 ```
-## Note:
-
-Alternatively, you can use the provided [RMLmapper-java JAR file]() directly instead of installing and compiling the mapper using the steps above.
