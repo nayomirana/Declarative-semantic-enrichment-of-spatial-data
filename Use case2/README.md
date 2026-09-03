@@ -7,9 +7,9 @@ The approach uses [RML (RDF Mapping Language)](https://rml.io/specs/rml/) to con
 ## Repository structure
 
 - **data**: Folder with data from official gazetteers and place names.
-- **images**: Project documentation and examples. 
+- **images**: Contains diagrams, and other visual resources associated with the use case.
 - **src**: RML mapping rules for enriching Place Name Data.
-- **results**: Place name knowledge graphs
+- **results**: Contains the generated knowledge graphs
 
 ## Data
 
