@@ -35,5 +35,5 @@ The PNKG in ttl file format will be stored in ```./src/PlaceNameKGAus/out/pnkg_o
 ```
 java -jar rmlmapper.jar -m mapping.ttl -f functions.ttl -o output.ttl
 ```
-#### Note:
+### Note:
 Alternatively, you can use the provided [RMLmapper-java JAR file]() directly instead of installing and compiling the mapper using the steps above.
