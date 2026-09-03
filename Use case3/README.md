@@ -17,7 +17,7 @@ This repository contains source code and datasets for transparent and reusable s
 
 ## RML mapping and processing
 
-The RML mapping rules for the four-step semantic enrichment process are provided in [1](src/dvmMappingFlow_Step1_2026.ttl), [2](src/dvmMappingFlow_Step2_2026.ttl), [3](dvmMappingFlow_Step3_2026.ttl) and [4](dvmMappingFlow_Step4_2026.ttl).
+The RML mapping rules for the four-step semantic enrichment process are provided in [1](src/dvmMappingFlow_Step1_2026.ttl), [2](src/dvmMappingFlow_Step2_2026.ttl), [3](src/dvmMappingFlow_Step3_2026.ttl) and [4](src/dvmMappingFlow_Step4_2026.ttl).
 
 
 
