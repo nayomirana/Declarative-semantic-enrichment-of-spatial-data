@@ -19,6 +19,14 @@ This repository contains source code and datasets for transparent and reusable s
 
 The RML mapping rules for the four-step semantic enrichment process are provided in [1](src/dvmMappingFlow_Step1_2026.ttl), [2](src/dvmMappingFlow_Step2_2026.ttl), [3](src/dvmMappingFlow_Step3_2026.ttl) and [4](src/dvmMappingFlow_Step4_2026.ttl).
 
+Before starting the enrichment process, the PostgreSQL database, created using our dataset, and the GraphDB triple store were set up on an AWS EC2 r6i.2xlarge instance.
+
+1.	Step 1: Accesses data from the PostgreSQL database (_dvm_). The generated RDF triples must be transferred to the knowledge graph stored in the _dvicmap_ triple store in GraphDB.
+2.	Step 2: Reads data from same triple store, and performs the second enrichment step, and writes the resulting triples back to the same triple store in GraphDB.
+3.	Step 3: Performs the third enrichment step. The generated results must be transferred to the same triple store in GraphDB.
+4.	Step 4: Performs the final enrichment step and stores the resulting triples in the same triple store in GraphDB.
+
+
 
 
 
