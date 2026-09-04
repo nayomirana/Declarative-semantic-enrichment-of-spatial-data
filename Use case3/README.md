@@ -22,9 +22,16 @@ The RML mapping rules for the four-step semantic enrichment process are provided
 Before starting the enrichment process, the PostgreSQL database, created using our [dataset](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/tree/main/Use%20case3/data), and the GraphDB triple store were set up on an _AWS EC2 r6i.2xlarge_ instance.
 
 1.	Step 1: Accesses data from the PostgreSQL database (_dvm_). The generated RDF triples must be transferred to the knowledge graph stored in the _dvicmap_ triple store in GraphDB.
-2.	Step 2: Reads data from same triple store, and performs the second enrichment step, and writes the resulting triples back to the same triple store in GraphDB.
-3.	Step 3: Performs the third enrichment step. The generated results must be transferred to the same triple store in GraphDB.
-4.	Step 4: Performs the final enrichment step and stores the resulting triples in the same triple store in GraphDB.
+   After loading the RDF data into GraphDB, enable GeoSPARQL spatial indexing by executing the following SPARQL query in the dvicmap repository:
+   ```
+  PREFIX geosparql: <http://www.ontotext.com/plugins/geosparql#>
+  INSERT DATA {
+    [] geosparql:enabled "true" .
+  }
+   ```
+3.	Step 2: Reads data from same triple store, and performs the second enrichment step, and writes the resulting triples back to the same triple store in GraphDB.
+4.	Step 3: Performs the third enrichment step. The generated results must be transferred to the same triple store in GraphDB.
+5.	Step 4: Performs the final enrichment step and stores the resulting triples in the same triple store in GraphDB.
 
 In the mapping process, Steps 1 and 3 use functions declared in the [geofunctions.ttl](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/blob/main/Use%20case3/src/GeoGREL/geofunctions.ttl) file. Therefore, this file must be specified in the execution command.
 
