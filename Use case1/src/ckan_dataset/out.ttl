@@ -1,0 +1,31 @@
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://purl.org/dc/terms/creator> <http://www.example.com/creator> .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://purl.org/dc/terms/description> "During the period 1982-86 a team of geologists from the British Geological Survey ..." .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://purl.org/dc/terms/identifier> "2988a6aa-2802-4f32-b846-d4520c79c4b7" .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://purl.org/dc/terms/identifier> "9df8df51-63db-37a8-e044-0003ba9b0d98" .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://purl.org/dc/terms/issued> "2012-05-10"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://purl.org/dc/terms/language> "en,es,ca" .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://purl.org/dc/terms/modified> "2012-05-10T21:04"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://purl.org/dc/terms/publisher> <http://www.example.com/publisher> .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://purl.org/dc/terms/title> "Zimbabwe Regional Geochemical Survey." .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Dataset> .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://www.w3.org/ns/dcat#distribution> <http://www.example.com/distribution/$%7Bid%7D> .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://www.w3.org/ns/dcat#keyword> "exploration" .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://www.w3.org/ns/dcat#keyword> "geochemical-exploration" .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://www.w3.org/ns/dcat#keyword> "geochemical-maps" .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://www.w3.org/ns/dcat#keyword> "geochemistry" .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://www.w3.org/ns/dcat#keyword> "geology" .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://www.w3.org/ns/dcat#keyword> "nercddc" .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://www.w3.org/ns/dcat#keyword> "regional-geology" .
+<http://www.example.com/catalog/datasets/2988a6aa-2802-4f32-b846-d4520c79c4b7> <http://www.w3.org/ns/dcat#landingPage> <http://some.source.url.com> .
+<http://www.example.com/creator> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Agent> .
+<http://www.example.com/creator> <http://xmlns.com/foaf/0.1/mbox> "johndoe@example.com" .
+<http://www.example.com/creator> <http://xmlns.com/foaf/0.1/name> "John Doe" .
+<http://www.example.com/distribution/$%7Bid%7D> <http://purl.org/dc/terms/description> "Resource locator" .
+<http://www.example.com/distribution/$%7Bid%7D> <http://purl.org/dc/terms/format> "text/html" .
+<http://www.example.com/distribution/$%7Bid%7D> <http://purl.org/dc/terms/identifier> "b1e0b666-b7f4-44c1-9b16-56c78e86b66a" .
+<http://www.example.com/distribution/$%7Bid%7D> <http://purl.org/dc/terms/title> "" .
+<http://www.example.com/distribution/$%7Bid%7D> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Distribution> .
+<http://www.example.com/distribution/$%7Bid%7D> <http://www.w3.org/ns/dcat#accessURL> <http://www.bgs.ac.uk/gbase/geochemcd/home.html> .
+<http://www.example.com/publisher> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Agent> .
+<http://www.example.com/publisher> <http://xmlns.com/foaf/0.1/mbox> "info@gs.org" .
+<http://www.example.com/publisher> <http://xmlns.com/foaf/0.1/name> "Geological Society" .
