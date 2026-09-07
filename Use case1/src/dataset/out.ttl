@@ -1,0 +1,31 @@
+_:genid300 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Agent> .
+_:genid300 <http://xmlns.com/foaf/0.1/mbox> "info@gs.org" .
+_:genid300 <http://xmlns.com/foaf/0.1/name> "Geological Society" .
+_:genid311 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Agent> .
+_:genid311 <http://xmlns.com/foaf/0.1/mbox> "johndoe@example.com" .
+_:genid311 <http://xmlns.com/foaf/0.1/name> "John Doe" .
+_:genid322 <http://purl.org/dc/terms/description> "Resource locator" .
+_:genid322 <http://purl.org/dc/terms/format> "text/html" .
+_:genid322 <http://purl.org/dc/terms/title> "" .
+_:genid322 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Distribution> .
+_:genid322 <http://www.w3.org/ns/dcat#accessURL> <http://www.bgs.ac.uk/gbase/geochemcd/home.html> .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://purl.org/dc/terms/creator> _:genid311 .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://purl.org/dc/terms/description> "During the period 1982-86 a team of geologists from the British Geological Survey ..."@en .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://purl.org/dc/terms/identifier> "9df8df51-63db-37a8-e044-0003ba9b0d98" .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://purl.org/dc/terms/issued> "2012-05-10"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/ca> .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/en> .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/es> .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://purl.org/dc/terms/modified> "2012-05-10T21:04"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://purl.org/dc/terms/publisher> _:genid300 .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://purl.org/dc/terms/title> "Zimbabwe Regional Geochemical Survey."@en .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Dataset> .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://www.w3.org/ns/dcat#distribution> _:genid322 .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://www.w3.org/ns/dcat#keyword> "exploration" .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://www.w3.org/ns/dcat#keyword> "geochemical-exploration" .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://www.w3.org/ns/dcat#keyword> "geochemical-maps" .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://www.w3.org/ns/dcat#keyword> "geochemistry" .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://www.w3.org/ns/dcat#keyword> "geology" .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://www.w3.org/ns/dcat#keyword> "nercddc" .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://www.w3.org/ns/dcat#keyword> "regional-geology" .
+<http://www.example.com/dataset/Zimbabwe%20Regional%20Geochemical%20Survey.> <http://www.w3.org/ns/dcat#landingPage> <http://some.source.url.com> .
