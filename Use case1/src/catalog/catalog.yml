@@ -1,0 +1,86 @@
+prefixes:
+  ex: "http://www.example.com/"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcat: "http://www.w3.org/ns/dcat#"
+  dcterms: "http://purl.org/dc/terms/"
+  foaf: "http://xmlns.com/foaf/0.1/"
+  idlab-fn: "http://example.com/idlab/function/"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"
+
+
+sources:
+  catalog_source:
+    [catalog.json~jsonpath, "$"]
+  dataset_source:
+    [catalog.json~jsonpath, "$.dataset[*]"]
+  publisher_source:
+    [catalog.json~jsonpath, "$.dataset[*].publisher"]
+  distribution_source:
+    [catalog.json~jsonpath, "$.dataset[*].distribution[*]"]
+
+
+mappings:
+  catalog:
+    sources: catalog_source
+    s: ex:catalog/$(title)
+    po:
+      - [a, dcat:Catalog]
+      - [dcterms:title, $(title)]
+      - [dcterms:description, $(description)]
+      - [foaf:homepage, $(homepage)]
+      - [dcterms:issued, $(issued), xsd:dateTime]
+      - [dcterms:modified, $(modified), xsd:dateTime]
+      - [dcterms:language, "http://id.loc.gov/vocabulary/iso639-1/$(language)~iri"]
+      - [dcterms:license, $(license)]
+      - p: dcat:dataset
+        o:
+          - mapping: dataset
+
+  
+  dataset:
+    sources: dataset_source
+    s: ex:catalog/datasets/$(title)
+    po:
+      - [a, dcat:Dataset]
+      - [dcterms:title, $(title)]
+      - [dcterms:description, $(description)]
+      - [dcterms:identifier, $(identifier)]
+      - [dcterms:issued, $(issued), xsd:dateTime]
+      - [dcterms:modified, $(modified), xsd:dateTime]
+      - [dcat:landingPage, $(landingPage)~iri]
+      - p: dcterms:publisher
+        o:
+           mapping: publisher
+           condition:
+              function: equal
+              parameters:
+                - [str1, $(publisher.name)]
+                - [str2, $(name)]
+      - [dcat:keyword, "$(keyword[*])"]
+      - [dcterms:language, "http://id.loc.gov/vocabulary/iso639-1/$(language[*])~iri"]
+
+      - p: dcat:distribution
+        o: "http://www.example.com/distribution/$(distribution[*].title)~iri"
+
+  publisher:
+    sources: publisher_source
+    s: null
+    po:
+      - [a, foaf:Agent] 
+      - [foaf:name, $(name)]
+      - [foaf:mbox, $(mbox)]
+
+  distribution:
+    sources: distribution_source
+    s: ex:distribution/$(title) #Doesn't exist unique id
+    po:
+      - [a, dcat:Distribution]
+      - [dcat:accessURL, $(accessURL)~iri]
+      - [dcat:byteSize, $(byteSize)]
+      - [dcterms:description, $(description)]
+      - [dcat:downloadURL, $(downloadURL)~iri]
+      - [dcterms:format, $(format)]
+      - [dcterms:issued, $(issued), xsd:date]
+      - [dcterms:license, $(license)]
+      - [dcterms:modified, $(modified), xsd:date]
+      - [dcterms:title, $(title)]     
