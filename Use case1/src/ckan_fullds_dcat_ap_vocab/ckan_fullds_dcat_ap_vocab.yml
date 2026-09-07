@@ -1,0 +1,204 @@
+prefixes:
+  ex: "http://www.example.com/"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcat: "http://www.w3.org/ns/dcat#"
+  dcterms: "http://purl.org/dc/terms/"
+  foaf: "http://xmlns.com/foaf/0.1/"
+  adms: "https://www.w3.org/ns/adms#"
+  owl: "http://www.w3.org/2002/07/owl#"
+  cnt: "http://www.w3.org/2008/content#"
+  spdx: "http://spdx.org/rdf/terms#"
+  dcatap: "http://data.europa.eu/r5r/"
+  locn: "http://www.w3.org/ns/locn#"
+  geosparql: "http://www.opengis.net/ont/geosparql#"
+  skos: "http://www.w3.org/2004/02/skos/core#"
+
+
+sources:
+  dataset_source:
+    [ckan_fullds_dcat_ap_vocab.json~jsonpath, "$"]
+  contact_source:
+    [ckan_fullds_dcat_ap_vocab.json~jsonpath, "$.contact[*]"]
+  creator_source:
+    [ckan_fullds_dcat_ap_vocab.json~jsonpath, "$.creator[*]"]
+  publisher_source:
+    [ckan_fullds_dcat_ap_vocab.json~jsonpath, "$.publisher[*]"]
+  temporal_source:
+    [ckan_fullds_dcat_ap_vocab.json~jsonpath, "$.temporal_coverage[*]"]
+  spatial_coverage_source:
+    [ckan_fullds_dcat_ap_vocab.json~jsonpath, "$.spatial_coverage[*]"]
+  qualified_relation_source:
+    [ckan_fullds_dcat_ap_vocab.json~jsonpath, " $.qualified_relation[*]"]
+  distribution_source:
+    [ckan_fullds_dcat_ap_vocab.json~jsonpath, "$.resources[*]"]
+  access_service_source:
+    [ckan_fullds_dcat_ap_vocab.json~jsonpath, "$.resources[*].access_services[*]"]
+  service_dataset_source:
+    [ckan_fullds_dcat_ap_vocab.json~jsonpath, "$.resources[*].access_services[*]"]
+
+
+mappings:
+  dataset:
+    sources: dataset_source
+    s: ex:dataset/$(title)
+    po:
+      - [a, dcat:Dataset]
+      - [dcterms:title, $(title)] 
+      - [dcterms:description, $(notes)]
+      - [dcat:landingPage, $(url)~iri]
+      - [owl:versionInfo, $(version)]
+      - [dcat:keyword, "$(tags[*].name)"]
+      - [dcterms:issued, $(issued), xsd:date]
+      - [dcterms:modified, $(modified), xsd:date]
+      - [dcterms:identifier, $(identifier)]
+      - [dcterms:accrualPeriodicity, $(frequency)~iri]
+      - [dcterms:provenance, $(provenance)]
+      - [dcterms:type, $(dcat_type)]
+      - [adms:versionNotes, $(version_notes)]
+      - [dcterms:accessRights, $(access_rights)~iri]
+      - [adms:identifier, "$(alternate_identifier[*])"]
+      - [dcat:theme, "$(theme[*])"]
+      - [dcterms:language, "$(language[*])"]
+      - [foaf:page, "$(documentation[*])~iri"]
+      - [dcterms:conformsTo, "$(conforms_to[*])"]
+      - [dcterms:isReferencedBy, "$(is_referenced_by[*])"]
+      - [dcatap:applicableLegislation, "$(applicable_legislation[*])"] ### https://semiceu.github.io/DCAT-AP/releases/3.0.0/
+      - p: dcat:contactPoint
+        o:
+          - mapping: contact
+
+      - p: dcterms:creator
+        o:
+          - mapping: creator
+
+      - p: dcterms:publisher
+        o:
+          - mapping: publisher
+
+      - p: dcterms:temporal
+        o:
+          - mapping: temporal
+
+      - [dcat:temporalResolution, $(temporal_resolution), xsd:duration]
+      - p: dcterms:spatial
+        o:
+          - mapping: spatialCoverage
+
+      - [dcat:spatialResolutionInMeters, $(spatial_resolution_in_meters) ]
+      - p: dcat:qualifiedRelation
+        o:
+          - mapping: qualifiedRelation
+
+      - p: dcat:distribution
+        o:
+          - mapping: distribution
+
+
+  contact:
+    sources: contact_source
+    s: null
+    po:
+      - [a, vcard:Kind]
+      - [vcard:fn, $(name)]
+      - [vcard:hasEmail, $(email)]
+
+  creator:
+    sources: creator_source
+    s: null
+    po:
+      - [a, foaf:Agent]
+      - [foaf:name, $(name)]
+      - [foaf:mbox, $(email)]
+      - [foaf:homepage, $(url)~iri]
+      
+  publisher:
+    sources: publisher_source
+    s: null
+    po:
+      - [a, foaf:Agent]
+      - [foaf:name, $(name)]
+      - [foaf:mbox, $(email)]
+      - [foaf:homepage, $(url)~iri]
+      - [dcterms:type, $(type)]
+
+  temporal:
+    sources: temporal_source
+    s: null
+    po:
+      - [a, dcterms:PeriodOfTime]
+      - [dcat:startDate, $(start), xsd:date]
+      - [dcat:endDate, $(end), xsd:date]
+
+
+  spatialCoverage:
+    sources: spatial_coverage_source
+    s: null
+    po:
+      - [a, dcterms:Location]
+      - [locn:geometry, $(geom), https://www.iana.org/assignments/media-types/application/vnd.geo+json]
+      - [skos:prefLabel, $(text)]
+      - [dcat:bbox, $(bbox), geosparql:geoJSONLiteral]
+      - [dcat:centriod, $(centroid), geosparql:geoJSONLiteral]
+
+
+  qualifiedRelation:
+    sources: qualified_relation_source
+    s: null
+    po:
+      - [a, dcat:Relationship]
+      - [dcterms:relation, $(relation)]
+      - [dcat:hadRole, $(role)]  
+
+
+  distribution:
+    sources: distribution_source
+    s: ex:distribution/$(name) 
+    po:
+      - [a, dcat:Distribution]
+      - [dcterms:title, $(name)]  
+      - [dcterms:description, $(description)]
+      - [dcat:accessURL, $(url)~iri]
+      - [dcterms:format, $(format)]
+      - [dcat:mediaType, $(mimetype)]
+      - [dcatap:availability, $(availability)]
+      - [dcat:compressFormat, $(compress_format)]
+      - [dcat:packageFormat, $(package_format)]
+      - [dcat:byteSize, $(size)]
+      - [spdx:checksum, $(hash)]
+      - [spdx:algorithm, $(hash_algorithm)]
+      - [adms:status, $(status)]
+      - [dcat:accessURL, $(access_url)~iri]
+      - [dcat:downloadURL, $(download_url)~iri]
+      - [dcterms:issued, $(issued), xsd:dateTime]
+      - [dcterms:modified, $(modified), xsd:dateTime]
+      - [dcat:temporalResolution, $(temporal_resolution), xsd:duration]
+      - [dcat:spatialResolutionInMeters, $(spatial_resolution_in_meters) ]
+      - [dcterms:license, $(license)]
+      - [dcterms:rights, $(rights)]
+      - [dcterms:conformsTo, "$(conforms_to[*])"]
+      - [dcterms:language, "$(language[*])~iri"]
+      - p: dcat:accessService
+        o:
+          - mapping: accessService
+
+
+  accessService:
+    sources: access_service_source
+    s: ex:dataservice/$(title) 
+    po:
+      - [a, dcat:DataService]
+      - [dcterms:title, $(title)]  
+      - [dcat:endpointDescription, $(endpoint_description)]
+      - [dcat:endpointURL, "$(endpoint_url[*])~iri"]
+      # - [dcat:servesDataset, "$(serves_dataset[*])~iri", dcat:Dataset]
+      - p: dcat:servesDataset
+        o:
+          - mapping: servesDataset
+
+
+  servesDataset:
+    sources: service_dataset_source
+    s: ex:dataservice/servesDataset/$(title)
+    po:
+      - [a, dcat:Dataset]
+      - [dcterms:identifier, "$(serves_dataset[*])"]
