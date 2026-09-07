@@ -1,0 +1,56 @@
+_:genid300 <http://purl.org/dc/terms/identifier> "custom-creator-id" .
+_:genid300 <http://purl.org/dc/terms/identifier> "http://example.org/creator-id" .
+_:genid300 <http://purl.org/dc/terms/type> "person" .
+_:genid300 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Agent> .
+_:genid300 <http://xmlns.com/foaf/0.1/homepage> "https://example.org" .
+_:genid300 <http://xmlns.com/foaf/0.1/mbox> "creator@example.org" .
+_:genid300 <http://xmlns.com/foaf/0.1/name> "Test Creator" .
+_:genid311 <http://purl.org/dc/terms/identifier> "custom-publisher-id" .
+_:genid311 <http://purl.org/dc/terms/identifier> "http://example.org/publisher-id" .
+_:genid311 <http://purl.org/dc/terms/type> "person" .
+_:genid311 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Agent> .
+_:genid311 <http://xmlns.com/foaf/0.1/homepage> "https://example.org" .
+_:genid311 <http://xmlns.com/foaf/0.1/mbox> "publisher@example.org" .
+_:genid311 <http://xmlns.com/foaf/0.1/name> "Test Publisher" .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://purl.org/dc/terms/creator> _:genid300 .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://purl.org/dc/terms/description> "Lorem ipsum"@en .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://purl.org/dc/terms/identifier> "05469327-3d64-4e54-a23b-e97e0a0b9c81" .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://purl.org/dc/terms/issued> "2024-05-01"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://purl.org/dc/terms/issued> "2024-05-02"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/ca> .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/en> .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/es> .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://purl.org/dc/terms/license> <http://creativecommons.org/licenses/by/3.0/> .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://purl.org/dc/terms/modified> "2024-05-05"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://purl.org/dc/terms/publisher> _:genid311 .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://purl.org/dc/terms/title> "Test Croissant dataset" .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Dataset> .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://www.w3.org/2002/07/owl#sameAs> <https://some.other.catalog/dataset/123> .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://www.w3.org/2002/07/owl#sameAs> <https://yet.another.catalog/dataset/xyz> .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://www.w3.org/2002/07/owl#versionInfo> "1.0.0" .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://www.w3.org/ns/dcat#distribution> <http://www.example.com/distribution/Resource%201> .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://www.w3.org/ns/dcat#keyword> "Tag 1" .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://www.w3.org/ns/dcat#keyword> "Tag 2" .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <http://www.w3.org/ns/dcat#landingPage> <http://example.org/ds1> .
+<http://www.example.com/dataset/Test%20Croissant%20dataset> <https://www.w3.org/ns/adms#identifier> "my-custom-id" .
+<http://www.example.com/distribution/Resource%201> <http://purl.org/dc/terms/description> "Some description"@en .
+<http://www.example.com/distribution/Resource%201> <http://purl.org/dc/terms/format> "ZIP" .
+<http://www.example.com/distribution/Resource%201> <http://purl.org/dc/terms/identifier> "568b8ac9-8c69-4475-b35e-d7f812a63c32" .
+<http://www.example.com/distribution/Resource%201> <http://purl.org/dc/terms/identifier> "my-custom-resource-id" .
+<http://www.example.com/distribution/Resource%201> <http://purl.org/dc/terms/title> "Resource 1" .
+<http://www.example.com/distribution/Resource%201> <http://spdx.org/rdf/terms#checksum> "b221d9dbb083a7f33428d7c2a3c3198ae925614d70210e28716ccaa7cd4ddb79" .
+<http://www.example.com/distribution/Resource%201> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Distribution> .
+<http://www.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#accessService> <http://www.example.com/sub_distribution/my-custom-subresource-id-1> .
+<http://www.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#accessService> <http://www.example.com/sub_distribution/my-custom-subresource-id-2> .
+<http://www.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#accessURL> <https://example.com/data.zip> .
+<http://www.example.com/distribution/Resource%201> <http://www.w3.org/ns/dcat#byteSize> "12323" .
+<http://www.example.com/sub_distribution/my-custom-subresource-id-1> <http://purl.org/dc/terms/description> "Test subresource 1" .
+<http://www.example.com/sub_distribution/my-custom-subresource-id-1> <http://purl.org/dc/terms/format> "TXT" .
+<http://www.example.com/sub_distribution/my-custom-subresource-id-1> <http://purl.org/dc/terms/identifier> "my-custom-subresource-id-1" .
+<http://www.example.com/sub_distribution/my-custom-subresource-id-1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#DataService> .
+<http://www.example.com/sub_distribution/my-custom-subresource-id-1> <http://www.w3.org/ns/dcat#accessURL> <http://example.comdata.txt> .
+<http://www.example.com/sub_distribution/my-custom-subresource-id-1> <http://www.w3.org/ns/dcat#byteSize> "890" .
+<http://www.example.com/sub_distribution/my-custom-subresource-id-2> <http://purl.org/dc/terms/description> "Test subresource 2" .
+<http://www.example.com/sub_distribution/my-custom-subresource-id-2> <http://purl.org/dc/terms/format> "CSV" .
+<http://www.example.com/sub_distribution/my-custom-subresource-id-2> <http://purl.org/dc/terms/identifier> "my-custom-subresource-id-2" .
+<http://www.example.com/sub_distribution/my-custom-subresource-id-2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#DataService> .
