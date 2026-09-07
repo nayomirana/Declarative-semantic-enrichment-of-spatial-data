@@ -13,7 +13,7 @@ This repository contains the  datasets and source code for all three use cases l
 <p align="center">
   <img src="Use case2/images/SemanticEnrichmentProcess.png" alt="Semantic Enrichment Process" width="70%">
 </p>
-
+The above figure provides a schematic overview of the core idea behind this approach.
 
 ## Acknowledgments
 This work on declarative semantic enrichment of spatial data was developed with contributions from the research team at the [RMIT Geographic Knowledge Lab](http://gkl.rmit.melbourne/about).
