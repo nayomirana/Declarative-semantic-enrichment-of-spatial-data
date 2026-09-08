@@ -50,7 +50,7 @@ You can use [RMLMapper-Java](https://drive.google.com/file/d/1wOW44Nlq9NA_ie_twc
 
 **Step 1:** Map each geometry record from all source data files directly to geometry object instances.
 
-In this step, hydrological spatial data are accessed from the PostgreSQL database (database name: _dvm_, schema name: _dvm_ds_). The generated RDF triples must be transferred to the knowledge graph stored in the _dvicmap_ triple store in GraphDB.
+In this step, hydrological spatial data are accessed from the PostgreSQL database (database name: _dvm_, schema name: _dvm_ds_). The generated RDF triples must be transferred to the knowledge graph in _dvicmap_ triple store in GraphDB.
 After loading the RDF data into GraphDB, enable GeoSPARQL spatial indexing by executing the following SPARQL query in the dvicmap repository:
    ```
   PREFIX geosparql: <http://www.ontotext.com/plugins/geosparql#>
