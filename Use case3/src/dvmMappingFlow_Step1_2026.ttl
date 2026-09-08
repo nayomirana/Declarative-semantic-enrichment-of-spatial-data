@@ -34,13 +34,6 @@
   d2rq:username "gis_admin";
   d2rq:password "PgAdmin@1234" .
 
-<#SPARQLEndpoint> a sd:Service;
-  sd:endpoint <http://13.211.150.184:7200/repositories/dvicmap/statements> ;
-  sd:supportedLanguage sd:SPARQL11Update.
-
-<#TargetSPARQL> a rmlt:LogicalTarget ;
-  rmlt:target <#SPARQLEndpoint> .
-
 ### Union of all hydro spatial data sets
 <#LogicalSource_WBResources>
   rml:logicalSource [
