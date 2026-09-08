@@ -17,8 +17,6 @@ This directory contains source code and datasets for transparent and reusable se
 
 ## RML mapping and processing
 
-The RML mapping rules for the four-step semantic enrichment process are provided in [1](src/dvmMappingFlow_Step1_2026.ttl), [2](src/dvmMappingFlow_Step2_2026.ttl), [3](src/dvmMappingFlow_Step3_2026.ttl) and [4](src/dvmMappingFlow_Step4_2026.ttl).
-
 Before starting the enrichment process, the PostgreSQL database (database name: _dvm_, schema name: _dvm_ds_) and the GraphDB triple store (_dvicmap_) were set up on an _AWS EC2 r6i.2xlarge_ instance.
 The PostgreSQL database was created using our [dataset](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/tree/main/Use%20case3/data).
 The following tables were created in the schema for each dataset.
@@ -33,7 +31,7 @@ The following tables were created in the schema for each dataset.
 | Authoritative-flood-data | `vic_flood_history_public` |
 | Non-authoritative-ML-flood-data | `fullfloodextents_25jan_detailed` |
 
-
+The RML mapping rules for the four-step semantic enrichment process are provided in [1](src/dvmMappingFlow_Step1_2026.ttl), [2](src/dvmMappingFlow_Step2_2026.ttl), [3](src/dvmMappingFlow_Step3_2026.ttl) and [4](src/dvmMappingFlow_Step4_2026.ttl).
 
 
 1.	Step 1: Accesses data from the PostgreSQL database (_dvm_). The generated RDF triples must be transferred to the knowledge graph stored in the _dvicmap_ triple store in GraphDB.
