@@ -42,8 +42,22 @@ After loading the RDF data into GraphDB, enable GeoSPARQL spatial indexing by ex
     [] geosparql:enabled "true" .
   }
    ```
-3.	Step 2: Reads data from same triple store, and performs the second enrichment step, and writes the resulting triples back to the same triple store in GraphDB.
-4.	Step 3: Performs the third enrichment step. The generated results must be transferred to the same triple store in GraphDB.
+2.	Step 2: Reads data from same triple store, and performs the second enrichment step, and writes the resulting triples back to the same triple store in GraphDB.
+3.	Step 3: Performs the third enrichment step. The generated results must be transferred to the same triple store in GraphDB.
+
+  To load the Turtle file generated as the output of Step 3 into GraphDB, use the following command:
+
+```bash
+curl --fail-with-body \
+  -X POST \
+  -H "Content-Type: text/turtle" \
+  -T dvicmap3.ttl \
+  -w "\nHTTP status: %{http_code}\n" \
+  http://<graphdb-host>:<port>/repositories/<repository>/statements
+```
+Replace `<graphdb-host>`, `<port>`, and `<repository>`(_dvicmap_) with the connection details of the GraphDB instance.
+
+   
 5.	Step 4: Performs the final enrichment step and stores the resulting triples in the same triple store in GraphDB.
 
 In the mapping process, Steps 1 and 3 use functions declared in the [geofunctions.ttl](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/blob/main/Use%20case3/src/GeoGREL/geofunctions.ttl) file. Therefore, this file must be specified in the execution command.
