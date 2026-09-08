@@ -54,11 +54,11 @@ After loading the RDF data into GraphDB, enable GeoSPARQL spatial indexing by ex
     [] geosparql:enabled "true" .
   }
    ```
-**Step 2:** Reads data from same triple store, and performs the second enrichment step, and writes the resulting triples back to the same triple store in GraphDB.
+**Step 2:** Reads data from same triple store and writes the resulting triples back to the same triple store in GraphDB.
 
-**Step 3:** Performs the third enrichment step. The generated results must be transferred to the same triple store in GraphDB.
+**Step 3:** The output file generated in Step 3 must be transferred to the same GraphDB triple store.
 
-  To load the Turtle file generated as the output of Step 3 (_dvicmap3.ttl_) into GraphDB, use the following command:
+  To load the Turtle file generated as the output of Step 3 (_dvm3.ttl_) into GraphDB, use the following command:
 
 ```bash
 curl --fail-with-body \
