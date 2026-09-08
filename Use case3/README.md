@@ -34,8 +34,8 @@ The following tables were created in the schema for each dataset.
 The RML mapping rules for the four-step semantic enrichment process are provided in [1](src/dvmMappingFlow_Step1_2026.ttl), [2](src/dvmMappingFlow_Step2_2026.ttl), [3](src/dvmMappingFlow_Step3_2026.ttl) and [4](src/dvmMappingFlow_Step4_2026.ttl).
 
 
-1.	Step 1: Accesses data from the PostgreSQL database (_dvm_). The generated RDF triples must be transferred to the knowledge graph stored in the _dvicmap_ triple store in GraphDB.
-   After loading the RDF data into GraphDB, enable GeoSPARQL spatial indexing by executing the following SPARQL query in the dvicmap repository:
+1.	Step 1: In this step, hydrological spatial data are accessed from the PostgreSQL database (database name: _dvm_, schema name: _dvm_ds_). In the RML rules, make sure to provide the appropriate PostgreSQL database connection details, including the JDBC URL, driver, username, and password. The generated RDF triples must be transferred to the knowledge graph stored in the _dvicmap_ triple store in GraphDB.
+After loading the RDF data into GraphDB, enable GeoSPARQL spatial indexing by executing the following SPARQL query in the dvicmap repository:
    ```
   PREFIX geosparql: <http://www.ontotext.com/plugins/geosparql#>
   INSERT DATA {
