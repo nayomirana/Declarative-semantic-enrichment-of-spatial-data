@@ -17,7 +17,8 @@ This directory contains source code and datasets for transparent and reusable se
 
 ## RML mapping and processing
 
-Before starting the enrichment process, the PostgreSQL database (database name: _dvm_, schema name: _dvm_ds_) and the GraphDB triple store (_dvicmap_) should be set up on an AWS instance(e.g., _AWS EC2 r6i.2xlarge_ instance).
+Before starting the enrichment process, the PostgreSQL database (database name: _dvm_, schema name: _dvm_ds_) and the GraphDB triple store (_dvicmap_) should be set up on an AWS instance(e.g., _AWS EC2 r6i.2xlarge_ instance). The [metadata file](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/blob/main/Use%20case3/data/MetaData/metadata_hydro.csv) should also be copied to the server instance so that it can be used during the enrichment process.
+
 The PostgreSQL database should be created using our [dataset](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/tree/main/Use%20case3/data), and the tables for each dataset should be created in the schema as shown below.
 
 | Dataset | Table Name |
