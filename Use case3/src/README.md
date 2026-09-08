@@ -21,7 +21,7 @@ Before running the RML mappings, update the database and SPARQL endpoint connect
 
    The output SPARQL endpoint is configured using `<#SPARQLEndpoint>`:
 
-   ```turle
+   ```turtle
       <#SPARQLEndpoint> a sd:Service;
          sd:endpoint <http://<host>:<port>/repositories/<repository>/statements> ;
          sd:supportedLanguage sd:SPARQL11Update .
