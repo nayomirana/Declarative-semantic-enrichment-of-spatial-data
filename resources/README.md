@@ -23,14 +23,14 @@ java -jar ./target/jarFile -m mappingFile.ttl -o output.ttl
 The target location of each data source file in the RML mapping file must be updated to match the correct file paths on your local machine.
 
 <pre><#ACTSitesSource> a rml:LogicalSource;
-      rml:source "../Data/ACT.csv";  
+      rml:source "../data/ACT2026Q1.csv";  
       rml:referenceFormulation ql:CSV .</pre>
 Modify the execution command as needed, specifying the locations of the JAR file, mapping file, and the destination for the output file. 
 Example:
 ```
-java -jar ./lib/rmlmapper-17.0.0-r449-all.jar -m ./src/PlaceNameKGAus/RML/PlaceNameMapping.ttl -o ./src/PlaceNameKGAus/out/pnkg_out.ttl
+java -jar rmlmapper-17.0.0-r449-all.jar -m ./src/RMLMappings_PNO.ttl -o pnkg_out.ttl
 ```
-The PNKG in ttl file format will be stored in ```./src/PlaceNameKGAus/out/pnkg_out.ttl```
+The PNKG in ttl file format will be created.
 
 
 ##### If the RML mapping uses custom Java functions, run the RMLMapper with the function definition file using:
