@@ -1,7 +1,7 @@
 ## Use case 3 - Victorian state hydrology foundation spatial data
 This directory contains source code and datasets for transparent and reusable semantic data enrichment of Victorian state hydrology foundation spatial data. The approach uses [RML (RDF Mapping Language)](https://rml.io/specs/rml/) to enrich the Victorian hydrological spatial data sets.
 
-## Repository structure
+## Directory structure
 
 - **data**: Provides links to download the Victorian State Hydrology Foundation spatial datasets used in this use case.
 - **images**: Contains diagrams, and other visual resources associated with the use case.
