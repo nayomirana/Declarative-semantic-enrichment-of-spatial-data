@@ -184,7 +184,7 @@ SELECT gid, ST_AsText(geom) AS geom, SUBSTRING(ST_GeometryType(geom), 4) AS geom
 
 # # ############## RML mapings for - Meta Data of each hydro spatial datasets #############################################################################
 <#MetaDataSource>
-  rml:source "metadata_hydro.csv" ;
+  rml:source "../data/MetaData/metadata_hydro.csv" ;
   rml:referenceFormulation ql:CSV;
   rml:csvw:delimiter ".".
 
