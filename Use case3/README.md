@@ -62,7 +62,7 @@ Replace `<graphdb-host>`, `<port>`, and `<repository>`(_dvicmap_) with the conne
 
 In the mapping process, Steps 1 and 3 use functions declared in the [geofunctions.ttl](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/blob/main/Use%20case3/src/GeoGREL/geofunctions.ttl) file. Therefore, this file must be specified in the execution command.
 
-```
+```bash
 java -Xms50g -Xmx62g \
   -jar rmlmapper-17.0.0-r449-all.jar \
   -m dvmMappingFlow_Step1_2026.ttl \
