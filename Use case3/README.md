@@ -33,6 +33,18 @@ The PostgreSQL database should be created using our [dataset](https://github.com
 The RML mapping rules for the four-step semantic enrichment process are provided in [1](src/dvmMappingFlow_Step1_2026.ttl), [2](src/dvmMappingFlow_Step2_2026.ttl), [3](src/dvmMappingFlow_Step3_2026.ttl) and [4](src/dvmMappingFlow_Step4_2026.ttl). 
 Before executing the RML mapping files sequentially, update the files according to the instructions provided in [Configure Data Source Connections](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/tree/main/Use%20case3/src) to establish the required connections to each database.
 
+### RML mapping file execution
+
+The four mapping files should be executed sequentially, one at a time. For each step, specify the corresponding mapping file using the -m parameter and the respective output file using the -o parameter.
+For example:
+```bash
+java -Xms50g -Xmx62g \
+  -jar rmlmapper-17.0.0-r449-all.jar \
+  -m dvmMappingFlow_Step1_2026.ttl \
+  -o dvm1.ttl \
+  -s turtle \
+  -f geofunctions.ttl
+```
 
 **Step 1:** In this step, hydrological spatial data are accessed from the PostgreSQL database (database name: _dvm_, schema name: _dvm_ds_). The generated RDF triples must be transferred to the knowledge graph stored in the _dvicmap_ triple store in GraphDB.
 After loading the RDF data into GraphDB, enable GeoSPARQL spatial indexing by executing the following SPARQL query in the dvicmap repository:
@@ -62,15 +74,7 @@ Replace `<graphdb-host>`, `<port>`, and `<repository>`(_dvicmap_) with the conne
 
 In the mapping process, Steps 1 and 3 use functions declared in the [geofunctions.ttl](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/blob/main/Use%20case3/src/GeoGREL/geofunctions.ttl) file. Therefore, this file must be specified in the execution command.
 
-```bash
-java -Xms50g -Xmx62g \
-  -jar rmlmapper-17.0.0-r449-all.jar \
-  -m dvmMappingFlow_Step1_2026.ttl \
-  -o dvm1.ttl \
-  -s turtle \
-  -f geofunctions.ttl
-```
-All four mapping files should be executed sequentially, one after another, to complete the semantic enrichment process.
+
 
 ## Key resources 
 - **Research Paper:** [Semantic data enrichment for maintenance of foundation spatial data](https://www.sciencedirect.com/science/article/pii/S0198971526000128) - Computers, Environment and Urban Systems, Volume 126, 102410.
