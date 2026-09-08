@@ -47,9 +47,9 @@ Example:
 Modify the execution command as needed, specifying the locations of the JAR file, mapping file, and the destination for the output file. 
 Example:
 ```
-java -jar ./lib/rmlmapper-17.0.0-r449-all.jar -m ./src/PlaceNameKGAus/RML/PlaceNameMapping.ttl -o ./src/PlaceNameKGAus/out/pnkg_out.ttl
+java -jar rmlmapper-17.0.0-r449-all.jar -m ./src/RMLMappings_PNO.ttl -o pnkg_out.ttl
 ```
-The PNKG in ttl file format will be stored in ```./src/PlaceNameKGAus/out/pnkg_out.ttl```.
+The PNKG in ttl file format will be created.
 In this project, the knowledge graph was built using [RMLmapper-java](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/blob/main/resources/README.md). 
 
 ## Key resources 
