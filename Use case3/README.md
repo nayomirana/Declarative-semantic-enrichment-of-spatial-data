@@ -64,7 +64,7 @@ After loading the RDF data into GraphDB, enable GeoSPARQL spatial indexing by ex
 curl --fail-with-body \
   -X POST \
   -H "Content-Type: text/turtle" \
-  -T dvicmap3.ttl \
+  -T dvm3.ttl \
   -w "\nHTTP status: %{http_code}\n" \
   http://<graphdb-host>:<port>/repositories/<repository>/statements
 ```
