@@ -1,5 +1,5 @@
 # Use case 1 - Applying YARRRML to enrich CKAN data sets using DCAT vocabulary
-## Repository structure
+## Directory structure
 Each folder under [Use case1/src](./src) contains the CKAN metadata statement files, the corresponding YARRRML mapping rules, the intermediary RML file and the generated output in Turtle (TTL) format. 
 The input JSON files used in this project were downloaded from the [CKAN example datasets](https://github.com/ckan/ckanext-dcat/tree/master/examples/ckan) in the ckanext-dcat GitHub repository.
 The section below provides additional information about the YARRRML mappings and explains how they can be executed to reproduce the results.
