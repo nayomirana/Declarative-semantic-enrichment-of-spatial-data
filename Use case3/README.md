@@ -34,7 +34,7 @@ The RML mapping rules for the four-step semantic enrichment process are provided
 Before executing the RML mapping files sequentially, update the files according to the instructions provided in [Configure Data Source Connections](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/tree/main/Use%20case3/src) to establish the required connections to each database.
 
 
-1.	Step 1: In this step, hydrological spatial data are accessed from the PostgreSQL database (database name: _dvm_, schema name: _dvm_ds_). The generated RDF triples must be transferred to the knowledge graph stored in the _dvicmap_ triple store in GraphDB.
+**Step 1:** In this step, hydrological spatial data are accessed from the PostgreSQL database (database name: _dvm_, schema name: _dvm_ds_). The generated RDF triples must be transferred to the knowledge graph stored in the _dvicmap_ triple store in GraphDB.
 After loading the RDF data into GraphDB, enable GeoSPARQL spatial indexing by executing the following SPARQL query in the dvicmap repository:
    ```
   PREFIX geosparql: <http://www.ontotext.com/plugins/geosparql#>
@@ -42,8 +42,9 @@ After loading the RDF data into GraphDB, enable GeoSPARQL spatial indexing by ex
     [] geosparql:enabled "true" .
   }
    ```
-2.	Step 2: Reads data from same triple store, and performs the second enrichment step, and writes the resulting triples back to the same triple store in GraphDB.
-3.	Step 3: Performs the third enrichment step. The generated results must be transferred to the same triple store in GraphDB.
+**Step 2:** Reads data from same triple store, and performs the second enrichment step, and writes the resulting triples back to the same triple store in GraphDB.
+
+**Step 3:** Performs the third enrichment step. The generated results must be transferred to the same triple store in GraphDB.
 
   To load the Turtle file generated as the output of Step 3 (_dvicmap3.ttl_) into GraphDB, use the following command:
 
@@ -57,8 +58,7 @@ curl --fail-with-body \
 ```
 Replace `<graphdb-host>`, `<port>`, and `<repository>`(_dvicmap_) with the connection details of the GraphDB instance.
 
-   
-4.	Step 4: Performs the final enrichment step and stores the resulting triples in the same triple store in GraphDB.
+**Step 4:** Performs the final enrichment step and stores the resulting triples in the same triple store in GraphDB.
 
 In the mapping process, Steps 1 and 3 use functions declared in the [geofunctions.ttl](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/blob/main/Use%20case3/src/GeoGREL/geofunctions.ttl) file. Therefore, this file must be specified in the execution command.
 
