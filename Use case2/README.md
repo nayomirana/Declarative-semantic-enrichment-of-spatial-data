@@ -33,13 +33,8 @@ The image below provides an overview of the main classes and object properties d
 </p>
 
 ## RML mapping and processing
-
 RML mapping rules are written and included in [1](src/RMLMappings_PNO.ttl) and [2](src/RMLMappings_GNModel.ttl). 
-The following execution command should specify the relevant paths for the mapping and output files:
- ``` 
-java -jar ./target/jarFile -m mappingFile.ttl -o output.ttl
- ``` 
-The target location of each data source file in the RML mapping file must be updated to match the correct file paths on your local machine.
+The data source paths specified in the RML mapping file must be updated to match the corresponding file paths on your local machine.
 Example: 
 ```turtle
 <#ACTSitesSource> a rml:LogicalSource;
