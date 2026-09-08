@@ -35,7 +35,7 @@ Before executing the RML mapping files sequentially, update the files according 
 
 ### RML mapping file execution
 
-The four mapping files should be executed sequentially, one at a time. For each step, specify the corresponding mapping file using the -m parameter and the respective output file using the -o parameter.
+The four mapping files should be executed sequentially, one at a time. For each step, specify the corresponding mapping file using the -m parameter and the respective output file using the -o parameter. 
 For example:
 ```bash
 java -Xms50g -Xmx62g \
@@ -45,6 +45,7 @@ java -Xms50g -Xmx62g \
   -s turtle \
   -f geofunctions.ttl
 ```
+You can use [RMLMapper-Java](https://drive.google.com/file/d/1wOW44Nlq9NA_ie_twcSx6sEzHPKuc6qs/view?usp=drive_link) to execute the mapping commands.
 
 **Step 1:** Map each geometry record from all source data files directly to geometry object instances.
 
