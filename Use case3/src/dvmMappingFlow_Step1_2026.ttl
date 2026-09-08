@@ -35,7 +35,7 @@
   d2rq:password "PgAdmin@1234" .
 
 <#SPARQLEndpoint> a sd:Service;
-  sd:endpoint <http://32.236.243.86:7200/repositories/dvicmap/statements> ;
+  sd:endpoint <http://13.211.150.184:7200/repositories/dvicmap/statements> ;
   sd:supportedLanguage sd:SPARQL11Update.
 
 <#TargetSPARQL> a rmlt:LogicalTarget ;
