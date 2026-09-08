@@ -42,7 +42,7 @@ java -jar ./target/jarFile -m mappingFile.ttl -o output.ttl
 The target location of each data source file in the RML mapping file must be updated to match the correct file paths on your local machine.
 Example: 
 <pre><#ACTSitesSource> a rml:LogicalSource;
-      rml:source "../Data/ACT.csv";  
+      rml:source "../data/ACT2026Q1.csv";  
       rml:referenceFormulation ql:CSV .</pre>
 Modify the execution command as needed, specifying the locations of the JAR file, mapping file, and the destination for the output file. 
 Example:
