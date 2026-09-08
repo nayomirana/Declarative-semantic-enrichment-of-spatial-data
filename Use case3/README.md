@@ -17,9 +17,8 @@ This directory contains source code and datasets for transparent and reusable se
 
 ## RML mapping and processing
 
-Before starting the enrichment process, the PostgreSQL database (database name: _dvm_, schema name: _dvm_ds_) and the GraphDB triple store (_dvicmap_) were set up on an _AWS EC2 r6i.2xlarge_ instance.
-The PostgreSQL database was created using our [dataset](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/tree/main/Use%20case3/data).
-The following tables were created in the schema for each dataset.
+Before starting the enrichment process, the PostgreSQL database (database name: _dvm_, schema name: _dvm_ds_) and the GraphDB triple store (_dvicmap_) should be set up on an AWS instance(e.g., _AWS EC2 r6i.2xlarge_ instance).
+The PostgreSQL database should be created using our [dataset](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/tree/main/Use%20case3/data), and the tables for each dataset should be created in the schema as shown below.
 
 | Dataset | Table Name |
 |---------|------------|
@@ -31,7 +30,8 @@ The following tables were created in the schema for each dataset.
 | Authoritative-flood-data | `vic_flood_history_public` |
 | Non-authoritative-ML-flood-data | `fullfloodextents_25jan_detailed` |
 
-The RML mapping rules for the four-step semantic enrichment process are provided in [1](src/dvmMappingFlow_Step1_2026.ttl), [2](src/dvmMappingFlow_Step2_2026.ttl), [3](src/dvmMappingFlow_Step3_2026.ttl) and [4](src/dvmMappingFlow_Step4_2026.ttl). Before running the files sequentially, please update the mappings according to the instructions provided in [Configure Data Source Connections](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/tree/main/Use%20case3/src) to establish the required connections to each database.
+The RML mapping rules for the four-step semantic enrichment process are provided in [1](src/dvmMappingFlow_Step1_2026.ttl), [2](src/dvmMappingFlow_Step2_2026.ttl), [3](src/dvmMappingFlow_Step3_2026.ttl) and [4](src/dvmMappingFlow_Step4_2026.ttl). 
+Before executing the RML mapping files sequentially, update the files according to the instructions provided in [Configure Data Source Connections](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/tree/main/Use%20case3/src) to establish the required connections to each database.
 
 
 1.	Step 1: In this step, hydrological spatial data are accessed from the PostgreSQL database (database name: _dvm_, schema name: _dvm_ds_). The generated RDF triples must be transferred to the knowledge graph stored in the _dvicmap_ triple store in GraphDB.
