@@ -50,7 +50,7 @@ Example:
 java -jar rmlmapper-17.0.0-r449-all.jar -m ./src/RMLMappings_PNO.ttl -o pnkg_out.ttl
 ```
 The PNKG in ttl file format will be created.
-In this project, the knowledge graph was built using [RMLmapper-java](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/blob/main/resources/README.md). 
+In this project, the knowledge graph was built using [RMLmapper-java](https://drive.google.com/file/d/1wOW44Nlq9NA_ie_twcSx6sEzHPKuc6qs/view?usp=drive_link). 
 
 ## Key resources 
 
