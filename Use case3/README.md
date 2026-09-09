@@ -47,6 +47,7 @@ java -Xms50g -Xmx62g \
   -f geofunctions.ttl
 ```
 You can use [RMLMapper-Java](https://drive.google.com/file/d/1wOW44Nlq9NA_ie_twcSx6sEzHPKuc6qs/view?usp=drive_link) to execute the mapping commands.
+In the mapping process, Steps 1 and 3 use functions declared in the [geofunctions.ttl](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/tree/main/Use%20case3/src/GeoGREL) file. Therefore, this file must be specified in the execution command.
 
 **Step 1:** Map each geometry record from all source data files directly to geometry object instances.
 
@@ -82,7 +83,7 @@ Replace `<graphdb-host>`, `<port>`, and `<repository>`(_dvicmap_) with the conne
 
 The triples generated in this step will be stored in the same GraphDB triple store.
 
-In the mapping process, Steps 1 and 3 use functions declared in the [geofunctions.ttl](https://github.com/nayomirana/Declarative-semantic-enrichment-of-spatial-data/tree/main/Use%20case3/src/GeoGREL) file. Therefore, this file must be specified in the execution command.
+
 
 
 
