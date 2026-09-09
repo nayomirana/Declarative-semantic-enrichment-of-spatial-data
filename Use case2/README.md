@@ -9,8 +9,6 @@ The semantic enrichment approach uses [RML (RDF Mapping Language)](https://rml.i
 - **results**: Contains the generated knowledge graphs
 
 ## Data
-- Place name data directly available in the repository for ACT, NSW, NT, QLD, TAS, VIC, and WA.
-- For SA only external link available to download official place names gazatteer due to large file size.
 - Data downloaded from authoritative organisations (state) for NSW, QLD, SA and VIC.
 - For ACT, NT, WA and TAS place names gazetteers were downloaded from the national database, the [Composite Gazetteer of Australia](https://placenames.fsdf.org.au/). 
 
